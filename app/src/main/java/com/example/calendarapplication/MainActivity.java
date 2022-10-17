@@ -1,3 +1,6 @@
+/*
+共有官僚
+ */
 package com.example.calendarapplication;
 
 import android.os.Bundle;
