@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:weightSum="5">
 
             <CalendarView
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="invisible">
 
            <Spinner
                 android:id="@+id/spinner"
