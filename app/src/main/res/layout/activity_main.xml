@@ -1,34 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
+    android:background="#FFFFFF"
+    android:translationZ="0dp"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    >
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.CalendarApplication.AppBarOverlay">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+<!--        ホームレイアウト-->
+        <LinearLayout
+            android:id="@+id/layerCalendar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.CalendarApplication.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:weightSum="5">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <CalendarView
+                android:id="@+id/calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_weight="0.1"/>
 
-    <include layout="@layout/content_main" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/calendar"
+                android:layout_below="@+id/homeBtn"
+                android:layout_gravity="center"
+                android:layout_weight="4">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:id="@+id/TaskView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="wwwwww"
+                        />
+                </LinearLayout>
+            </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--        予定追加レイアウト-->
+        <LinearLayout
+        android:id="@+id/layerTask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+
+    <TableLayout
+        android:id="@+id/layerTsk"
+        android:layout_width="300dp"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center">
+
+        <TableRow>
+        <Button
+            android:id="@+id/exit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="キャンセル"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="openHome"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="タイトル" />
+        </TableRow>
+        <TableRow>
+            <EditText
+            android:id="@+id/taskName"
+            android:textSize="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:inputType="text"/>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="開始日時・時刻"
+                android:id="@+id/testVIew"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/dateS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"/>
+            <EditText
+                android:id="@+id/timeS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                tools:ignore="DuplicateIds" />
+            <Button
+                android:id="@+id/selectStartB"
+                android:text="時刻選択"
+                android:onClick="selectTimeStartBtn"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="終了日時・時刻"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/dateE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"/>
+            <EditText
+                android:id="@+id/timeE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                tools:ignore="DuplicateIds" />
+            <Button
+                android:id="@+id/selectEndB"
+                android:text="時刻選択"
+                android:onClick="selectTimeEndBtn"
+                />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="taskAdd"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="selectTaskSetBtn"/>
+        </TableRow>
+       </TableLayout>
+    </LinearLayout>
+
+<!--        予定一覧レイアウト-->
+        <LinearLayout
+            android:id="@+id/layerTaskList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+           <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|top">
+            </Spinner>
+            <Button
+                android:id="@+id/listMonthSelect"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/black"
+                android:text="選択"
+                android:onClick="ListTask">
+            </Button>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableLayout
+                    android:id="@+id/taskInsert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    </TableLayout>
+
+            </ScrollView>
+        </LinearLayout>
+
+    </FrameLayout>
+<!--    下部ボタンレイアウト-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <TableRow
+            android:gravity="right">
+            <Button
+                android:id="@+id/buttonTaskMenu"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="予定追加"
+                android:layout_gravity="right|bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="openTaskAdd"/>
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/taskBtn"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/black"
+                android:layout_weight="1"
+                android:text="予定"
+                android:onClick="openTaskView">
+            </Button>
+            <Button
+                android:id="@+id/homeBtn"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:layout_weight="1"
+                android:text="HOME"
+                android:onClick="openHome">
+            </Button>
+            <Button
+                android:id="@+id/CotBtn"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:layout_weight="1"
+                android:text="実績">
+            </Button>
+        </TableRow>
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
