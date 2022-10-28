@@ -1,5 +1,6 @@
 package com.example.calendarapplication;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
@@ -34,15 +35,13 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     private boolean flag;
     private TextView taskView;
     private DataBase selectDB;
-    private TextView startDayView;
-    private TextView taskNameView;
-    private TextView startTimeView;
 
-    private String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
+    private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
 
 
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,16 +57,16 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         selectDB = new DataBase(getApplicationContext());
 
-        ArrayAdapter<String> addapter = new ArrayAdapter<>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 spinnerItems
         );
 
-        addapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
         Spinner spinner = findViewById(R.id.spinner);
-        spinner.setAdapter(addapter);
+        spinner.setAdapter(adapter);
 
         CalendarView calendar = findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(
@@ -79,9 +78,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         );
 
-        /**
-         * 開始時刻→現在時刻
-         */
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR),c.get(Calendar.MINUTE)));
         dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)));
@@ -89,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * ホーム画面表示
-     * @param view
      */
     public void openHome(View view){
         LinearLayout CalendarLayout = (LinearLayout) findViewById(R.id.layerCalendar);
@@ -103,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * 予定追加画面表示
-     * @param view
      */
     public void openTaskAdd(View view){
         LinearLayout CalendarLayout = (LinearLayout) findViewById(R.id.layerCalendar);
@@ -117,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * 予定一覧画面表示
-     * @param view
      */
     public void openTaskView(View view){
 
@@ -136,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
      *　開始日時選択ボタン表示
      */
     public void selectTimeStartBtn(View view){
-        ShowDialogView(dateS,timeS);
+        ShowDialogView(timeS);
         flag = true;
     }
 
@@ -144,23 +137,22 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
      * 終了日時選択ボタン表示
      */
     public void selectTimeEndBtn(View view){
-        ShowDialogView(dateE,timeE);
+        ShowDialogView(timeE);
         flag = false;
     }
 
     /**
      * 予定追加ボタン押下時
      */
-    public void selectTaskSetBtn(View view){
+    public void selectTaskSetBtn(){
         //データ挿入
-        InsertTask(view);
+        InsertTask();
     }
 
     /**
      * DBインサート文
-     * @param view
      */
-    private void InsertTask(View view) {
+    private void InsertTask() {
         LinearLayout CalendarLayout = (LinearLayout) findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = (LinearLayout) findViewById(R.id.layerTask);
 
@@ -178,22 +170,22 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         String timeES = timeE.getText().toString();
 
         int test = dateSS.compareTo(dateES);
-        int testsub = timeSS.compareTo(timeES);
-        /**
-         * 日付判定
-         * 時刻が開始＞終了かつ日付が開始＜終了または
+        int testSub = timeSS.compareTo(timeES);
+        /*
+          日付判定
+          時刻が開始＞終了かつ日付が開始＜終了または
          */
-        if((testsub<0&&test<=0)||(testsub>=0&&test<0)){
+        if((testSub<0&&test<=0)||(testSub>=0&&test<0)){
             Log.d("debug","正常に処理");
-            /**
-             * if true　いずれかのエディットに入力されていない
-             * false 正常
+            /*
+              if true　いずれかのエディットに入力されていない
+              false 正常
              */
-            if (TextUtils.isEmpty(taskNameS) ==true||
-                    TextUtils.isEmpty(dateSS) ==true||
-                    TextUtils.isEmpty(timeSS) ==true||
-                    TextUtils.isEmpty(dateES) ==true||
-                    TextUtils.isEmpty(timeES) ==true){
+            if (TextUtils.isEmpty(taskNameS) ||
+                    TextUtils.isEmpty(dateSS) ||
+                    TextUtils.isEmpty(timeSS) ||
+                    TextUtils.isEmpty(dateES) ||
+                    TextUtils.isEmpty(timeES)){
                 Log.d("debug","null値判定");
             }else {
                 values.put("startday",dateSS);
@@ -217,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
 
         Log.d("debug","日付判定日にち"+test);
-        Log.d("debug","日付判定時刻"+testsub);
+        Log.d("debug","日付判定時刻"+testSub);
 
     }
 
@@ -230,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 "tastdb",
                 new String[]{"startday","starttime","endday","endtime","task"},
                 "startday=?",
-                new String[]{message.toString()},
+                new String[]{message},
                 null,
                 null,
                 null
@@ -281,9 +273,9 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             final TableRow tr = new TableRow(this);
             final TableRow tr1 = new TableRow(this);
             //開始時刻
-            startDayView = new TextView(this);
-            startTimeView = new TextView(this);
-            taskNameView = new TextView(this);
+            TextView startDayView = new TextView(this);
+            TextView startTimeView = new TextView(this);
+            TextView taskNameView = new TextView(this);
 
             startDayView.setText(cursor.getString(0));
             tr.addView(startDayView);
@@ -302,12 +294,10 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * 時刻・月日ダイアログ表示
-     * @param dateS
-     * @param timeS
      */
-    public void ShowDialogView(View dateS, View timeS) {
-        /**
-         * newFragment.show(getSupportFragmentManager(), "timePicker");
+    public void ShowDialogView(View timeS) {
+        /*
+          newFragment.show(getSupportFragmentManager(), "timePicker");
          */
         TimePickerFragment timePicker = new TimePickerFragment();
         timePicker.show(getSupportFragmentManager(),"timePicker");
@@ -318,13 +308,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * 時刻セット
-     * @param timePicker
-     * @param hour
-     * @param minu
      */
+    @SuppressLint("DefaultLocale")
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minu) {
-        if (flag == false){
+        if (!flag){
             timeE.setText(String.format("%02d時%02d分",hour,minu));
         }else{
             timeS.setText(String.format("%02d時%02d分",hour,minu));
@@ -334,14 +322,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     /**
      * 月日セット
-     * @param datePicker
-     * @param year
-     * @param month
-     * @param dayOfMonth
      */
+    @SuppressLint("DefaultLocale")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        if(flag == false){
+        if(!flag){
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
         }else{
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
