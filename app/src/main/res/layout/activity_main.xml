@@ -20,23 +20,28 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:visibility="visible"
-            android:weightSum="5">
+            android:weightSum="10">
+
+            <Space
+                android:id="@+id/tintin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"/>
 
             <CalendarView
                 android:id="@+id/calendar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:layout_weight="0.1"/>
+                android:layout_weight="3"/>
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_above="@+id/calendar"
-                android:layout_below="@+id/homeBtn"
+                android:layout_below="@+id/tintin"
                 android:layout_gravity="center"
-                android:layout_weight="4">
+                android:layout_weight="3">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,15 +49,21 @@
                     <TextView
                         android:id="@+id/TaskView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="wwwwww"
+                        android:layout_height="match_parent"
+                        android:text=""
                         />
                 </LinearLayout>
             </ScrollView>
 
+            <Space
+                android:id="@+id/tintin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1.5"/>
         </LinearLayout>
 
 <!--        予定追加レイアウト-->
+
         <LinearLayout
         android:id="@+id/layerTask"
         android:layout_width="match_parent"
@@ -106,13 +117,15 @@
                 android:id="@+id/dateS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:inputType="date"/>
             <EditText
                 android:id="@+id/timeS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                tools:ignore="DuplicateIds" />
+                tools:ignore="DuplicateIds"
+                android:inputType="datetime"/>
             <Button
                 android:id="@+id/selectStartB"
                 android:text="時刻選択"
@@ -131,13 +144,15 @@
                 android:id="@+id/dateE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:inputType="date"/>
             <EditText
                 android:id="@+id/timeE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
-                tools:ignore="DuplicateIds" />
+                tools:ignore="DuplicateIds"
+                android:inputType="datetime"/>
             <Button
                 android:id="@+id/selectEndB"
                 android:text="時刻選択"

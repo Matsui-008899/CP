@@ -23,6 +23,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Calendar;
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR),c.get(Calendar.MINUTE)));
         dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)));
+
     }
 
     /**
@@ -144,10 +146,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     /**
      * 予定追加ボタン押下時
      */
-    public void selectTaskSetBtn(){
+    public void selectTaskSetBtn(View view){
         //データ挿入
         InsertTask();
     }
+
 
     /**
      * DBインサート文
@@ -168,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         String timeSS = timeS.getText().toString();
         String dateES = dateE.getText().toString();
         String timeES = timeE.getText().toString();
+
 
         int test = dateSS.compareTo(dateES);
         int testSub = timeSS.compareTo(timeES);
@@ -197,12 +201,13 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 db.insert("tastdb",null,values);
                 CalendarLayout.setVisibility(View.VISIBLE);
                 TaskLayout.setVisibility(View.INVISIBLE);
+
+                taskName.setText("");
+                dateS.setText("");
+                timeS.setText("");
+                dateE.setText("");
+                timeE.setText("");
             }
-            taskName.setText("");
-            dateS.setText("");
-            timeS.setText("");
-            dateE.setText("");
-            timeE.setText("");
         }else{
             Log.d("debug","日付に矛盾が発生");
         }
