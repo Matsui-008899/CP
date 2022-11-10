@@ -9,7 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     private boolean flag;
     private TextView taskView;
     private DataBase selectDB;
+    private WebView gameView;
 
     private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
@@ -47,6 +51,20 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gameView = (WebView)findViewById(R.id.gameWeb);
+        gameView.setWebViewClient(new WebViewClient());
+        gameView.setClickable(true);
+        gameView.setEnabled(true);
+        gameView.getSettings().setJavaScriptEnabled(true);
+        gameView.loadUrl("file:///android_asset/testCout.html");
+
+        gameView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return (motionEvent.getAction() == MotionEvent.ACTION_MOVE);
+            }
+        });
 
         flag = false;
         taskName = findViewById(R.id.taskName);
@@ -96,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         CalendarLayout.setVisibility(View.VISIBLE);
         TaskLayout.setVisibility(View.INVISIBLE);
         TaskListLayout.setVisibility(View.INVISIBLE);
+
+        /*
+         * JavaScriptにゲームキャラクターのモーション操作を指示する
+         */
+        gameView.loadUrl("javascript:tara()");
     }
 
     /**
@@ -123,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         CalendarLayout.setVisibility(View.INVISIBLE);
         TaskLayout.setVisibility(View.INVISIBLE);
         TaskListLayout.setVisibility(View.VISIBLE);
+
+        /*
+         * JavaScriptにゲームキャラクターのモーション操作を指示する
+         */
+        gameView.loadUrl("javascript:tako()");
 
         ListTask(view);
     }

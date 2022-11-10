@@ -5,53 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:translationZ="0dp"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    >
+    android:translationZ="0dp"
+    tools:context=".MainActivity">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        ホームレイアウト-->
+        <!--        ホームレイアウト-->
         <LinearLayout
             android:id="@+id/layerCalendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:weightSum="10">
 
             <Space
                 android:id="@+id/tintin2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2.5"/>
+                android:layout_weight="2.5" />
 
             <CalendarView
                 android:id="@+id/calendar"
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_weight="3"/>
+                android:layout_weight="3" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_above="@+id/calendar"
-                android:layout_below="@+id/tintin"
                 android:layout_gravity="center"
                 android:layout_weight="3">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/TaskView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text=""
-                        />
+                        android:text="" />
                 </LinearLayout>
             </ScrollView>
 
@@ -59,144 +57,166 @@
                 android:id="@+id/tintin"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="1.5"/>
+                android:layout_weight="1.5" />
         </LinearLayout>
 
-<!--        予定追加レイアウト-->
+        <!--        予定追加レイアウト-->
 
         <LinearLayout
-        android:id="@+id/layerTask"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="invisible">
+            android:id="@+id/layerTask"
+            android:layout_width="300dp"
+            android:layout_height="380dp"
+            android:background="@drawable/border"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="invisible">
 
 
-    <TableLayout
-        android:id="@+id/layerTsk"
-        android:layout_width="300dp"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center">
-
-        <TableRow>
-        <Button
-            android:id="@+id/exit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="キャンセル"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="openHome"/>
-        </TableRow>
-        <TableRow>
-            <TextView android:text="タイトル" />
-        </TableRow>
-        <TableRow>
-            <EditText
-            android:id="@+id/taskName"
-            android:textSize="24dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-                android:inputType="text"/>
-        </TableRow>
-        <TableRow>
-            <TextView android:text="開始日時・時刻"
-                android:id="@+id/testVIew"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </TableRow>
-        <TableRow>
-            <EditText
-                android:id="@+id/dateS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:inputType="date"/>
-            <EditText
-                android:id="@+id/timeS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                tools:ignore="DuplicateIds"
-                android:inputType="datetime"/>
-            <Button
-                android:id="@+id/selectStartB"
-                android:text="時刻選択"
-                android:onClick="selectTimeStartBtn"
-                />
-        </TableRow>
-
-        <TableRow>
-            <TextView android:text="終了日時・時刻"
+            <TableLayout
+                android:id="@+id/layerTsk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
-        </TableRow>
-        <TableRow>
-            <EditText
-                android:id="@+id/dateE"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:inputType="date"/>
-            <EditText
-                android:id="@+id/timeE"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                tools:ignore="DuplicateIds"
-                android:inputType="datetime"/>
-            <Button
-                android:id="@+id/selectEndB"
-                android:text="時刻選択"
-                android:onClick="selectTimeEndBtn"
-                />
-        </TableRow>
-
-        <TableRow>
-            <Button
-                android:id="@+id/set"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="taskAdd"
+                android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="selectTaskSetBtn"/>
-        </TableRow>
-       </TableLayout>
-    </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent">
 
-<!--        予定一覧レイアウト-->
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/exit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:onClick="openHome"
+                        android:text="@string/cancel"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView android:text="@string/title" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/taskName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:textSize="24sp"/>
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/testVIew"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/StartDayStartTime" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/dateS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/timeS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime"
+                        android:textSize="16sp"
+                        tools:ignore="DuplicateIds" />
+
+                    <Button
+                        android:id="@+id/selectStartB"
+                        android:onClick="selectTimeStartBtn"
+                        android:text="@string/SelectTime" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/EndDayEndTime" />
+                </TableRow>
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/dateE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/timeE"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="datetime"
+                        android:textSize="16sp"
+                        tools:ignore="DuplicateIds" />
+
+                    <Button
+                        android:id="@+id/selectEndB"
+                        android:onClick="selectTimeEndBtn"
+                        android:text="@string/SelectTime" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/set"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:onClick="selectTaskSetBtn"
+                        android:text="taskAdd"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+
+        <!--        予定一覧レイアウト-->
         <LinearLayout
             android:id="@+id/layerTaskList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="visible">
+            
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="90dp"/>
 
-           <Spinner
+            <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center|top">
-            </Spinner>
+                android:gravity="center|top" />
+
             <Button
                 android:id="@+id/listMonthSelect"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:backgroundTint="@android:color/black"
-                android:text="選択"
-                android:onClick="ListTask">
-            </Button>
+                android:onClick="ListTask"
+                android:text="選択" />
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -207,59 +227,70 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    </TableLayout>
+                </TableLayout>
 
             </ScrollView>
         </LinearLayout>
 
     </FrameLayout>
-<!--    下部ボタンレイアウト-->
+    <!--    下部ボタンレイアウト-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <WebView
+        android:id="@+id/gameWeb"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        />
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">
 
-        <TableRow
-            android:gravity="right">
+        <TableRow android:gravity="right">
+
             <Button
                 android:id="@+id/buttonTaskMenu"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:text="予定追加"
                 android:layout_gravity="right|bottom"
+                android:onClick="openTaskAdd"
+                android:text="予定追加"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:onClick="openTaskAdd"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </TableRow>
+
         <TableRow>
+
             <Button
                 android:id="@+id/taskBtn"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:backgroundTint="@android:color/black"
                 android:layout_weight="1"
-                android:text="予定"
-                android:onClick="openTaskView">
-            </Button>
+                android:backgroundTint="@android:color/black"
+                android:onClick="openTaskView"
+                android:text="予定" />
+
             <Button
                 android:id="@+id/homeBtn"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:backgroundTint="@android:color/darker_gray"
                 android:layout_weight="1"
-                android:text="HOME"
-                android:onClick="openHome">
-            </Button>
+                android:backgroundTint="@android:color/darker_gray"
+                android:onClick="openHome"
+                android:text="HOME" />
+
             <Button
                 android:id="@+id/CotBtn"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
-                android:backgroundTint="@android:color/holo_blue_light"
                 android:layout_weight="1"
-                android:text="実績">
-            </Button>
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:text="実績" />
         </TableRow>
     </TableLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
