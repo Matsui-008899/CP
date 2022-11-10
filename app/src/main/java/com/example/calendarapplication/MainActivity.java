@@ -26,7 +26,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
 import java.util.Calendar;
 
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
 
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +58,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
 
-        gameView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return (motionEvent.getAction() == MotionEvent.ACTION_MOVE);
-            }
-        });
+        gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
         flag = false;
         taskName = findViewById(R.id.taskName);
