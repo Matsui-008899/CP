@@ -1,22 +1,30 @@
 package com.example.calendarapplication;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -26,6 +34,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 
 import java.util.Calendar;
 
@@ -39,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     private TextView taskView;
     private DataBase selectDB;
     private WebView gameView;
+
+    InputMethodManager inputMethodManager;
+    private LinearLayout layerTask;
+
+
 
     private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
@@ -70,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         selectDB = new DataBase(getApplicationContext());
 
+        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        layerTask = findViewById(R.id.layerTask);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -77,10 +94,12 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
+        /*
+        テスト：カレンダーの標識確認
+         */
         CalendarView calendar = findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(
                 (calendarView, year, month, date) -> {
@@ -93,9 +112,23 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR),c.get(Calendar.MINUTE)));
-        dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)));
+        dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH)));
 
+        timeE.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR)+1,c.get(Calendar.MINUTE)));
+        dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH)));
     }
+
+    /**
+     * キーボード非表示（フォーカス外タッチ時）
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        inputMethodManager.hideSoftInputFromWindow(layerTask.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+        layerTask.requestFocus();
+
+        return true;
+    }
+
 
     /**
      * ホーム画面表示
@@ -106,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         LinearLayout TaskListLayout = (LinearLayout) findViewById(R.id.layerTaskList);
 
         CalendarLayout.setVisibility(View.VISIBLE);
-        TaskLayout.setVisibility(View.INVISIBLE);
-        TaskListLayout.setVisibility(View.INVISIBLE);
+        TaskLayout.setVisibility(View.GONE);
+        TaskListLayout.setVisibility(View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
@@ -137,8 +170,8 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         LinearLayout TaskLayout = (LinearLayout) findViewById(R.id.layerTask);
         LinearLayout TaskListLayout = (LinearLayout) findViewById(R.id.layerTaskList);
 
-        CalendarLayout.setVisibility(View.INVISIBLE);
-        TaskLayout.setVisibility(View.INVISIBLE);
+        CalendarLayout.setVisibility(View.GONE);
+        TaskLayout.setVisibility(View.GONE);
         TaskListLayout.setVisibility(View.VISIBLE);
 
         /*
@@ -172,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         //データ挿入
         InsertTask();
     }
-
 
     /**
      * DBインサート文
@@ -225,14 +257,18 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 TaskLayout.setVisibility(View.INVISIBLE);
 
                 taskName.setText("");
-                dateS.setText("");
-                timeS.setText("");
-                dateE.setText("");
-                timeE.setText("");
+                Calendar c = Calendar.getInstance();
+                timeS.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR),c.get(Calendar.MINUTE)));
+                dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH)));
+
+                timeE.setText(String.format("%02d時%02d分",c.get(Calendar.HOUR)+1,c.get(Calendar.MINUTE)));
+                dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH)));
+
             }
         }else{
             Log.d("debug","日付に矛盾が発生");
         }
+
 
 
         Log.d("debug","日付判定日にち"+test);
@@ -284,6 +320,8 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         Spinner spinner = findViewById(R.id.spinner);
         String item = (String)spinner.getSelectedItem();
 
+        //幅調整（未完）
+//        insertLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         Cursor cursor = db.query(
                 "tastdb",
                 new String[]{"startday","starttime","task"},
@@ -294,30 +332,58 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 "startday"
         );
         cursor.moveToFirst();
+        /*
+        データ抽出語のデータを一意に識別するよう配列で格納
+         */
+        int[] array;
 
+        int id = 10;
 
         for (int i = 0; i < cursor.getCount(); i++){
             final TableRow tr = new TableRow(this);
-            final TableRow tr1 = new TableRow(this);
             //開始時刻
-            TextView startDayView = new TextView(this);
-            TextView startTimeView = new TextView(this);
-            TextView taskNameView = new TextView(this);
+            TextView TView1 = new TextView(this);
+            TextView TView2 = new TextView(this);
+            Button TaskEdit = new Button(this);
 
-            startDayView.setText(cursor.getString(0));
-            tr.addView(startDayView);
+            TView1.setText(cursor.getString(0)+"\n"+cursor.getString(2));
+            tr.addView(TView1);
+            TView2.setLayoutParams(new ViewGroup.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+            //Gravity(右詰め予定)
+//            startTimeView.setGravity(Gravity.LEFT);
+            //編集用ボタン生成
+            tr.addView(TView2);
+            TaskEdit.setOnClickListener(updateDB);
+            tr.addView(TaskEdit);
+
+
+
+
+            /*
+            ID付与
+             */
+            id = ViewCompat.generateViewId();
+            tr.setId(id);
+            tr.setOnClickListener(testDebug);
             insertLayout.addView(tr);
 
-            taskNameView.setText(cursor.getString(2));
-            tr1.addView(taskNameView);
-            startTimeView.setText(cursor.getString(1));
-            tr1.addView(startTimeView);
-            insertLayout.addView(tr1);
+
 
             cursor.moveToNext();
         }
         cursor.close();
     }
+    //DB編集
+    private View.OnClickListener updateDB;
+
+    //デバッグ用（メッセージ表示）
+    private View.OnClickListener testDebug = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            Log.d("debug","testMessage"+id);
+        }
+    };
 
     /**
      * 時刻・月日ダイアログ表示

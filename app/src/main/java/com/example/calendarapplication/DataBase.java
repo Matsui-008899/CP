@@ -46,7 +46,8 @@ public class DataBase extends SQLiteOpenHelper {
         /**
          * テスト挿入
          */
-        saveData(db,"2022年10月12日","12時30分","2022年10月12日","13時40分","肉まん");
+
+//        saveData(db,"2022年10月12日","12時30分","2022年10月12日","13時40分","肉まん");
     }
 
     private void saveData(SQLiteDatabase db, String startD,String startT, String endD,String endT,String task) {
