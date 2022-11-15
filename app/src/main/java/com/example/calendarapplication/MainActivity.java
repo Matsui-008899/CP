@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -314,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
      * 月別予定一覧表示
      */
     public void ListTask(View view) {
-        LinearLayout insertLayout = (TableLayout) findViewById(R.id.taskInsert);
+        TableLayout insertLayout = (TableLayout) findViewById(R.id.taskInsert);
         insertLayout.removeAllViews();
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Spinner spinner = findViewById(R.id.spinner);
@@ -324,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 //        insertLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         Cursor cursor = db.query(
                 "tastdb",
-                new String[]{"startday","starttime","task"},
+                new String[]{"_id","startday","starttime","task"},
                 "startday LIKE ?",
                 new String[]{"2022年"+item+"%"},
                 null,
@@ -338,36 +339,43 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         int[] array;
 
         int id = 10;
-
         for (int i = 0; i < cursor.getCount(); i++){
             final TableRow tr = new TableRow(this);
+            tr.setLayoutParams(new TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.MATCH_PARENT));
             //開始時刻
             TextView TView1 = new TextView(this);
             TextView TView2 = new TextView(this);
+            TextView TView3 = new TextView(this);
+            TextView TView4 = new TextView(this);
             Button TaskEdit = new Button(this);
 
-            TView1.setText(cursor.getString(0)+"\n"+cursor.getString(2));
-            tr.addView(TView1);
-            TView2.setLayoutParams(new ViewGroup.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+            TableRow.LayoutParams textLayoutParams = new TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT
+            );
+
+            TView1.setText(cursor.getString(1));
+            tr.addView(TView1,textLayoutParams);
+            TView2.setText(cursor.getString(2));
+            tr.addView(TView2,textLayoutParams);
+            TView4.setText(cursor.getString(3));
+            tr.addView(TView4,textLayoutParams);
+//            TView2.setLayoutParams(new ViewGroup.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
             //Gravity(右詰め予定)
-//            startTimeView.setGravity(Gravity.LEFT);
-            //編集用ボタン生成
-            tr.addView(TView2);
-            TaskEdit.setOnClickListener(updateDB);
-            tr.addView(TaskEdit);
+//            startTimeView.setGravity(Gravity.RIGHT);
 
+//            編集用ボタン生成
+//            TaskEdit.setOnClickListener(updateDB);
+//            tr.addView(TaskEdit,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 
-
-
-            /*
-            ID付与
-             */
-            id = ViewCompat.generateViewId();
+            //DBの"_id"からID付与
+            id = Integer.parseInt(cursor.getString(0));
             tr.setId(id);
+            //予定クリック時に遷移
             tr.setOnClickListener(testDebug);
             insertLayout.addView(tr);
-
-
 
             cursor.moveToNext();
         }
@@ -380,6 +388,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     private View.OnClickListener testDebug = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
             int id = view.getId();
             Log.d("debug","testMessage"+id);
         }
