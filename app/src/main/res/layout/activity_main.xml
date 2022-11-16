@@ -12,11 +12,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <WebView
             android:id="@+id/gameWeb"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            />
+            android:layout_height="90dp" />
 
         <!--        ホームレイアウト-->
         <LinearLayout
@@ -223,45 +223,25 @@
                 android:onClick="ListTask"
                 android:text="選択" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <LinearLayout
+                    android:id="@+id/taskInsert"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10月３０日１０時３０分" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="～" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="１０月１２時００分" />
-
-                    <Button
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:gravity="right"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/RecycleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
 
                 </LinearLayout>
-
             </ScrollView>
 
-            </LinearLayout>
 
         </LinearLayout>
 
@@ -271,54 +251,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
 
-        <TableRow android:gravity="right">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
 
-            <Button
-                android:id="@+id/buttonTaskMenu"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:onClick="openTaskAdd"
-                android:text="予定追加"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </TableRow>
+            <TableRow android:gravity="right">
 
-        <TableRow>
+                <Button
+                    android:id="@+id/buttonTaskMenu"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:onClick="openTaskAdd"
+                    android:text="予定追加"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/taskBtn"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/black"
-                android:onClick="openTaskView"
-                android:text="予定" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/homeBtn"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/darker_gray"
-                android:onClick="openHome"
-                android:text="HOME" />
+                <Button
+                    android:id="@+id/taskBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/black"
+                    android:onClick="openTaskView"
+                    android:text="予定" />
 
-            <Button
-                android:id="@+id/CotBtn"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/holo_blue_light"
-                android:text="実績" />
-        </TableRow>
-    </TableLayout>
+                <Button
+                    android:id="@+id/homeBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/darker_gray"
+                    android:onClick="openHome"
+                    android:text="HOME" />
+
+                <Button
+                    android:id="@+id/CotBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_blue_light"
+                    android:text="実績" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,8 +36,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements  TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private EditText taskName;
@@ -52,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
-
-
 
     private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
@@ -97,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
+
+        //予定一覧画面
 
         /*
         テスト：カレンダーの標識確認
@@ -315,17 +319,94 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
      * 月別予定一覧表示
      */
     public void ListTask(View view) {
-        TableLayout insertLayout = (TableLayout) findViewById(R.id.taskInsert);
-        insertLayout.removeAllViews();
+
+        RecyclerView rv = (RecyclerView)findViewById(R.id.RecycleView);
+        CasarealRecycleViewAdapter adapter = new CasarealRecycleViewAdapter(this.createDataset());
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
+
+//        LinearLayout insertLayout = (LinearLayout) findViewById(R.id.taskInsert);
+//        insertLayout.removeAllViews();
+//        SQLiteDatabase db = selectDB.getReadableDatabase();
+//        Spinner spinner = findViewById(R.id.spinner);
+//        String item = (String)spinner.getSelectedItem();
+//
+//        //幅調整（未完）
+////        insertLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//        Cursor cursor = db.query(
+//                "tastdb",
+//                new String[]{"_id","startday","starttime","task"},
+//                "startday LIKE ?",
+//                new String[]{"2022年"+item+"%"},
+//                null,
+//                null,
+//                "startday"
+//        );
+//        cursor.moveToFirst();
+//        /*
+//        データ抽出語のデータを一意に識別するよう配列で格納
+//         */
+//        int[] array;
+//
+//        int id = 10;
+//        for (int i = 0; i < cursor.getCount(); i++){
+//            final TableRow tr = new TableRow(this);
+//            tr.setLayoutParams(new TableRow.LayoutParams(
+//                    TableRow.LayoutParams.MATCH_PARENT,
+//                    TableRow.LayoutParams.MATCH_PARENT));
+//            //開始時刻
+//            TextView TView1 = new TextView(this);
+//            TextView TView2 = new TextView(this);
+//            TextView TView3 = new TextView(this);
+//            TextView TView4 = new TextView(this);
+//            Button TaskEdit = new Button(this);
+//
+//            TableRow.LayoutParams textLayoutParams = new TableRow.LayoutParams(
+//                    TableRow.LayoutParams.WRAP_CONTENT,
+//                    TableRow.LayoutParams.WRAP_CONTENT
+//            );
+//
+//            TView1.setText(cursor.getString(1));
+//            tr.addView(TView1,textLayoutParams);
+//            TView2.setText(cursor.getString(2));
+//            tr.addView(TView2,textLayoutParams);
+//            TView4.setText(cursor.getString(3));
+//            tr.addView(TView4,textLayoutParams);
+////            TView2.setLayoutParams(new ViewGroup.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+//            //Gravity(右詰め予定)
+////            startTimeView.setGravity(Gravity.RIGHT);
+//
+////            編集用ボタン生成
+////            TaskEdit.setOnClickListener(updateDB);
+////            tr.addView(TaskEdit,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+//
+//            //DBの"_id"からID付与
+//            id = Integer.parseInt(cursor.getString(0));
+//            tr.setId(id);
+//            //予定クリック時に遷移
+//            tr.setOnClickListener(testDebug);
+//            insertLayout.addView(tr);
+//
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+    }
+
+    private List<RowData> createDataset() {
+        List<RowData> dataset = new ArrayList<>();
+
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Spinner spinner = findViewById(R.id.spinner);
         String item = (String)spinner.getSelectedItem();
 
-        //幅調整（未完）
-//        insertLayout.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
         Cursor cursor = db.query(
                 "tastdb",
-                new String[]{"_id","startday","starttime","task"},
+                new String[]{"_id","startday","starttime","endtime","task"},
                 "startday LIKE ?",
                 new String[]{"2022年"+item+"%"},
                 null,
@@ -333,54 +414,22 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 "startday"
         );
         cursor.moveToFirst();
-        /*
-        データ抽出語のデータを一意に識別するよう配列で格納
-         */
-        int[] array;
 
-        int id = 10;
-        for (int i = 0; i < cursor.getCount(); i++){
-            final TableRow tr = new TableRow(this);
-            tr.setLayoutParams(new TableRow.LayoutParams(
-                    TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            //開始時刻
-            TextView TView1 = new TextView(this);
-            TextView TView2 = new TextView(this);
-            TextView TView3 = new TextView(this);
-            TextView TView4 = new TextView(this);
-            Button TaskEdit = new Button(this);
 
-            TableRow.LayoutParams textLayoutParams = new TableRow.LayoutParams(
-                    TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT
-            );
+        for (int i = 0; i < cursor.getCount(); i++) {
+            RowData data = new RowData();
+            data.setStartDay(cursor.getString(1));
+            data.setStartTime(cursor.getString(2));
+            data.setEndTime(cursor.getString(3));
+            data.setTaskName(cursor.getString(4));
 
-            TView1.setText(cursor.getString(1));
-            tr.addView(TView1,textLayoutParams);
-            TView2.setText(cursor.getString(2));
-            tr.addView(TView2,textLayoutParams);
-            TView4.setText(cursor.getString(3));
-            tr.addView(TView4,textLayoutParams);
-//            TView2.setLayoutParams(new ViewGroup.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
-            //Gravity(右詰め予定)
-//            startTimeView.setGravity(Gravity.RIGHT);
-
-//            編集用ボタン生成
-//            TaskEdit.setOnClickListener(updateDB);
-//            tr.addView(TaskEdit,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            //DBの"_id"からID付与
-            id = Integer.parseInt(cursor.getString(0));
-            tr.setId(id);
-            //予定クリック時に遷移
-            tr.setOnClickListener(testDebug);
-            insertLayout.addView(tr);
-
+            dataset.add(data);
             cursor.moveToNext();
         }
         cursor.close();
+        return dataset;
     }
+
     //DB編集
     private View.OnClickListener updateDB;
 
