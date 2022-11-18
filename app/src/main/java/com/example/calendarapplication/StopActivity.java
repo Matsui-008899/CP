@@ -23,7 +23,7 @@ public class StopActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(getApplication(), MainActivity.class);
+                Intent intent = new Intent(getApplication(), LoginActivity.class);
                 startActivity(intent);
             }
         }.start();

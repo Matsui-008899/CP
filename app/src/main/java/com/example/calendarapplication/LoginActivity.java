@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     // 5回失敗で１５秒待機
                     if (numError>5) {
-                        Intent intent = new Intent(getApplication(), StopActivity.class);
+                        Intent intent = new Intent(getApplication(), ImageActivity.class);
                         startActivity(intent);
                     }
                 }
