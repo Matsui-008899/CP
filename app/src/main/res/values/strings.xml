@@ -14,4 +14,19 @@
     <string name="StartDayStartTime">開始日時・時刻</string>
     <string name="SelectTime">時刻選択</string>
     <string name="EndDayEndTime">終了日時・時刻</string>
+
+    // MainActivity
+    <string name="pwd_title">パスワード</string>
+    <string name="pwd_enter">パスワードを入力してください</string>
+    <string name="pwd_send">送信</string>
+
+
+    // ImageActivity
+    <string name="img_title">画像を並べてください</string>
+    <string name="img_send">送信</string>
+
+
+    // StopActivity
+    <string name="stop">15秒お待ちください</string>
+
 </resources>

@@ -1,25 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setId"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/border">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/startDayRecycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10月３０日" />
+            android:text="１０月３０日"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/UpDateDayLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/startDayRecycleUp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="１０"
+            android:inputType="date"
+            android:visibility="visible"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="月"
+            android:visibility="visible"/>
+        <EditText
+            android:id="@+id/startDayRecycleUp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="３０"
+            android:inputType="date"
+            android:visibility="visible"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日"
+            android:visibility="visible"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/startTimeRecycle"
@@ -40,15 +77,87 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/UpdateTimeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/startTimeRecycleUp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:text="１０" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="時" />
+        <EditText
+            android:id="@+id/startTimeRecycleUp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:text="３０" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="～" />
+
+        <EditText
+            android:id="@+id/endTimeRecycleUp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:text="１２" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="時" />
+        <EditText
+            android:id="@+id/endTimeRecycleUp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:text="３０" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/taskNameRecycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="タスク" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/taskNameRecycleUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="タスク"
+            android:visibility="visible"/>
     </LinearLayout>
 
     <LinearLayout
@@ -72,9 +181,22 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/viewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="編集" />
+            android:text="編集"
+            android:onClick="selectUpdate"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:onClick="onUpdate"
+            android:text="確定"
+            android:visibility="invisible"/>
     </LinearLayout>
     <Space
         android:layout_width="match_parent"

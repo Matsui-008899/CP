@@ -1,7 +1,6 @@
 package com.example.calendarapplication;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
@@ -9,13 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,18 +20,13 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
+
 
 
 
@@ -384,9 +376,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 ////            TaskEdit.setOnClickListener(updateDB);
 ////            tr.addView(TaskEdit,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT));
 //
-//            //DBの"_id"からID付与
-//            id = Integer.parseInt(cursor.getString(0));
-//            tr.setId(id);
+
 //            //予定クリック時に遷移
 //            tr.setOnClickListener(testDebug);
 //            insertLayout.addView(tr);
@@ -396,12 +386,17 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 //        cursor.close();
     }
 
+    /**
+     * DBより月別の予定を取得
+     * @return
+     */
     private List<RowData> createDataset() {
         List<RowData> dataset = new ArrayList<>();
 
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Spinner spinner = findViewById(R.id.spinner);
         String item = (String)spinner.getSelectedItem();
+        int id =0;
 
 
         Cursor cursor = db.query(
@@ -423,6 +418,19 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             data.setEndTime(cursor.getString(3));
             data.setTaskName(cursor.getString(4));
 
+            data.setSDay1(cursor.getString(1).substring(cursor.getString(1).indexOf("年")+1,cursor.getString(1).indexOf("月")));
+            data.setSDay2(cursor.getString(1).substring(cursor.getString(1).indexOf("月")+1,cursor.getString(1).indexOf("日")));
+
+            data.setSTime1(cursor.getString(2).substring(0,cursor.getString(2).indexOf("時")));
+            data.setSTime2(cursor.getString(2).substring(cursor.getString(2).indexOf("時")+1,cursor.getString(3).indexOf("分")));
+            data.setETime1(cursor.getString(3).substring(0,cursor.getString(3).indexOf("時")));
+            data.setETime2(cursor.getString(3).substring(cursor.getString(3).indexOf("時")+1,cursor.getString(3).indexOf("分")));
+
+
+            //DBの"_id"からID付与
+            id = Integer.parseInt(cursor.getString(0));
+            data.setId(id);
+
             dataset.add(data);
             cursor.moveToNext();
         }
@@ -430,8 +438,56 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         return dataset;
     }
 
-    //DB編集
-    private View.OnClickListener updateDB;
+    //予定編集モード移行
+    public void selectUpdate(View view){
+        LinearLayout pare =(LinearLayout)view.getParent();
+        LinearLayout childLO = (LinearLayout)pare.getParent();
+
+        childLO.getChildAt(0).setVisibility(View.GONE);
+        childLO.getChildAt(1).setVisibility(View.VISIBLE);
+
+        childLO.getChildAt(2).setVisibility(View.GONE);
+        childLO.getChildAt(3).setVisibility(View.VISIBLE);
+
+        childLO.getChildAt(4).setVisibility(View.GONE);
+        childLO.getChildAt(5).setVisibility(View.VISIBLE);
+
+        LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
+        child1.getChildAt(2).setVisibility(View.VISIBLE);
+
+    }
+
+    //編集内容確定
+    public  void onUpdate(View view){
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout)view.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout)viewPare.getParent();
+        //開始月日のレイアウト
+        LinearLayout startDayLayout = (LinearLayout)viewPPare.getChildAt(1);
+        //開始・終了時刻レイアウト
+        LinearLayout timeLayout = (LinearLayout)viewPPare.getChildAt(3);
+        //タスクレイアウト
+        LinearLayout taskLayout = (LinearLayout)viewPPare.getChildAt(5);
+
+        EditText startMonth = (EditText) startDayLayout.getChildAt(0);
+        EditText startDay = (EditText) startDayLayout.getChildAt(2);
+
+        //開始時刻取得
+        String startMD = String.format(startMonth.getText()+"月"+startDay.getText()+"日");
+
+        EditText startHours = (EditText) timeLayout.getChildAt(0);
+        EditText startMin = (EditText) timeLayout.getChildAt(2);
+
+        String startHM = String.format(startHours.getText()+"時"+startMin.getText()+"分");
+
+
+
+        SQLiteDatabase db = selectDB.getReadableDatabase();
+
+
+        Log.d("debug","　"+viewPPare.getId()+"開始月日"+startMD+"開始時刻"+startHM);
+    }
 
     //デバッグ用（メッセージ表示）
     private View.OnClickListener testDebug = new View.OnClickListener() {
@@ -483,4 +539,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
         }
     }
+
+
 }

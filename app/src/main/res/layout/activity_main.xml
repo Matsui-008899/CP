@@ -203,7 +203,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            >
 
             <Space
                 android:layout_width="match_parent"
@@ -226,7 +227,8 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:id="@+id/taskInsert"
@@ -241,7 +243,9 @@
 
                 </LinearLayout>
             </ScrollView>
-
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
 
         </LinearLayout>
 
