@@ -10,21 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
+
 
         <TextView
             android:id="@+id/startDayRecycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="１０月３０日"/>
+            android:text="２０２２年１０月３０日"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/UpDateDayLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:visibility="gone">
 
+        <EditText
+            android:id="@+id/yearRecycleUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="２０２２"
+            android:inputType="date"
+            android:visibility="visible"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年"
+            android:visibility="visible"/>
         <EditText
             android:id="@+id/startDayRecycleUp1"
             android:layout_width="wrap_content"
@@ -56,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/startTimeRecycle"
@@ -81,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/startTimeRecycleUp1"
@@ -138,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/taskNameRecycle"
@@ -150,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/taskNameRecycleUp"

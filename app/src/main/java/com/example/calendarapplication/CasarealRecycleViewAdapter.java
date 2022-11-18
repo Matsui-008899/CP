@@ -38,6 +38,8 @@ public class CasarealRecycleViewAdapter extends RecyclerView.Adapter<CasarealVie
         holder.upSTime2.setText(list.get(position).getSTime2());
         holder.upETime1.setText(list.get(position).getETime1());
         holder.upETime2.setText(list.get(position).getETime2());
+        holder.upYear.setText(list.get(position).getYear());
+        holder.upTask.setText(list.get(position).getTaskName());
 
 
     }

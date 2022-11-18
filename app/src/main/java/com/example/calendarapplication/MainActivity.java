@@ -426,6 +426,10 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             data.setETime1(cursor.getString(3).substring(0,cursor.getString(3).indexOf("時")));
             data.setETime2(cursor.getString(3).substring(cursor.getString(3).indexOf("時")+1,cursor.getString(3).indexOf("分")));
 
+            data.setYear(cursor.getString(1).substring(0,cursor.getString(1).indexOf("年")));
+
+            data.setTaskName(cursor.getString(4).toString());
+
 
             //DBの"_id"からID付与
             id = Integer.parseInt(cursor.getString(0));
@@ -470,23 +474,39 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         //タスクレイアウト
         LinearLayout taskLayout = (LinearLayout)viewPPare.getChildAt(5);
 
-        EditText startMonth = (EditText) startDayLayout.getChildAt(0);
-        EditText startDay = (EditText) startDayLayout.getChildAt(2);
+        EditText year = (EditText)startDayLayout.getChildAt(0) ;
+        EditText startMonth = (EditText) startDayLayout.getChildAt(2);
+        EditText startDay = (EditText) startDayLayout.getChildAt(4);
 
-        //開始時刻取得
-        String startMD = String.format(startMonth.getText()+"月"+startDay.getText()+"日");
+        //開始月日取得
+        String startMD = String.format(year.getText()+"年"+startMonth.getText()+"月"+startDay.getText()+"日");
 
         EditText startHours = (EditText) timeLayout.getChildAt(0);
         EditText startMin = (EditText) timeLayout.getChildAt(2);
 
+        //開始時刻取得
         String startHM = String.format(startHours.getText()+"時"+startMin.getText()+"分");
 
+        EditText endHours = (EditText)timeLayout.getChildAt(5);
+        EditText endMin = (EditText)timeLayout.getChildAt(7);
+
+        //開始時刻取得
+        String endHM = String.format(endHours.getText()+"時"+endMin.getText()+"分");
 
 
-        SQLiteDatabase db = selectDB.getReadableDatabase();
+        EditText taskText = (EditText) taskLayout.getChildAt(0);
+        //タスク内容取得
+        String task = String.format(String.valueOf(taskText.getText()));
 
+        ContentValues values = new ContentValues();
+        values.put("startday",startMD);
+        values.put("starttime",startHM);
+        values.put("endtime",endHM);
+        values.put("task",task);
 
-        Log.d("debug","　"+viewPPare.getId()+"開始月日"+startMD+"開始時刻"+startHM);
+        SQLiteDatabase db = selectDB.getWritableDatabase();
+        int ret = db.update("tastdb",values,"_id = "+viewPPare.getId(),null);
+        Log.d("debug","　"+viewPPare.getId()+"\n開始月日："+startMD+"\n開始時刻："+startHM+"\n終了時刻："+endHM+"\nタスク名："+task+"\n判定処理："+ret);
     }
 
     //デバッグ用（メッセージ表示）

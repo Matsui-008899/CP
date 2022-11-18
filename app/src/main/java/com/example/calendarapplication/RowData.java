@@ -1,6 +1,9 @@
 package com.example.calendarapplication;
 
 public class RowData {
+    private String Year;
+
+
     private String startDay;
     private String startTime;
     private String endTime;
@@ -15,6 +18,15 @@ public class RowData {
 
     public String ETime1;
     public String ETime2;
+
+
+    public String getYear() {
+        return Year;
+    }
+
+    public void setYear(String year) {
+        Year = year;
+    }
 
     public String getSDay1() {
         return SDay1;
