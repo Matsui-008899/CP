@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:id="@+id/UpDateDayLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
 
@@ -62,6 +62,21 @@
             android:layout_height="wrap_content"
             android:text="日"
             android:visibility="visible"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/taskExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onExit"
+            android:text="×"
+            android:textSize="25dp"
+            android:visibility="visible"/>
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

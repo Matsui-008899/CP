@@ -461,6 +461,23 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
     }
 
+    public void onExit(View view){
+        LinearLayout pare =(LinearLayout)view.getParent();
+        LinearLayout childLO = (LinearLayout)pare.getParent();
+
+        childLO.getChildAt(0).setVisibility(View.VISIBLE);
+        childLO.getChildAt(1).setVisibility(View.GONE);
+
+        childLO.getChildAt(2).setVisibility(View.VISIBLE);
+        childLO.getChildAt(3).setVisibility(View.GONE);
+
+        childLO.getChildAt(4).setVisibility(View.VISIBLE);
+        childLO.getChildAt(5).setVisibility(View.GONE);
+
+        LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
+        child1.getChildAt(2).setVisibility(View.GONE);
+    }
+
     //編集内容確定
     public  void onUpdate(View view){
         //確定ボタンの親レイアウト
@@ -507,7 +524,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         SQLiteDatabase db = selectDB.getWritableDatabase();
         int ret = db.update("tastdb",values,"_id = "+viewPPare.getId(),null);
         Log.d("debug","　"+viewPPare.getId()+"\n開始月日："+startMD+"\n開始時刻："+startHM+"\n終了時刻："+endHM+"\nタスク名："+task+"\n判定処理："+ret);
+
+        onExit(view);
     }
+
+
 
     //デバッグ用（メッセージ表示）
     private View.OnClickListener testDebug = new View.OnClickListener() {
