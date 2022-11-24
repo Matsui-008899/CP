@@ -22,6 +22,7 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
     public EditText upETime2;
     public EditText upYear;
     public EditText upTask;
+    private TextView testBtn;
 
     public CasarealViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -39,5 +40,8 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
         upETime2 = (EditText) itemView.findViewById(R.id.endTimeRecycleUp2);
         upYear = (EditText) itemView.findViewById(R.id.yearRecycleUp);
         upTask = (EditText) itemView.findViewById(R.id.taskNameRecycleUp);
+
     }
+
+
 }

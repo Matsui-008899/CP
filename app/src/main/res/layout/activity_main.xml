@@ -17,7 +17,8 @@
         <WebView
             android:id="@+id/gameWeb"
             android:layout_width="match_parent"
-            android:layout_height="90dp" />
+            android:layout_height="90dp"
+            android:visibility="gone"/>
 
         <!--        ホームレイアウト-->
         <LinearLayout
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:weightSum="10">
 
             <Space
@@ -49,13 +50,19 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/TaskView"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/CalendarRecycleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
             </ScrollView>
 
@@ -67,7 +74,6 @@
         </LinearLayout>
 
         <!--        予定追加レイアウト-->
-
         <LinearLayout
             android:id="@+id/layerTask"
             android:layout_width="300dp"
@@ -204,7 +210,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             >
 
             <Space
@@ -224,6 +230,7 @@
                 android:backgroundTint="@android:color/black"
                 android:onClick="ListTask"
                 android:text="選択" />
+
 
 
             <ScrollView

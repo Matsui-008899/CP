@@ -12,7 +12,10 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="開始月日："/>
         <TextView
             android:id="@+id/startDayRecycle"
             android:layout_width="wrap_content"
@@ -26,6 +29,10 @@
         android:layout_height="wrap_content"
         android:visibility="gone">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="開始月日："/>
         <EditText
             android:id="@+id/yearRecycleUp"
             android:layout_width="wrap_content"
@@ -87,6 +94,10 @@
         android:visibility="visible">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="開始時刻："/>
+        <TextView
             android:id="@+id/startTimeRecycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,6 +108,10 @@
             android:layout_height="wrap_content"
             android:text="～" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="終了時刻："/>
         <TextView
             android:id="@+id/endTimeRecycle"
             android:layout_width="wrap_content"
@@ -111,6 +126,10 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="開始時刻："/>
         <EditText
             android:id="@+id/startTimeRecycleUp1"
             android:layout_width="wrap_content"
@@ -137,6 +156,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="～" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="終了時刻："/>
 
         <EditText
             android:id="@+id/endTimeRecycleUp1"
