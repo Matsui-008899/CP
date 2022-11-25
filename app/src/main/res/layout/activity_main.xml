@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="10">
 
             <Space
@@ -49,15 +49,15 @@
                 android:layout_weight="3">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/TaskView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/TaskView"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:text="" />-->
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/CalendarRecycleView"
@@ -257,6 +257,26 @@
 
         </LinearLayout>
 
+        <!--        実績レイアウト-->
+        <LinearLayout
+            android:id="@+id/layerAchievement"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:onClick="openAchievement">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="90dp" />
+            <Button
+                android:id="@+id/debugSetDataBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:onClick="dataSet"/>
+
+        </LinearLayout>
     </FrameLayout>
     <!--    下部ボタンレイアウト-->
     <LinearLayout

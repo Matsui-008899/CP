@@ -1,10 +1,8 @@
 package com.example.calendarapplication;
 
-import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,19 +11,17 @@ import java.util.List;
 
 public class CasarealRecycleViewAdapter extends RecyclerView.Adapter<CasarealViewHolder> {
 
-    private MainActivity.onRecyclerClickListener listener;
-
-    private List<RowData> list;
+    private List<CasarealRowData> list;
 
 
-    public CasarealRecycleViewAdapter(List<RowData> list){
+    public CasarealRecycleViewAdapter(List<CasarealRowData> list){
         this.list = list;
     }
 
 
     @Override
     public CasarealViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.row,parent,false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_task_view_row,parent,false);
         CasarealViewHolder vh = new CasarealViewHolder(inflate);
         return vh;
     }

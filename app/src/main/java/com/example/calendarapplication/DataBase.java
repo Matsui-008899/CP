@@ -43,22 +43,10 @@ public class DataBase extends SQLiteOpenHelper {
                 SQL_CREATE_ENTRIES
         );
 
-        /**
-         * テスト挿入
-         */
-        saveData(db,"2022年01月12日","12時30分","2022年01月12日","13時40分","肉まん1");
-        saveData(db,"2022年01月12日","12時30分","2022年01月12日","13時40分","肉まん12");
-        saveData(db,"2022年02月12日","12時30分","2022年02月12日","13時40分","肉まん123");
-        saveData(db,"2022年02月12日","12時30分","2022年02月12日","13時40分","肉まん1234");
-        saveData(db,"2022年03月12日","12時30分","2022年03月12日","13時40分","肉まん1234");
-        saveData(db,"2022年03月12日","12時30分","2022年03月12日","13時40分","肉まん1234");
-        saveData(db,"2022年04月12日","12時30分","2022年04月12日","13時40分","肉まん1234");
-        saveData(db,"2022年04月12日","12時30分","2022年04月12日","13時40分","肉まん1234");
-        saveData(db,"2022年05月12日","12時30分","2022年05月12日","13時40分","肉まん1234");
-        saveData(db,"2022年05月12日","12時30分","2022年05月12日","13時40分","肉まん1234");
     }
 
-    private void saveData(SQLiteDatabase db, String startD,String startT, String endD,String endT,String task) {
+
+    public void saveData(SQLiteDatabase db, String startD,String startT, String endD,String endT,String task) {
         ContentValues values = new ContentValues();
         values.put("startday",startD);
         values.put("starttime",startT);

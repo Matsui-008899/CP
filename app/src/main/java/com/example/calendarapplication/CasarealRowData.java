@@ -1,6 +1,6 @@
 package com.example.calendarapplication;
 
-public class RowData {
+public class CasarealRowData {
     private String Year;
 
 
