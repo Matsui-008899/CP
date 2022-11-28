@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             "07月", "08月", "09月", "10月", "11月", "12月"};
 
     private int[][] taskLayoutNum;
-    private int[] idList;
+    private Integer[] idList;
     private boolean[] checkLoad;
 
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 null
         );
         cursor.moveToFirst();
-        idList = new int[cursor.getCount()+1];
+        idList = new Integer[cursor.getCount()+1];
         taskLayoutNum = new int[cursor.getCount()+1][9];
         cursor.close();
 
@@ -568,6 +568,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
         child1.getChildAt(2).setVisibility(View.VISIBLE);
+        child1.getChildAt(4).setVisibility(View.VISIBLE);
 
     }
 
@@ -589,6 +590,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
         child1.getChildAt(2).setVisibility(View.GONE);
+        child1.getChildAt(4).setVisibility(View.GONE);
     }
 
     /**
@@ -602,14 +604,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         //全体の親レイアウト
         LinearLayout viewPPare = (LinearLayout)viewPare.getParent();
 
-        int id = viewPPare.getId();
-        for (int i = 1;i<idList.length;i++){
-            if(id == idList[i]){
-                id = i;
-                break;
-            }
-        }
-
+        int id = Arrays.asList(idList).indexOf(viewPPare.getId());
 
         EditText year = findViewById(taskLayoutNum[id][7]);
         EditText startMonth = findViewById(taskLayoutNum[id][1]);
@@ -644,11 +639,40 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         values.put("endtime",endHM);
         values.put("task",task);
 
+
         SQLiteDatabase db = selectDB.getWritableDatabase();
-        int ret = db.update("tastdb",values,"_id = "+viewPPare.getId(),null);
+        int ret = db.update("tastdb",values,"_id = "+id,null);
 //        Log.d("debug","　"+viewPPare.getId()+"\n開始月日："+startMD+"\n開始時刻："+startHM+"\n終了時刻："+endHM+"\nタスク名："+task+"\n判定処理："+ret);
 
-        onExit(view);
+        View pan = findViewById(R.id.listMonthSelectBtn);
+        ListTask(pan);
+
+    }
+
+    /**
+     * 予定一件を削除
+     */
+    public void onDelete(View view){
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout)view.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout)viewPare.getParent();
+
+        int viewId = viewPPare.getId();
+
+        SQLiteDatabase db = selectDB.getWritableDatabase();
+
+        int i = Arrays.asList(idList).indexOf(viewId);
+//        for (int a = 0;a < idList.length;a++){
+//            Log.d("dubug","リスト出力ID ￥＝"+idList[a]);
+//        }
+//        Log.d("dubug","idlistの格納インデックス番号 ￥＝"+i);
+//        Log.d("dubug","おやID ￥＝"+viewId);
+        int ewt = db.delete("tastdb","_id = "+i,null);
+
+//        Log.d("dubug","削除成功判定ID ￥＝"+ewt);
+        View pan = findViewById(R.id.listMonthSelectBtn);
+        ListTask(pan);
     }
 
     /**

@@ -242,6 +242,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:onClick="onDelete"
+            android:text="削除"
+            android:visibility="invisible"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"/>
+        <Button
             android:id="@+id/updateBtn"
             android:layout_width="70dp"
             android:layout_height="35dp"
