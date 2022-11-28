@@ -21,7 +21,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     private EditText dateE;
     private EditText timeE;
     private boolean flag;
-    private TextView taskView;
     private DataBase selectDB;
     private WebView gameView;
 
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
             "07月", "08月", "09月", "10月", "11月", "12月"};
 
     private int[][] taskLayoutNum;
-    private int[] idList;
+    private Integer[] idList;
     private boolean[] checkLoad;
 
 
@@ -109,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 (calendarView, year, month, date) -> {
                     String message = (String.format("%d年%02d月%02d日",year,month+1,date));
                     Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                    taskDaySelect(message,taskView);
+                    taskDaySelect(message);
                 }
 
         );
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Cursor cursor = db.query(
                 "tastdb",
-                new String[]{"_id"},
+                new String[]{"max(_id)"},
                 null,
                 null,
                 null,
@@ -134,8 +132,9 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 null
         );
         cursor.moveToFirst();
-        idList = new int[cursor.getCount()+1];
-        taskLayoutNum = new int[cursor.getCount()+1][9];
+        idList = new Integer[Integer.parseInt(cursor.getString(0)+1)];
+        taskLayoutNum = new int[Integer.parseInt(cursor.getString(0)+1)][9];
+        Log.d("dubug","配列作成"+cursor.getString(0));
         cursor.close();
 
     }
@@ -317,25 +316,23 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
                 //空の配列opferを作成し既存の配列をコピーする
                 int[][] opfer = new int[taskLayoutNum.length+1][9];
                 for (int d=0;d<taskLayoutNum.length;d++){
-                    for (int h=0;h<taskLayoutNum[d].length;h++){
-                        opfer[d][h] = taskLayoutNum[d][h];
-                    }
+                    System.arraycopy(taskLayoutNum[d], 0, opfer[d], 0, taskLayoutNum[d].length);
                 }
                 //コピー＆要素追加したものを新規作成する。
                 taskLayoutNum = new int[opfer.length][];
                 for (int d=0;d<opfer.length;d++){
                     taskLayoutNum[d] = new int[opfer[d].length];
-                    for (int h=0;h<opfer[d].length;h++){
-                        taskLayoutNum[d][h] = opfer[d][h];
-                    }
+                    System.arraycopy(opfer[d], 0, taskLayoutNum[d], 0, opfer[d].length);
                 }
 
 
                 Log.d("debug","新配列数1="+taskLayoutNum[0].length);
                 Log.d("debug","新配列数2="+taskLayoutNum.length);
 
+                Log.d("debug","旧idlist="+idList.length);
                 int b = idList.length;
                 idList = Arrays.copyOf(idList,b+1);
+                Log.d("debug","新idlist="+idList.length);
             }
         }else{
             Log.d("debug","日付に矛盾が発生");
@@ -350,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
     /**
      * カレンダーの日にちを選択時、予定しているタスクを表示
      */
-    private void taskDaySelect(String message, TextView taskView) {
+    private void taskDaySelect(String message) {
         RecyclerView rv = findViewById(R.id.CalendarRecycleView);
         CTaskRecyclerViewAdapter adapter = new CTaskRecyclerViewAdapter(this.CTcreateDataset(message));
 
@@ -359,36 +356,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         rv.setHasFixedSize(true);
         rv.setLayoutManager(lm);
         rv.setAdapter(adapter);
-
-//        SQLiteDatabase db = selectDB.getReadableDatabase();
-//        Cursor cursor = db.query(
-//                "tastdb",
-//                new String[]{"startday","starttime","endday","endtime","task"},
-//                "startday=?",
-//                new String[]{message},
-//                null,
-//                null,
-//                null
-//        );
-//        cursor.moveToFirst();
-//
-//        StringBuilder subuilder = new StringBuilder();
-//
-//        for (int i = 0; i < cursor.getCount(); i++){
-//            subuilder.append("開始月日："+cursor.getString(0));
-//            subuilder.append("\n                                ");
-//            subuilder.append("開始時刻："+cursor.getString(1));
-//            subuilder.append("\n終了月日："+cursor.getString(2));
-//            subuilder.append("\n                                ");
-//            subuilder.append("終了時刻："+cursor.getString(3));
-//            subuilder.append("\n");
-//            subuilder.append("予定内容："+cursor.getString(4));
-//            subuilder.append("\n\n");
-//            cursor.moveToNext();
-//        }
-//        //Log.d("debug","**********"+subuilder);
-//        cursor.close();
-//        taskView.setText(subuilder.toString());
     }
 
     private List<CTaskViewRowData> CTcreateDataset(String message) {
@@ -472,19 +439,17 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         Log.d("debug","月true="+ checkLoad[month]);
 
             for (int i = 0; i < cursor.getCount(); i++) {
-                int count = 0;
                 CasarealRowData data = new CasarealRowData();
                 id = Integer.parseInt(cursor.getString(0));
                 //配列にidの番号で格納
                 // true 選択した月が未表示の場合or予定追加時
                 // false 選択した月がすでに表示済みの場合
-                if (checkLoad[month] == false){
+                if (!checkLoad[month]){
                     //RowData一件分のデータの一意識別ようIDをジェネレート
                     idList[id] = ViewCompat.generateViewId();
                     //ジェネレートしたIDを格納
-                    taskLayoutNum[id][count] = idList[id];
+                    taskLayoutNum[id][0] = idList[id];
                 }
-                count = count++;
 
                 //data(setter,getter)にプリセット(Row.xml)に入れる
                 // データ(開始月日、開始時刻、終了時刻etc...)をDBから抽出し挿入
@@ -515,8 +480,8 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
                 // true 選択した月が未表示の場合or予定追加時
                 // false 選択した月がすでに表示済みの場合
-                if (checkLoad[month] == false){
-                    for (count = 1;count <9;count++){
+                if (!checkLoad[month]){
+                    for (int count = 1;count <9;count++){
                         taskLayoutNum[id][count] = ViewCompat.generateViewId();
                         Log.d("debug","testId挿入="+ taskLayoutNum[id][count]);
                     }
@@ -568,6 +533,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
         child1.getChildAt(2).setVisibility(View.VISIBLE);
+        child1.getChildAt(4).setVisibility(View.VISIBLE);
 
     }
 
@@ -589,6 +555,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         LinearLayout child1 = (LinearLayout)childLO.getChildAt(7);
         child1.getChildAt(2).setVisibility(View.GONE);
+        child1.getChildAt(4).setVisibility(View.GONE);
     }
 
     /**
@@ -602,14 +569,7 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         //全体の親レイアウト
         LinearLayout viewPPare = (LinearLayout)viewPare.getParent();
 
-        int id = viewPPare.getId();
-        for (int i = 1;i<idList.length;i++){
-            if(id == idList[i]){
-                id = i;
-                break;
-            }
-        }
-
+        int id = Arrays.asList(idList).indexOf(viewPPare.getId());
 
         EditText year = findViewById(taskLayoutNum[id][7]);
         EditText startMonth = findViewById(taskLayoutNum[id][1]);
@@ -644,11 +604,40 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         values.put("endtime",endHM);
         values.put("task",task);
 
+
         SQLiteDatabase db = selectDB.getWritableDatabase();
-        int ret = db.update("tastdb",values,"_id = "+viewPPare.getId(),null);
+        db.update("tastdb",values,"_id = "+id,null);
 //        Log.d("debug","　"+viewPPare.getId()+"\n開始月日："+startMD+"\n開始時刻："+startHM+"\n終了時刻："+endHM+"\nタスク名："+task+"\n判定処理："+ret);
 
-        onExit(view);
+        View pan = findViewById(R.id.listMonthSelectBtn);
+        ListTask(pan);
+
+    }
+
+    /**
+     * 予定一件を削除
+     */
+    public void onDelete(View view){
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout)view.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout)viewPare.getParent();
+
+        int viewId = viewPPare.getId();
+
+        SQLiteDatabase db = selectDB.getWritableDatabase();
+
+        int i = Arrays.asList(idList).indexOf(viewId);
+//        for (int a = 0;a < idList.length;a++){
+//            Log.d("dubug","リスト出力ID ￥＝"+idList[a]);
+//        }
+//        Log.d("dubug","idlistの格納インデックス番号 ￥＝"+i);
+//        Log.d("dubug","おやID ￥＝"+viewId);
+        db.delete("tastdb","_id = "+i,null);
+
+//        Log.d("dubug","削除成功判定ID ￥＝"+ewt);
+        View pan = findViewById(R.id.listMonthSelectBtn);
+        ListTask(pan);
     }
 
     /**
@@ -696,9 +685,6 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
 
         SQLiteDatabase db = selectDB.getWritableDatabase();
 
-        /**
-         * テスト挿入
-         */
         selectDB.saveData(db,"2022年01月12日","12時30分","2022年01月12日","13時40分","肉まん1");
         selectDB.saveData(db,"2022年01月12日","12時30分","2022年01月12日","13時40分","肉まん12");
         selectDB.saveData(db,"2022年01月12日","12時30分","2022年01月12日","13時40分","肉まん1");
@@ -718,16 +704,5 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         selectDB.saveData(db,"2022年05月12日","12時30分","2022年05月12日","13時40分","肉まん1234");
         selectDB.saveData(db,"2022年05月12日","12時30分","2022年05月12日","13時40分","肉まん1234");
     }
-
-    //デバッグ用（メッセージ表示）
-    private View.OnClickListener testDebug = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            int id = view.getId();
-            Log.d("debug","testMessage"+id);
-        }
-    };
-
 
 }
