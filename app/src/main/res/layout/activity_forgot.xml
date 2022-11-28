@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ForgotActivity">
+
+    <TextView
+        android:id="@+id/fgtTextView"
+        android:layout_width="294dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="51dp"
+        android:text="@string/fgt_title"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fgtCurrentPassword"
+        android:layout_width="238dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="@string/fgt_current"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        app:layout_constraintBottom_toTopOf="@+id/fgtNewPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/fgtNewPassword"
+        android:layout_width="238dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="@string/fgt_new"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        app:layout_constraintBottom_toTopOf="@+id/fgtRePassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/fgtRePassword"
+        android:layout_width="238dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="@string/fgt_re"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        app:layout_constraintBottom_toTopOf="@+id/fgtButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/fgtButton"
+        android:layout_width="100dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginBottom="184dp"
+        android:text="@string/fgt_change"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

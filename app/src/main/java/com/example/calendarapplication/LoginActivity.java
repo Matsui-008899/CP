@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText password;
     private Button button;
+    private Button buttonForgot;
     private DataBaseLogin helper;
 
 
@@ -30,9 +31,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Viewの取得
         password = findViewById(R.id.password);
         button = findViewById(R.id.button);
+        buttonForgot = findViewById(R.id.buttonForgot);
 
         // ボタンにクリックリスナーをセット
         button.setOnClickListener(this);
+        buttonForgot.setOnClickListener(this);
 
         // スクショを無効化
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -50,63 +53,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // 送信ボタン押下
     @Override
     public void onClick(View view) {
-        {
-            // 入力欄が空白かチェック
-            if (password.length() != 0) {
-                // ログイン処理
-                // dbデータ取得(パスワード)
-                // readData(); // データベースを読み込む
-                SQLiteDatabase db = helper.getReadableDatabase();
-                Cursor cursor = db.query(
-                        "pswddb",
-                        new String[]{"password"},
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                );
-                cursor.moveToFirst();
+        switch (view.getId()) {
 
-                StringBuilder sbuilder = new StringBuilder();
-                for (int i = 0; i < cursor.getCount(); i++) {
-                    sbuilder.append(cursor.getString(0));
-                    cursor.moveToNext();
-                }
-                Log.d("debug", "" + sbuilder);
-                cursor.close();
-                db.close();
-                String dswd = sbuilder.toString();
+            // パスワード入力
+            case R.id.button:
+                // 入力欄が空白かチェック
+                if (password.length() != 0) {
+                    // ログイン処理
+                    // dbデータ取得(パスワード)
+                    // readData(); // データベースを読み込む
+                    SQLiteDatabase db = helper.getReadableDatabase();
+                    Cursor cursor = db.query(
+                            "pswddb",
+                            new String[]{"password"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                    );
+                    cursor.moveToFirst();
 
-                // 入力データ取得
-                String pswd = password.getText().toString();
+                    StringBuilder sbuilder = new StringBuilder();
+                    for (int i = 0; i < cursor.getCount(); i++) {
+                        sbuilder.append(cursor.getString(0));
+                        cursor.moveToNext();
+                    }
+                    Log.d("debug", "" + sbuilder);
+                    cursor.close();
+                    db.close();
+                    String dswd = sbuilder.toString();
 
-                // 照合
-                Log.d("debug", "判定処理:" + dswd + "," + pswd);
-                if (pswd.equals(dswd)) {
+                    // 入力データ取得
+                    String pswd = password.getText().toString();
 
-                    Log.d("debug", "成功:" + dswd + "," + pswd);
+                    // 照合
+                    Log.d("debug", "判定処理:" + dswd + "," + pswd);
+                    if (pswd.equals(dswd)) {
 
-                    // 画像認証に遷移
-                    Intent intent = new Intent(getApplication(), MainActivity.class);
-                    startActivity(intent);
+                        Log.d("debug", "成功:" + dswd + "," + pswd);
 
-                } else {
-                    password.setError("パスワードが違います");
-
-                    // エラー回数を足す
-                    numError += 1;
-                    Log.d("debug", "失敗" + numError);
-
-                    // 5回失敗で１５秒待機
-                    if (numError>5) {
+                        // 画像認証に遷移
                         Intent intent = new Intent(getApplication(), ImageActivity.class);
                         startActivity(intent);
+
+                    } else {
+                        password.setError("パスワードが違います");
+
+                        // エラー回数を足す
+                        numError += 1;
+                        Log.d("debug", "失敗" + numError);
+
+                        // 5回失敗で１５秒待機
+                        if (numError > 5) {
+                            Intent intent = new Intent(getApplication(), StopActivity.class);
+                            startActivity(intent);
+                        }
                     }
+                } else {
+                    password.setError("入力してください");
                 }
-            } else {
-                password.setError("入力してください");
-            }
+                break;
+
+            // パスワードを忘れた
+            case R.id.buttonForgot:
+                // ForgotActivityに遷移
+                Intent intent = new Intent(getApplication(), ForgotActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
