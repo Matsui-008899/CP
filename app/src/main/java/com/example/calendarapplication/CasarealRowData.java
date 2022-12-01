@@ -6,6 +6,7 @@ public class CasarealRowData {
 
     private String startDay;
     private String startTime;
+    private String endDay;
     private String endTime;
     private String taskName;
     private int id;
@@ -13,6 +14,8 @@ public class CasarealRowData {
     private int idSDay2;
     private int idSTime1;
     private int idSTime2;
+    private int idEDay1;
+    private int idEDay2;
     private int idETime1;
     private int idETime2;
     private int idYear;
@@ -20,10 +23,52 @@ public class CasarealRowData {
 
     public String SDay1;
     public String SDay2;
+    public String EDay1;
+    public String EDay2;
     public String STime1;
     public String STime2;
     public String ETime1;
     public String ETime2;
+
+    public String getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(String endDay) {
+        this.endDay = endDay;
+    }
+
+    public String getEDay1() {
+        return EDay1;
+    }
+
+    public void setEDay1(String EDay1) {
+        this.EDay1 = EDay1;
+    }
+
+    public String getEDay2() {
+        return EDay2;
+    }
+
+    public void setEDay2(String EDay2) {
+        this.EDay2 = EDay2;
+    }
+
+    public int getIdEDay1() {
+        return idEDay1;
+    }
+
+    public void setIdEDay1(int idEDay1) {
+        this.idEDay1 = idEDay1;
+    }
+
+    public int getIdEDay2() {
+        return idEDay2;
+    }
+
+    public void setIdEDay2(int idEDay2) {
+        this.idEDay2 = idEDay2;
+    }
 
     public String getYear() {
         return Year;

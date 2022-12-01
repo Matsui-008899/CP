@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CasarealViewHolder extends RecyclerView.ViewHolder {
     public TextView startDay;
     public TextView startTime;
+    public TextView endDay;
     public TextView endTime;
     public  TextView taskName;
     public LinearLayout setId;
@@ -18,17 +19,19 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
     public EditText upSDay2;
     public EditText upSTime1;
     public EditText upSTime2;
+    public EditText upEDay1;
+    public EditText upEDay2;
     public EditText upETime1;
     public EditText upETime2;
     public EditText upYear;
     public EditText upTask;
-    private TextView testBtn;
 
     public CasarealViewHolder(@NonNull View itemView) {
         super(itemView);
 
         startDay = (TextView) itemView.findViewById(R.id.startDayRecycle);
         startTime = (TextView) itemView.findViewById(R.id.startTimeRecycle);
+        endDay = (TextView)itemView.findViewById(R.id.endDayRecycle);
         endTime = (TextView) itemView.findViewById(R.id.endTimeRecycle);
         taskName = (TextView) itemView.findViewById(R.id.taskNameRecycle);
         setId = (LinearLayout) itemView.findViewById(R.id.setId);
@@ -36,6 +39,8 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
         upSDay2 = (EditText) itemView.findViewById(R.id.startDayRecycleUp2);
         upSTime1 = (EditText) itemView.findViewById(R.id.startTimeRecycleUp1);
         upSTime2 = (EditText) itemView.findViewById(R.id.startTimeRecycleUp2);
+        upEDay1 = (EditText) itemView.findViewById(R.id.endDayRecycleUp1);
+        upEDay2 = (EditText) itemView.findViewById(R.id.endDayRecycleUp2);
         upETime1 = (EditText) itemView.findViewById(R.id.endTimeRecycleUp1);
         upETime2 = (EditText) itemView.findViewById(R.id.endTimeRecycleUp2);
         upYear = (EditText) itemView.findViewById(R.id.yearRecycleUp);
