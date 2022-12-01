@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -208,6 +209,10 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
         ListTask(view);
     }
 
+    /**
+     * 実績画面表示
+     * @param view
+     */
     public void openAchievement(View view){
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
@@ -223,6 +228,11 @@ public class MainActivity extends AppCompatActivity implements  TimePickerDialog
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
         gameView.loadUrl("javascript:tara()");
+    }
+
+    public void openSetting(View view){
+        Intent intent = new Intent(getApplication(),SettingActivity.class);
+        startActivity(intent);
     }
 
     /**

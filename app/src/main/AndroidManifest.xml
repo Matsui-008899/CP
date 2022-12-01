@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CalendarApplication"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -30,6 +30,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".StopActivity"
@@ -47,6 +48,9 @@
             android:name=".ForgotActivity"
             android:exported="true">
 
+        </activity>
+        <activity android:name=".SettingActivity"
+            android:exported="true">
 
         </activity>
     </application>

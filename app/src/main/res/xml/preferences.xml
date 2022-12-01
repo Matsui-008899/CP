@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="セキュリティ">
+        <Preference
+            android:title="ページ遷移"
+            android:summary="パスワードの再設定をします" >
+            <intent
+                android:targetPackage="com.example.calendarapplication"
+                android:targetClass="com.example.calendarapplication.ForgotActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

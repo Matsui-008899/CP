@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:weightSum="10">
 
             <Space
@@ -263,7 +264,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:onClick="openAchievement">
 
             <Space
@@ -277,6 +278,8 @@
                 android:onClick="dataSet"/>
 
         </LinearLayout>
+
+
     </FrameLayout>
     <!--    下部ボタンレイアウト-->
     <LinearLayout
@@ -333,6 +336,14 @@
                     android:layout_weight="1"
                     android:backgroundTint="@android:color/holo_blue_light"
                     android:text="実績" />
+                <Button
+                    android:id="@+id/settingBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/holo_green_light"
+                    android:onClick="openSetting"
+                    android:text="設定" />
             </TableRow>
         </TableLayout>
     </LinearLayout>
