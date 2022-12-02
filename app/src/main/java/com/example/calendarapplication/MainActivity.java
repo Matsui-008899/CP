@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private EditText timeS;
     private EditText dateE;
     private EditText timeE;
-    private boolean flag;
+    private String flag;
     private DataBase selectDB;
     private WebView gameView;
 
@@ -55,12 +56,26 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private Integer[] idList;
     private boolean[] checkLoad;
 
+    private SharedPreferences preference;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //初回起動時の処理
+        preference = getSharedPreferences("Preference Name",MODE_PRIVATE);
+        editor = preference.edit();
+
+        //true=初回起動の処理
+        if (preference.getBoolean("Launched",false)==false){
+            findViewById(R.id.CalendarRecycleView).setVisibility(View.GONE);
+
+            editor.putBoolean("Launched",true);
+            editor.commit();
+        }
 
         gameView = findViewById(R.id.gameWeb);
         gameView.setWebViewClient(new WebViewClient());
@@ -72,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
 
-        flag = false;
+        flag = null;
         taskName = findViewById(R.id.taskName);
         dateS = findViewById(R.id.dateS);
         timeS = findViewById(R.id.timeS);
@@ -166,8 +181,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:tara()");
+        gameView.loadUrl("javascript:purun()");
     }
+
+
 
     /**
      * 予定追加画面表示
@@ -182,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         TaskLayout.setVisibility(View.VISIBLE);
         TaskListLayout.setVisibility(View.INVISIBLE);
         AchievementLayout.setVisibility(View.GONE);
+
+        gameView.loadUrl("javascript:pururun()");
     }
 
     /**
@@ -202,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:tako()");
+        gameView.loadUrl("javascript:puyon()");
 
         ListTask(view);
     }
@@ -237,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void selectTimeStartBtn(View view) {
         ShowDialogView(timeS);
-        flag = true;
+        flag = "timeS";
     }
 
     /**
@@ -245,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void selectTimeEndBtn(View view) {
         ShowDialogView(timeE);
-        flag = false;
+        flag = "timeE";
     }
 
     /**
@@ -354,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * カレンダーの日にちを選択時、予定しているタスクを表示
      */
     private void taskDaySelect(String message) {
+        findViewById(R.id.CalendarRecycleView).setVisibility(View.VISIBLE);
         RecyclerView rv = findViewById(R.id.CalendarRecycleView);
         CTaskRecyclerViewAdapter adapter = new CTaskRecyclerViewAdapter(this.CalendarTaskCreateDataset(message));
 
@@ -725,12 +745,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minu) {
-        if (!flag) {
+        if (flag=="timeE") {
             timeE.setText(String.format("%02d時%02d分", hour, minu));
-        } else {
+        } else if (flag=="timeS"){
             timeS.setText(String.format("%02d時%02d分", hour, minu));
         }
-
     }
 
     /**
@@ -739,9 +758,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        if (!flag) {
+        if (flag=="timeE") {
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else {
+        } else if (flag=="timeS"){
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
         }
     }

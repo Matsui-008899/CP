@@ -12,6 +12,10 @@ body {
   animation: scroll-anim 5s linear infinite;
 }
 
+#mitarashi{
+  top: 10px;
+}
+
 @keyframes scroll-anim {
   100% {
     background-position:  center;
@@ -56,4 +60,98 @@ img, div {
     }
 
 
+.pyon{
+  animation: pyon 2.5s infinite;
+}
+@keyframes pyon {
+  0%   { transform: scale(0.8, 1.4) translate(0%, -100%); }
+  10%  { transform: scale(0.8, 1.4) translate(0%, -15%); }
+  20%  { transform: scale(1.4, 0.6) translate(0%, 30%); }
+  30%  { transform: scale(0.9, 1.1) translate(0%, -10%); }
+  40%  { transform: scale(0.95, 1.2) translate(0%, -30%); }
+  50%  { transform: scale(0.95, 1.2) translate(0%, -10%); }
+  60%  { transform: scale(1.1, 0.9) translate(0%, 5%); }
+  70%  { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+
+.poyoon{
+  animation: poyoon 2s infinite;
+}
+@keyframes poyoon {
+  0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  10%  { transform: scale(1.1, 0.9) translate(0%, 5%); }
+  40%  { transform: scale(1.2, 0.8) translate(0%, 15%); }
+  50%  { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  60%  { transform: scale(0.9, 1.2) translate(0%, -100%); }
+  75%  { transform: scale(0.9, 1.2) translate(0%, -20%); }
+  85%  { transform: scale(1.2, 0.8) translate(0%, 15%); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+
+.purupurun{
+  animation: purupurun 2s infinite;
+}
+@-webkit-keyframes purupurun {
+  0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+  20%  { -webkit-transform: scale(1.0, 1.06) translate(-5%, -4%) skew(6deg, 0deg); }
+  50%  { -webkit-transform: scale(1.0, 0.94) translate(5%, 4%) skew(-6deg, 0deg); }
+  65%  { -webkit-transform: scale(1.0, 1.03) translate(2%, -2%) skew(-3deg, 0deg); }
+  80%  { -webkit-transform: scale(1.0, 0.97) translate(-2%, 2%) skew(3deg, 0deg); }
+  100% { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+@keyframes purupurun {
+  0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  20%  { transform: scale(1.0, 1.06) translate(-5%, -4%) skew(6deg, 0deg); }
+  50%  { transform: scale(1.0, 0.94) translate(5%, 4%) skew(-6deg, 0deg); }
+  65%  { transform: scale(1.0, 1.03) translate(2%, -2%) skew(-3deg, 0deg); }
+  80%  { transform: scale(1.0, 0.97) translate(-2%, 2%) skew(3deg, 0deg); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+
+.pururun{
+  animation: pururun 1.6s infinite;
+}
+@-webkit-keyframes pururun {
+  0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+  10%  { -webkit-transform: scale(1.0, 1.0) translate(10%, 0%) skew(-10deg, 0deg); }
+  60%  { -webkit-transform: scale(1.0, 1.0) translate(20%, 0%) skew(-20deg, 0deg); }
+  70%  { -webkit-transform: scale(1.0, 1.0) translate(-15%, 0%) skew(15deg, 0deg); }
+  80%  { -webkit-transform: scale(1.0, 1.0) translate(15%, 0%) skew(-15deg, 0deg); }
+  80%  { -webkit-transform: scale(1.0, 1.0) translate(5%, 0%) skew(-5deg, 0deg); }
+  90%  { -webkit-transform: scale(1.0, 1.0) translate(-5%, 0%) skew(5deg, 0deg); }
+  100% { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+@keyframes pururun {
+  0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  10%  { transform: scale(1.0, 1.0) translate(10%, 0%) skew(-10deg, 0deg); }
+  60%  { transform: scale(1.0, 1.0) translate(20%, 0%) skew(-20deg, 0deg); }
+  70%  { transform: scale(1.0, 1.0) translate(-15%, 0%) skew(15deg, 0deg); }
+  80%  { transform: scale(1.0, 1.0) translate(15%, 0%) skew(-15deg, 0deg); }
+  80%  { transform: scale(1.0, 1.0) translate(5%, 0%) skew(-5deg, 0deg); }
+  90%  { transform: scale(1.0, 1.0) translate(-5%, 0%) skew(5deg, 0deg); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+
+.puyon{
+  animation: puyon 1.3s infinite;
+}
+@-webkit-keyframes puyon {
+  0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+  40%  { -webkit-transform: scale(0.95, 1.2) translate(0%, -10%); }
+  50%  { -webkit-transform: scale(1.1, 0.9) translate(0%, 5%); }
+  60%  { -webkit-transform: scale(0.95, 1.05) translate(0%, -3%); }
+  70%  { -webkit-transform: scale(1.05, 0.95) translate(0%, 3%); }
+  80%  { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+  100% { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
+@keyframes puyon {
+  0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  40%  { transform: scale(0.95, 1.2) translate(0%, -10%); }
+  50%  { transform: scale(1.1, 0.9) translate(0%, 5%); }
+  60%  { transform: scale(0.95, 1.05) translate(0%, -3%); }
+  70%  { transform: scale(1.05, 0.95) translate(0%, 3%); }
+  80%  { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
+}
     

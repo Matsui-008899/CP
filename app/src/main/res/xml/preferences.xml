@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="セキュリティ">
         <Preference
-            android:title="ページ遷移"
+            android:title="再設定"
             android:summary="パスワードの再設定をします" >
             <intent
                 android:targetPackage="com.example.calendarapplication"

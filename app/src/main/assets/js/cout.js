@@ -1,3 +1,4 @@
+let motion;
 //背景の挙動設定
 document.querySelector(`.container`).animate(
   [
@@ -28,18 +29,51 @@ function looopAnimation(id, className ) {
   
 }
 
+
 /**
  * ホーム画面（待機モーション）
  */
-function tara() {
-  document.getElementById("mitarashi").classList.remove("korokoro");
+function purun() {
+  document.getElementById("mitarashi").classList.remove(motion);
   looopAnimation("mitarashi", "purun");
+  motion = "purun";
 }
 
 /**
  * 予定追加画面
  */
-function tako() {
-  document.getElementById("mitarashi").classList.remove("purun");
+function korokoro() {
+  document.getElementById("mitarashi").classList.remove(motion);
   looopAnimation("mitarashi", "korokoro");
+  motion = "korokoro";
+}
+
+function pyon() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "pyon");
+  motion = "pyon";
+}
+
+function poyoon() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "poyoon");
+  motion = "poyoon";
+}
+
+function purupurun() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "purupurun");
+  motion = "purupurun";
+}
+
+function pururun() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "pururun");
+  motion = "pururun";
+}
+
+function puyon() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "puyon");
+  motion = "puyon";
 }

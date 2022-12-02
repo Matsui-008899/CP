@@ -14,6 +14,7 @@
     <string name="StartDayStartTime">開始日時・時刻</string>
     <string name="SelectTime">時刻選択</string>
     <string name="EndDayEndTime">終了日時・時刻</string>
+    <string name="taskHint">予定を入力してください</string>
 
     // MainActivity
     <string name="pwd_title">パスワード</string>
@@ -36,6 +37,7 @@
     <string name="fgt_new">新しいパスワード</string>
     <string name="fgt_re">新しいパスワードを再入力</string>
     <string name="fgt_change">変更する</string>
+    <string name="taskAddBtn">予定追加</string>
 
 
 </resources>

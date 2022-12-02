@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="10">
 
             <Space
@@ -83,126 +83,145 @@
             android:background="@drawable/border"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
 
-            <TableLayout
-                android:id="@+id/layerTsk"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/exit"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:onClick="openHome"
-                        android:text="@string/cancel"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </TableRow>
+                        android:text="@string/cancel" />
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <TextView android:text="@string/title" />
-                </TableRow>
+                    <TextView android:text="@string/title"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"/>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/taskName"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:inputType="text"
-                        android:textSize="24sp" />
-                </TableRow>
+                        android:textSize="14sp"
+                        android:hint="@string/taskHint"/>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/testVIew"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/StartDayStartTime" />
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/dateS"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:enabled="false"
+                        android:textColor="@color/black"/>
 
                     <EditText
                         android:id="@+id/timeS"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="datetime"
                         android:textSize="16sp"
-                        tools:ignore="DuplicateIds" />
+                        tools:ignore="DuplicateIds"
+                        android:enabled="false"
+                        android:textColor="@color/black"/>
 
                     <Button
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:id="@+id/selectStartB"
                         android:onClick="selectTimeStartBtn"
                         android:text="@string/SelectTime" />
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/EndDayEndTime" />
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/dateE"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:enabled="false"
+                        android:textColor="@color/black" />
 
                     <EditText
                         android:id="@+id/timeE"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="datetime"
                         android:textSize="16sp"
-                        tools:ignore="DuplicateIds" />
+                        tools:ignore="DuplicateIds"
+                        android:enabled="false"
+                        android:textColor="@color/black" />
 
                     <Button
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:id="@+id/selectEndB"
                         android:onClick="selectTimeEndBtn"
                         android:text="@string/SelectTime" />
-                </TableRow>
+                </LinearLayout>
 
-                <TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/set"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:onClick="selectTaskSetBtn"
-                        android:text="taskAdd"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </TableRow>
-            </TableLayout>
+                        android:text="@string/taskAddBtn" />
+                </LinearLayout>
         </LinearLayout>
 
         <!--        予定一覧レイアウト-->
