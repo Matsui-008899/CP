@@ -746,6 +746,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         }
     }
 
+    /**
+     * デバッグ用　DBデータセット（日にち）
+     */
     public void dataSet(View view) {
 
         SQLiteDatabase db = selectDB.getWritableDatabase();

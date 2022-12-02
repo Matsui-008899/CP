@@ -19,7 +19,7 @@
             android:id="@+id/gameWeb"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <!--        ホームレイアウト-->
         <LinearLayout
