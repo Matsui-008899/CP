@@ -42,9 +42,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private EditText timeS;
     private EditText dateE;
     private EditText timeE;
-    private String flag;
+    private String flagTime;
+    private String flagDate;
     private DataBase selectDB;
     private WebView gameView;
+    private int taskSetting;
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
@@ -87,7 +89,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
 
-        flag = null;
+        flagTime = null;
+        flagDate = null;
         taskName = findViewById(R.id.taskName);
         dateS = findViewById(R.id.dateS);
         timeS = findViewById(R.id.timeS);
@@ -255,16 +258,56 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 　開始日時選択ボタン表示
      */
     public void selectTimeStartBtn(View view) {
-        ShowDialogView(timeS);
-        flag = "timeS";
+        ShowDialogView();
+        flagTime = "timeS";
+        flagDate = "timeS";
     }
 
     /**
      * 終了日時選択ボタン表示
      */
     public void selectTimeEndBtn(View view) {
-        ShowDialogView(timeE);
-        flag = "timeE";
+        ShowDialogView();
+        flagTime = "timeE";
+        flagDate = "timeE";
+
+    }
+
+    /**
+     * 　開始日時選択ボタン表示（タスク編集モード）
+     */
+    public void selectTimeStartTaskBtn(View view) {
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout) view.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout) viewPare.getParent();
+
+        taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
+
+
+
+        Log.d("pepe",""+taskSetting);
+        ShowDialogView();
+        flagTime = "timeSS";
+        flagDate = "timeSS";
+    }
+
+    /**
+     * 終了日時選択ボタン表示（タスク編集モード）
+     */
+    public void selectTimeEndTaskBtn(View view) {
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout) view.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout) viewPare.getParent();
+
+        taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
+
+
+        ShowDialogView();
+        flagTime = "timeEE";
+        flagDate = "timeEE";
+
     }
 
     /**
@@ -728,7 +771,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     /**
      * 時刻・月日ダイアログ表示
      */
-    public void ShowDialogView(View timeS) {
+    public void ShowDialogView() {
         /*
           newFragment.show(getSupportFragmentManager(), "timePicker");
          */
@@ -745,11 +788,27 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minu) {
-        if (flag=="timeE") {
+        if (flagTime =="timeE") {
             timeE.setText(String.format("%02d時%02d分", hour, minu));
-        } else if (flag=="timeS"){
+        } else if (flagTime =="timeS"){
             timeS.setText(String.format("%02d時%02d分", hour, minu));
+        }else if (flagTime == "timeSS"){
+            EditText startHours = findViewById(taskLayoutNum[taskSetting][3]);
+            EditText startMin = findViewById(taskLayoutNum[taskSetting][4]);
+
+
+            startHours.setText(String.format("%02d",hour));
+            startMin.setText(String.format("%02d",minu));
+        }else if (flagTime == "timeEE"){
+            EditText endHours = findViewById(taskLayoutNum[taskSetting][7]);
+            EditText endMin = findViewById(taskLayoutNum[taskSetting][8]);
+
+            endHours.setText(String.format("%02d",hour));
+            endMin.setText(String.format("%02d",minu));
         }
+
+
+        flagTime=null;
     }
 
     /**
@@ -758,11 +817,27 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        if (flag=="timeE") {
+        if (flagDate =="timeE") {
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else if (flag=="timeS"){
+        } else if (flagDate =="timeS"){
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
+        }else if (flagTime == "timeSS"){
+            EditText yearH = findViewById(taskLayoutNum[taskSetting][9]);
+            EditText startMonth = findViewById(taskLayoutNum[taskSetting][1]);
+            EditText startDay = findViewById(taskLayoutNum[taskSetting][2]);
+
+            yearH.setText(String.format("%d",year));
+            startMonth.setText(String.format("%02d",month+1));
+            startDay.setText(String.format("%02d",dayOfMonth));
+        }else if (flagTime == "timeEE"){
+            EditText endMonth = findViewById(taskLayoutNum[taskSetting][5]);
+            EditText endDay = findViewById(taskLayoutNum[taskSetting][6]);
+
+            endMonth.setText(String.format("%02d",month+1));
+            endDay.setText(String.format("%02d",dayOfMonth));
         }
+
+        flagDate=null;
     }
 
     /**
