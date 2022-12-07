@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private EditText taskName;
@@ -45,8 +47,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String flagTime;
     private String flagDate;
     private DataBase selectDB;
+    private CountDown countSta;
     private WebView gameView;
     private int taskSetting;
+    private  boolean moveScene;
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private Integer[] idList;
     private boolean[] checkLoad;
 
+    private String[] charaMotion = {"purun","korokoro","pyon","poyoon","purupurun","pururun","puyon","papa"};
+
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
 
@@ -66,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //初回起動時の処理
         preference = getSharedPreferences("Preference Name",MODE_PRIVATE);
         editor = preference.edit();
@@ -79,15 +84,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             editor.commit();
         }
 
+        //ゲーム画面表示処理
         gameView = findViewById(R.id.gameWeb);
         gameView.setWebViewClient(new WebViewClient());
         gameView.setClickable(true);
         gameView.setEnabled(true);
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
+        gameView.loadUrl("javascript:purun()");
 
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
+        //ゲーム：待機画面モーション無限ループ
+        timeCount();
 
         flagTime = null;
         flagDate = null;
@@ -97,27 +106,32 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         dateE = findViewById(R.id.dateE);
         timeE = findViewById(R.id.timeE);
 
+        //DB起動
         selectDB = new DataBase(getApplicationContext());
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         layerTask = findViewById(R.id.layerTask);
 
+        //月日選択プルダウン設定
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 spinnerItems
         );
-
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
 
+        //月日ごとに呼び出し済みかどうかのチェック
         checkLoad = new boolean[13];
+
+        moveScene = false;
 
         //予定一覧画面
 
         /*
         テスト：カレンダーの標識確認
+        削除予定
          */
         CalendarView calendar = findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(
@@ -129,14 +143,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         );
 
-        Calendar c = Calendar.getInstance();
-        timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
-        dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+        maxIdSetting();
 
-        timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
-        dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+    }
 
-
+    /**
+     * IDの最大値に更新
+     */
+    private void maxIdSetting() {
         //DB->ID格納
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Cursor cursor = db.query(
@@ -153,6 +167,36 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         taskLayoutNum = new int[Integer.parseInt(cursor.getString(0) + 1)][12];
         Log.d("dubug", "配列作成" + cursor.getString(0));
         cursor.close();
+    }
+
+    /**
+     * 一定周期でキャラクターのアニメーションを変える
+     */
+    private void timeCount() {
+        Random random = new Random();
+        //レンジ：１５秒
+        int tara = random.nextInt(5)*1000+10000;
+        CountDownTimer cdt = new CountDownTimer(tara,1000) {
+            @Override
+            public void onTick(long l) {
+                Log.d("debug","カウントまで"+l/1000);
+                if (moveScene){
+                    timeCount();
+                    moveScene=false;
+                    cancel();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d("debug","カウント終了");
+                Random random = new Random();
+                int randomValue = random.nextInt(7);
+                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"()");
+                timeCount();
+            }
+        }.start();
 
     }
 
@@ -171,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * ホーム画面表示
      */
     public void openHome(View view) {
+        moveScene=true;
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
         LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
@@ -193,6 +238,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定追加画面表示
      */
     public void openTaskAdd(View view) {
+        moveScene=true;
+        Calendar c = Calendar.getInstance();
+        timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
+        dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+
+        timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
+        dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
         LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
@@ -210,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定一覧画面表示
      */
     public void openTaskView(View view) {
-
+        moveScene=true;
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
         LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
@@ -233,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 実績画面表示
      */
     public void openAchievement(View view) {
+        moveScene=true;
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
         LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);

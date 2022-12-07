@@ -77,3 +77,10 @@ function puyon() {
   looopAnimation("mitarashi", "puyon");
   motion = "puyon";
 }
+
+
+function papa() {
+  document.getElementById("mitarashi").classList.remove(motion);
+  looopAnimation("mitarashi", "papa");
+  motion = "papa";
+}

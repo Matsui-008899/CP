@@ -154,4 +154,14 @@ img, div {
   80%  { transform: scale(1.0, 1.0) translate(0%, 0%); }
   100% { transform: scale(1.0, 1.0) translate(0%, 0%); }
 }
+
+
+.papa{
+  animation: papa 4s infinite;
+}
+@keyframes papa {
+      33%  { transform: translatex(100%)  rotate(1turn);}
+      66%  { transform: translatex(-100%)  rotate(-1turn);}
+}
+
     
