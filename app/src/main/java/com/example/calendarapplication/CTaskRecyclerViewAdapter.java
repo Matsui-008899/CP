@@ -19,7 +19,8 @@ public class CTaskRecyclerViewAdapter extends RecyclerView.Adapter<CTaskViewHold
     @NonNull
     @Override
     public CTaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.calendar_task_view_row,parent,false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate
+                (R.layout.calendar_task_view_row,parent,false);
         CTaskViewHolder vh = new CTaskViewHolder(inflate);
         return vh;
     }

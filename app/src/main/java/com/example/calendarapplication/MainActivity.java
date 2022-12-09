@@ -67,6 +67,23 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
 
+    LinearLayout CalendarLayout ;
+    LinearLayout TaskLayout ;
+    LinearLayout TaskListLayout ;
+    LinearLayout AchievementLayout ;
+    LinearLayout GameLayout;
+
+    private String tableName = "taskdb";
+    private String idName = "_id";
+    private String startDayName = "startDay";
+    private String startTimeName = "startTime";
+    private String endDayName = "endDay";
+    private String endTimeName = "endTime";
+    private String taskNameDb = "task";
+    private String levelCheck = "level";
+
+
+
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +100,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             editor.putBoolean("Launched",true);
             editor.commit();
         }
+
+        //レイアウト取得
+        CalendarLayout = findViewById(R.id.layerCalendar);
+        TaskLayout = findViewById(R.id.layerTask);
+        TaskListLayout = findViewById(R.id.layerTaskList);
+        AchievementLayout = findViewById(R.id.layerAchievement);
+        GameLayout = findViewById(R.id.layerGame);
+
 
         //ゲーム画面表示処理
         gameView = findViewById(R.id.gameWeb);
@@ -154,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //DB->ID格納
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Cursor cursor = db.query(
-                "tastdb",
+                tableName,
                 new String[]{"max(_id)"},
                 null,
                 null,
@@ -163,9 +188,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 null
         );
         cursor.moveToFirst();
-        idList = new Integer[Integer.parseInt(cursor.getString(0) + 1)];
-        taskLayoutNum = new int[Integer.parseInt(cursor.getString(0) + 1)][12];
-        Log.d("dubug", "配列作成" + cursor.getString(0));
+        Log.d("debug", "月true=" + cursor.getString(0));
+        if (cursor.getString(0) != null){
+            idList = new Integer[Integer.parseInt(cursor.getString(0) + 1)];
+            taskLayoutNum = new int[Integer.parseInt(cursor.getString(0) + 1)][12];
+            Log.d("dubug", "配列作成" + cursor.getString(0));
+        }
+
         cursor.close();
     }
 
@@ -216,15 +245,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void openHome(View view) {
         moveScene=true;
-        LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
-        LinearLayout TaskLayout = findViewById(R.id.layerTask);
-        LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
-        LinearLayout AchievementLayout = findViewById(R.id.layerAchievement);
 
         CalendarLayout.setVisibility(View.VISIBLE);
         TaskLayout.setVisibility(View.GONE);
         TaskListLayout.setVisibility(View.GONE);
         AchievementLayout.setVisibility(View.GONE);
+        GameLayout.setVisibility(View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
@@ -246,15 +272,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
         dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
 
-        LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
-        LinearLayout TaskLayout = findViewById(R.id.layerTask);
-        LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
-        LinearLayout AchievementLayout = findViewById(R.id.layerAchievement);
+
 
         CalendarLayout.setVisibility(View.INVISIBLE);
         TaskLayout.setVisibility(View.VISIBLE);
         TaskListLayout.setVisibility(View.INVISIBLE);
         AchievementLayout.setVisibility(View.GONE);
+        GameLayout.setVisibility(View.GONE);
 
         gameView.loadUrl("javascript:pururun()");
     }
@@ -264,15 +288,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void openTaskView(View view) {
         moveScene=true;
-        LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
-        LinearLayout TaskLayout = findViewById(R.id.layerTask);
-        LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
-        LinearLayout AchievementLayout = findViewById(R.id.layerAchievement);
 
         CalendarLayout.setVisibility(View.GONE);
         TaskLayout.setVisibility(View.GONE);
         TaskListLayout.setVisibility(View.VISIBLE);
         AchievementLayout.setVisibility(View.GONE);
+        GameLayout.setVisibility(View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
@@ -287,20 +308,32 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void openAchievement(View view) {
         moveScene=true;
-        LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
-        LinearLayout TaskLayout = findViewById(R.id.layerTask);
-        LinearLayout TaskListLayout = findViewById(R.id.layerTaskList);
-        LinearLayout AchievementLayout = findViewById(R.id.layerAchievement);
 
         AchievementLayout.setVisibility(View.VISIBLE);
         CalendarLayout.setVisibility(View.GONE);
         TaskLayout.setVisibility(View.GONE);
         TaskListLayout.setVisibility(View.GONE);
+        GameLayout.setVisibility(View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
         gameView.loadUrl("javascript:tara()");
+    }
+
+    /**
+     * キャラ画面表示
+     * @param view
+     */
+    public void openChara(View view){
+
+        GameLayout.setVisibility(View.VISIBLE);
+        AchievementLayout.setVisibility(View.GONE);
+        CalendarLayout.setVisibility(View.GONE);
+        TaskLayout.setVisibility(View.GONE);
+        TaskListLayout.setVisibility(View.GONE);
+
+        onFoodTask(view);
     }
 
     public void openSetting(View view) {
@@ -419,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 values.put("endtime", timeES);
                 values.put("task", taskNameS);
                 Log.d("debug", "**********" + values);
-                db.insert("tastdb", null, values);
+                db.insert("taskdb", null, values);
                 CalendarLayout.setVisibility(View.VISIBLE);
                 TaskLayout.setVisibility(View.INVISIBLE);
 
@@ -489,9 +522,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Cursor cursor = db.query(
-                "tastdb",
-                new String[]{"startday", "starttime", "endday", "endtime", "task"},
-                "startday=?",
+                tableName,
+                new String[]{startDayName, startTimeName, endDayName, endTimeName, taskNameDb},
+                "startDay=?",
                 new String[]{message},
                 null,
                 null,
@@ -550,13 +583,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
         Cursor cursor = db.query(
-                "tastdb",
-                new String[]{"_id", "startday", "starttime", "endday", "endtime", "task"},
-                "startday LIKE ?",
+                tableName,
+                new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb},
+                "startDay LIKE ?",
                 new String[]{"2022年" + item + "%"},
                 null,
                 null,
-                "startday"
+                "startDay"
         );
         cursor.moveToFirst();
 
@@ -836,6 +869,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     }
 
+
+    /**
+     * 時刻ダイアログ設定
+     */
     /**
      * 時刻セット
      */
@@ -894,31 +931,98 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         flagDate=null;
     }
 
+
     /**
-     * デバッグ用　DBデータセット（日にち）
+     * キャラクター画面
      */
-    public void dataSet(View view) {
+    public void onFoodTask(View view){
+        RecyclerView rv = findViewById(R.id.foodRecycleView);
+        FoodRecycleAdapter adapter = new FoodRecycleAdapter(this.createFoodList());
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
+    }
+
+    private List<FoodRowData> createFoodList() {
+         /*
+        プリセット（Row.xml）に入れる予定のgetter,setter呼びだし
+         */
+        List<FoodRowData> dataset = new ArrayList<>();
+
+        //DB呼びだし
+        SQLiteDatabase db = selectDB.getReadableDatabase();
+        Calendar c = Calendar.getInstance();
+
+        String item = String.format("%02d月%02d日", c.get(Calendar.MONTH)+1, c.get(Calendar.DATE));
+        String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        Log.d("debug","genzai"+item);
+
+
+        //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
+        Cursor cursor = db.query(
+                tableName,
+                new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb,levelCheck},
+                "endDay < ? and endDay > ? and level = 0",
+                new String[]{"2022年" + item ,"2022年" + item2 },
+                null,
+                null,
+                "startDay"
+        );
+        cursor.moveToFirst();
+        Log.d("debug","合計"+cursor.getCount());
+        Log.d("debug","開始");
+        //DBから取り出した件数分回す
+        for (int i = 0; i < cursor.getCount(); i++) {
+            //リサイクル用データの入れ子を作成
+            FoodRowData data = new FoodRowData();
+
+            Log.d("debug","結果＝"+cursor.getString(3));
+            data.setStartView(cursor.getString(1)+"："+cursor.getString(2));
+            data.setEndView(cursor.getString(3)+"："+cursor.getString(4));
+            data.setTaskView(cursor.getString(5));
+            data.setTag(Integer.parseInt(cursor.getString(0)));
+
+            dataset.add(data);
+            cursor.moveToNext();
+        }
+
+        Log.d("debug","終了");
+        //DBから呼びだしたデータの件数文Forを回す
+        cursor.close();
+
+        return dataset;
+    }
+
+    public void checkTask(View view){
+        Log.d("debug","クリック成功="+view.getTag());
+    }
+
+    public void onDebug(View view){
 
         SQLiteDatabase db = selectDB.getWritableDatabase();
 
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん1");
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん12");
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん1");
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん12");
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん1");
-        selectDB.saveData(db, "2022年01月12日", "12時30分", "2022年01月12日", "13時40分", "肉まん12");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん123");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん123");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん123");
-        selectDB.saveData(db, "2022年02月12日", "12時30分", "2022年02月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年03月12日", "12時30分", "2022年03月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年03月12日", "12時30分", "2022年03月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年04月12日", "12時30分", "2022年04月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年04月12日", "12時30分", "2022年04月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年05月12日", "12時30分", "2022年05月12日", "13時40分", "肉まん1234");
-        selectDB.saveData(db, "2022年05月12日", "12時30分", "2022年05月12日", "13時40分", "肉まん1234");
-    }
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
+        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
 
+
+    }
 }
