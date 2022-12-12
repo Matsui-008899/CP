@@ -13,8 +13,10 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -244,6 +246,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * ホーム画面表示
      */
     public void openHome(View view) {
+
+        changeGameViewStandard();
+
         moveScene=true;
 
         CalendarLayout.setVisibility(View.VISIBLE);
@@ -264,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定追加画面表示
      */
     public void openTaskAdd(View view) {
+
+        changeGameViewStandard();
         moveScene=true;
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
@@ -287,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定一覧画面表示
      */
     public void openTaskView(View view) {
+
+        changeGameViewStandard();
         moveScene=true;
 
         CalendarLayout.setVisibility(View.GONE);
@@ -307,6 +316,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 実績画面表示
      */
     public void openAchievement(View view) {
+
+        changeGameViewStandard();
         moveScene=true;
 
         AchievementLayout.setVisibility(View.VISIBLE);
@@ -326,6 +337,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * @param view
      */
     public void openChara(View view){
+        changeGameViewSetting();
 
         GameLayout.setVisibility(View.VISIBLE);
         AchievementLayout.setVisibility(View.GONE);
@@ -334,6 +346,30 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         TaskListLayout.setVisibility(View.GONE);
 
         onFoodTask(view);
+    }
+
+    /**
+     * ゲーム画面調整
+     */
+    private void changeGameViewSetting() {
+        LinearLayout gameLayout = findViewById(R.id.gameLayout);
+        ViewGroup.LayoutParams layoutParams = gameLayout.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200,getResources().getDisplayMetrics());
+        gameLayout.setLayoutParams(layoutParams);
+
+    }
+
+    /**
+     * ゲーム画面調整
+     */
+    private void changeGameViewStandard() {
+        LinearLayout gameLayout = findViewById(R.id.gameLayout);
+        ViewGroup.LayoutParams layoutParams = gameLayout.getLayoutParams();
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,90,getResources().getDisplayMetrics());
+        gameLayout.setLayoutParams(layoutParams);
+
     }
 
     public void openSetting(View view) {
@@ -451,6 +487,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 values.put("endday", dateES);
                 values.put("endtime", timeES);
                 values.put("task", taskNameS);
+                values.put("level",0);
                 Log.d("debug", "**********" + values);
                 db.insert("taskdb", null, values);
                 CalendarLayout.setVisibility(View.VISIBLE);
@@ -819,7 +856,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
                 SQLiteDatabase db = selectDB.getWritableDatabase();
-                db.update("tastdb", values, "_id = " + id, null);
+                db.update("taskdb", values, "_id = " + id, null);
 
                 View pan = findViewById(R.id.listMonthSelectBtn);
                 ListTask(pan);
@@ -848,7 +885,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 //        }
 //        Log.d("dubug","idlistの格納インデックス番号 ￥＝"+i);
 //        Log.d("dubug","おやID ￥＝"+viewId);
-        db.delete("tastdb", "_id = " + i, null);
+        db.delete("taskdb", "_id = " + i, null);
 
 //        Log.d("dubug","削除成功判定ID ￥＝"+ewt);
         View pan = findViewById(R.id.listMonthSelectBtn);
@@ -997,7 +1034,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     public void checkTask(View view){
-        Log.d("debug","クリック成功="+view.getTag());
+        int id = (int) view.getTag();
+        ContentValues values = new ContentValues();
+        values.put("level",1);
+
+        SQLiteDatabase db = selectDB.getWritableDatabase();
+        db.update("taskdb",values, "_id = " + id, null);
+        Log.d("debug","削除成功ID="+id);
+
+        //リスト更新
+        onFoodTask(view);
     }
 
     public void onDebug(View view){
