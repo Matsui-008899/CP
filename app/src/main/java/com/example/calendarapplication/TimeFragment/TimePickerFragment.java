@@ -1,4 +1,4 @@
-package com.example.calendarapplication;
+package com.example.calendarapplication.TimeFragment;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;

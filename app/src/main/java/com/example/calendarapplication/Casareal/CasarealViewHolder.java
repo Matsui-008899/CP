@@ -1,4 +1,4 @@
-package com.example.calendarapplication;
+package com.example.calendarapplication.Casareal;
 
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.calendarapplication.R;
 
 public class CasarealViewHolder extends RecyclerView.ViewHolder {
     public TextView startDay;

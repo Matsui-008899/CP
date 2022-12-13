@@ -1,4 +1,4 @@
-package com.example.calendarapplication;
+package com.example.calendarapplication.CalendarTaskView;
 
 public class CTaskViewRowData {
     private String startDayView;

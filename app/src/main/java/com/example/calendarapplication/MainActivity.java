@@ -34,6 +34,17 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calendarapplication.CalendarTaskView.CTaskRecyclerViewAdapter;
+import com.example.calendarapplication.CalendarTaskView.CTaskViewRowData;
+import com.example.calendarapplication.Casareal.CasarealRecycleViewAdapter;
+import com.example.calendarapplication.Casareal.CasarealRowData;
+import com.example.calendarapplication.Food.FoodRecycleAdapter;
+import com.example.calendarapplication.Food.FoodRowData;
+import com.example.calendarapplication.Game.DataBaseGame;
+import com.example.calendarapplication.Game.GameActivity;
+import com.example.calendarapplication.TimeFragment.DatePickerFragment;
+import com.example.calendarapplication.TimeFragment.TimePickerFragment;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private WebView gameView;
     private int taskSetting;
     private  boolean moveScene;
+    private GameActivity dbGame;
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
@@ -83,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String endTimeName = "endTime";
     private String taskNameDb = "task";
     private String levelCheck = "level";
+
+    private String chara1;
+    private String chara2;
+    private String chara3;
 
 
 
@@ -118,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.setEnabled(true);
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
-        gameView.loadUrl("javascript:purun()");
+        gameView.loadUrl("javascript:purun("+chara1+")");
 
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
@@ -224,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 Log.d("debug","カウント終了");
                 Random random = new Random();
                 int randomValue = random.nextInt(7);
-                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"()");
+                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"("+chara1+")");
                 timeCount();
             }
         }.start();
@@ -246,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * ホーム画面表示
      */
     public void openHome(View view) {
+        gameView.loadUrl("javascript:mitarashi("+chara1+")");
 
         changeGameViewStandard();
 
@@ -260,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:purun()");
+        gameView.loadUrl("javascript:purun("+chara1+")");
     }
 
 
@@ -287,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
 
-        gameView.loadUrl("javascript:pururun()");
+        gameView.loadUrl("javascript:puyon("+chara1+")");
     }
 
     /**
@@ -307,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:puyon()");
+        gameView.loadUrl("javascript:puyon("+chara1+")");
 
         ListTask(view);
     }
@@ -329,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:tara()");
+        gameView.loadUrl("javascript:pururun("+chara1+")");
     }
 
     /**

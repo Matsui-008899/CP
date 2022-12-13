@@ -42,45 +42,50 @@ function purun() {
 /**
  * 予定追加画面
  */
-function korokoro() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "korokoro");
+function korokoro(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "korokoro");
   motion = "korokoro";
 }
 
-function pyon() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "pyon");
+function pyon(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "pyon");
   motion = "pyon";
 }
 
-function poyoon() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "poyoon");
+function poyoon(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "poyoon");
   motion = "poyoon";
 }
 
-function purupurun() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "purupurun");
+function purupurun(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "purupurun");
   motion = "purupurun";
 }
 
-function pururun() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "pururun");
+function pururun(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "pururun");
   motion = "pururun";
 }
 
-function puyon() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "puyon");
+function puyon(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "puyon");
   motion = "puyon";
 }
 
 
-function papa() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "papa");
+function papa(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "papa");
   motion = "papa";
+}
+
+//御手洗挿入
+function mitarashi() {
+  document.getElementById("chara1").src = "images/mitarashi.png";
 }

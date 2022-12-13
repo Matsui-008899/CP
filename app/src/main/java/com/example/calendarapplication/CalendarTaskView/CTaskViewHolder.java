@@ -1,10 +1,12 @@
-package com.example.calendarapplication;
+package com.example.calendarapplication.CalendarTaskView;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.calendarapplication.R;
 
 public class CTaskViewHolder extends RecyclerView.ViewHolder {
     public TextView startDayView;

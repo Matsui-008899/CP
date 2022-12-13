@@ -1,4 +1,4 @@
-package com.example.calendarapplication;
+package com.example.calendarapplication.Food;
 
 public class FoodRowData {
     private String startView;
