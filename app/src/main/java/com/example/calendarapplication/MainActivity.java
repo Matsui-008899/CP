@@ -1033,8 +1033,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         return dataset;
     }
 
+    /**
+     * 予定一件をタップ時
+     * @param view
+     */
     public void checkTask(View view){
         int id = (int) view.getTag();
+
+
+
+        //DBレベル列を変更
         ContentValues values = new ContentValues();
         values.put("level",1);
 
@@ -1049,7 +1057,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void onDebug(View view){
 
         SQLiteDatabase db = selectDB.getWritableDatabase();
-
         selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
         selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
         selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
