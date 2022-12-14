@@ -89,3 +89,7 @@ function papa(chara) {
 function mitarashi() {
   document.getElementById("chara1").src = "images/mitarashi.png";
 }
+
+function tako() {
+  document.getElementById("chara1").src = "images/tako.png";
+}

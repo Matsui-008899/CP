@@ -22,6 +22,9 @@ public class SettingActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.setting_container,new MyPreferenceFragment())
                 .commit();
+
+        ActionBar actionBar = getSupportActionBar();
+
     }
 
     private void initializeToolBar() {

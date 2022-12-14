@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String chara2;
     private String chara3;
 
+    private  GameActivity gameActivity;
+
 
 
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
@@ -134,9 +136,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.setEnabled(true);
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
-        gameView.loadUrl("javascript:purun("+chara1+")");
 
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
+
+        //最初に表示するキャラクター挿入
+        gameView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url){
+                gameView.loadUrl("javascript:mitarashi()");
+            }
+        });
 
         //ゲーム：待機画面モーション無限ループ
         timeCount();
@@ -151,6 +160,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         //DB起動
         selectDB = new DataBase(getApplicationContext());
+        //DB起動ゲームver
+        gameActivity = new GameActivity();
+        gameActivity.createDataBase();
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         layerTask = findViewById(R.id.layerTask);
@@ -189,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         maxIdSetting();
 
     }
+
 
     /**
      * IDの最大値に更新
@@ -262,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * ホーム画面表示
      */
     public void openHome(View view) {
-        gameView.loadUrl("javascript:mitarashi("+chara1+")");
+
 
         changeGameViewStandard();
 
@@ -1000,6 +1013,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         rv.setAdapter(adapter);
     }
 
+    /**
+     * 餌（予定）一覧画面表示
+     * @return
+     */
     private List<FoodRowData> createFoodList() {
          /*
         プリセット（Row.xml）に入れる予定のgetter,setter呼びだし
@@ -1057,15 +1074,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void checkTask(View view){
         int id = (int) view.getTag();
 
+         int i = gameActivity.levelUp();
+        Log.d("debug","ウニ饅頭と愉快な殺戮賞"+i);
 
-
-        //DBレベル列を変更
-        ContentValues values = new ContentValues();
-        values.put("level",1);
-
-        SQLiteDatabase db = selectDB.getWritableDatabase();
-        db.update("taskdb",values, "_id = " + id, null);
-        Log.d("debug","削除成功ID="+id);
+        //予定のチェック確認
+//        ContentValues values = new ContentValues();
+//        values.put("level",1);
+//
+//        SQLiteDatabase db = selectDB.getWritableDatabase();
+//        db.update("taskdb",values, "_id = " + id, null);
+//        Log.d("debug","削除成功ID="+id);
 
         //リスト更新
         onFoodTask(view);
@@ -1094,5 +1112,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
 
 
+    }
+
+    public void dede(View view){
+        gameActivity.gameSetting();
+    }
+
+    public void bubu(View view){
+        gameActivity.resetDB();
     }
 }

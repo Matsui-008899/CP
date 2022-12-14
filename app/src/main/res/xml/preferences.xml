@@ -9,5 +9,20 @@
                 android:targetClass="com.example.calendarapplication.ForgotActivity"/>
         </Preference>
     </PreferenceCategory>
+    <PreferenceCategory android:title="初期化">
+        <Preference
+            android:key="resetGameDataBase"
+            android:title="ゲームDB初期化"
+            android:summary="DB内のキャラクター情報の再設定をします" >
+        </Preference>
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="デバッグ用">
+        <Preference
+            android:key="showGameDataBase"
+            android:title="ゲームDBログ出力"
+            android:summary="DB内のキャラクター情報を確認" >
+        </Preference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

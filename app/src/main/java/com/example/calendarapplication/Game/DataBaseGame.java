@@ -34,7 +34,14 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         db.execSQL(
                 SQL_CREATE_ENTRIES
         );
-        saveData(db,"mitarashi",2,2);
+
+        reCreate(db);
+    }
+
+    public void reCreate(SQLiteDatabase db) {
+        saveData(db,"chara1",0,1);
+        saveData(db,"chara2",0,0);
+        saveData(db,"chara3",0,0);
     }
 
 
