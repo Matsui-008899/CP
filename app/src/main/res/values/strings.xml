@@ -24,8 +24,11 @@
 
 
     // ImageActivity
-    <string name="img_title">画像を並べてください</string>
+    <string name="img_title">画像を5つ選択してください</string>
     <string name="img_send">送信</string>
+    <string name="img_count">0</string>
+    <string name="img_count_msg">個目がセットされました</string>
+    <string name="img_reset">リセット</string>
 
 
     // StopActivity

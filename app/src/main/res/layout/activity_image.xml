@@ -7,13 +7,13 @@
     tools:context=".ImageActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/ImgTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="12dp"
         android:text="@string/img_title"
-        android:textSize="34sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,8 +21,8 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/img_send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -33,14 +33,12 @@
         android:layout_height="200px"
         android:layout_row="0"
         android:layout_column="0"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginStart="16dp"
         android:src="@drawable/illustrain01_moji10"
         app:layout_column="0"
         app:layout_constraintBottom_toTopOf="@+id/imageFive"
         app:layout_constraintEnd_toStartOf="@+id/imageOne"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_output"
         app:layout_row="0" />
 
     <ImageView
@@ -49,13 +47,11 @@
         android:layout_height="200px"
         android:layout_row="0"
         android:layout_column="1"
-        android:layout_marginTop="72dp"
         android:src="@drawable/illustrain01_moji01"
         app:layout_column="1"
         app:layout_constraintBottom_toTopOf="@+id/imageSix"
         app:layout_constraintEnd_toStartOf="@+id/imageTwo"
         app:layout_constraintStart_toEndOf="@+id/imageZero"
-        app:layout_constraintTop_toBottomOf="@+id/img_output"
         app:layout_row="0" />
 
     <ImageView
@@ -64,43 +60,36 @@
         android:layout_height="200px"
         android:layout_row="0"
         android:layout_column="2"
-        android:layout_marginTop="72dp"
         android:src="@drawable/illustrain01_moji02"
         app:layout_column="2"
         app:layout_constraintBottom_toTopOf="@+id/imageSeven"
         app:layout_constraintEnd_toStartOf="@+id/imageThree"
         app:layout_constraintStart_toEndOf="@+id/imageOne"
-        app:layout_constraintTop_toBottomOf="@+id/img_output"
         app:layout_row="0" />
 
-    <!-- no working -->
     <ImageView
         android:id="@+id/imageThree"
         android:layout_width="78dp"
         android:layout_height="76dp"
         android:layout_row="0"
         android:layout_column="3"
-        android:layout_marginTop="73dp"
         android:src="@drawable/illustrain01_moji03"
         app:layout_column="3"
         app:layout_constraintBottom_toTopOf="@+id/imageEight"
         app:layout_constraintEnd_toStartOf="@+id/imageFour"
         app:layout_constraintStart_toEndOf="@+id/imageTwo"
-        app:layout_constraintTop_toBottomOf="@+id/img_output"
         app:layout_row="0" />
 
     <ImageView
         android:id="@+id/imageFour"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginTop="73dp"
         android:layout_marginEnd="14dp"
         android:src="@drawable/illustrain01_moji04"
         app:layout_column="4"
         app:layout_constraintBottom_toTopOf="@+id/imageNine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageThree"
-        app:layout_constraintTop_toBottomOf="@+id/img_output"
         app:layout_row="0" />
 
     <ImageView
@@ -108,68 +97,138 @@
         android:layout_width="200px"
         android:layout_height="200px"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="224dp"
         android:src="@drawable/illustrain01_moji05"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/anomalocaris"
         app:layout_constraintEnd_toStartOf="@+id/imageSix"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageZero" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageSix"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginBottom="92dp"
         android:src="@drawable/illustrain01_moji06"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/coelacanth"
         app:layout_constraintEnd_toStartOf="@+id/imageSeven"
-        app:layout_constraintStart_toEndOf="@+id/imageFive"
-        app:layout_constraintTop_toBottomOf="@+id/imageOne" />
+        app:layout_constraintStart_toEndOf="@+id/imageFive" />
 
     <ImageView
         android:id="@+id/imageSeven"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginBottom="93dp"
         android:src="@drawable/illustrain01_moji07"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/nautilus"
         app:layout_constraintEnd_toStartOf="@+id/imageEight"
-        app:layout_constraintStart_toEndOf="@+id/imageSix"
-        app:layout_constraintTop_toBottomOf="@+id/imageTwo" />
+        app:layout_constraintStart_toEndOf="@+id/imageSix" />
 
     <ImageView
         android:id="@+id/imageEight"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginBottom="92dp"
         android:src="@drawable/illustrain01_moji08"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/mammoth"
         app:layout_constraintEnd_toStartOf="@+id/imageNine"
-        app:layout_constraintStart_toEndOf="@+id/imageSeven"
-        app:layout_constraintTop_toBottomOf="@+id/imageThree" />
+        app:layout_constraintStart_toEndOf="@+id/imageSeven" />
 
     <ImageView
         android:id="@+id/imageNine"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="224dp"
+        android:layout_marginEnd="15dp"
         android:src="@drawable/illustrain01_moji09"
+        app:layout_constraintBottom_toTopOf="@+id/smilodon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageEight" />
+
+    <ImageView
+        android:id="@+id/anomalocaris"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/coelacanth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/anomalocaris" />
+
+    <ImageView
+        android:id="@+id/coelacanth"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/nautilus"
+        app:layout_constraintStart_toEndOf="@+id/anomalocaris"
+        app:srcCompat="@drawable/coelacanth" />
+
+    <ImageView
+        android:id="@+id/nautilus"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mammoth"
+        app:layout_constraintStart_toEndOf="@+id/coelacanth"
+        app:srcCompat="@drawable/nautilus" />
+
+    <ImageView
+        android:id="@+id/mammoth"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/smilodon"
+        app:layout_constraintStart_toEndOf="@+id/nautilus"
+        app:srcCompat="@drawable/mammoth" />
+
+    <ImageView
+        android:id="@+id/smilodon"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageEight"
-        app:layout_constraintTop_toBottomOf="@+id/imageThree" />
+        app:layout_constraintStart_toEndOf="@+id/mammoth"
+        app:srcCompat="@drawable/smilodon" />
 
-    <LinearLayout
-        android:id="@+id/img_output"
-        android:layout_width="365dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/ImgTextView2"
+        android:layout_width="67dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/img_count"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toStartOf="@+id/ImgTextView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView" />
+
+    <TextView
+        android:id="@+id/ImgTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/img_count_msg"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        android:background="@drawable/border"
-        />
+        app:layout_constraintStart_toEndOf="@+id/ImgTextView2"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#F44336"
+        android:text="@string/img_reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,11 +31,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Viewの取得
         password = findViewById(R.id.password);
         button = findViewById(R.id.button);
-        buttonForgot = findViewById(R.id.buttonForgot);
 
         // ボタンにクリックリスナーをセット
         button.setOnClickListener(this);
-        buttonForgot.setOnClickListener(this);
 
         // スクショを無効化
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -94,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.d("debug", "成功:" + dswd + "," + pswd);
 
                         // 画像認証に遷移
-                        Intent intent = new Intent(getApplication(), ImageActivity.class);
+                        Intent intent = new Intent(getApplication(), MainActivity.class);
                         startActivity(intent);
 
                     } else {
@@ -104,22 +102,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         numError += 1;
                         Log.d("debug", "失敗" + numError);
 
-                        // 5回失敗で１５秒待機
+                        // 画像認証に遷移
                         if (numError > 5) {
-                            Intent intent = new Intent(getApplication(), StopActivity.class);
+                            Intent intent = new Intent(getApplication(), ImageActivity.class);
                             startActivity(intent);
                         }
                     }
                 } else {
                     password.setError("入力してください");
                 }
-                break;
-
-            // パスワードを忘れた
-            case R.id.buttonForgot:
-                // ForgotActivityに遷移
-                Intent intent = new Intent(getApplication(), ForgotActivity.class);
-                startActivity(intent);
                 break;
         }
     }
