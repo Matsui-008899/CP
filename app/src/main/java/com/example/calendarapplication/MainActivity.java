@@ -1039,12 +1039,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
         Log.d("debug","genzai"+item);
 
+        Log.d("debug","開始"+item);
+        Log.d("debug","開始"+item2);
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
         Cursor cursor = db.query(
                 tableName,
                 new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb,levelCheck},
-                "endDay < ? and endDay > ? and level = 0",
+                "endDay <= ? and endDay > ? and level = 0",
                 new String[]{"2022年" + item ,"2022年" + item2 },
                 null,
                 null,
@@ -1086,47 +1088,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         Log.d("debug","ウニ饅頭と愉快な殺戮賞"+i);
 
         //予定のチェック確認
-//        ContentValues values = new ContentValues();
-//        values.put("level",1);
-//
-//        SQLiteDatabase db = selectDB.getWritableDatabase();
-//        db.update("taskdb",values, "_id = " + id, null);
-//        Log.d("debug","削除成功ID="+id);
+        ContentValues values = new ContentValues();
+        values.put("level",1);
+
+        SQLiteDatabase db = selectDB.getWritableDatabase();
+        db.update("taskdb",values, "_id = " + id, null);
+        Log.d("debug","削除成功ID="+id);
 
         //リスト更新
         onFoodTask(view);
     }
 
-    public void onDebug(View view){
-
-        SQLiteDatabase db = selectDB.getWritableDatabase();
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん12","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん123","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-        selectDB.saveData(db, "2022年12月02日", "12時30分", "2022年12月02日", "13時40分", "肉まん1234","0");
-
-
-    }
-
-    public void dede(View view){
-        gameActivity.gameSetting();
-    }
-
-    public void bubu(View view){
-        gameActivity.resetDB();
-    }
 }

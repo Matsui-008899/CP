@@ -295,12 +295,6 @@
                 android:layout_height="wrap_content"
                 android:text="test"
                 android:onClick="dataSet"/>
-            <Button
-                android:id="@+id/debugS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="押すお"
-                android:onClick="dede"/>
 
 
         </LinearLayout>
