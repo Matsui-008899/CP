@@ -63,6 +63,12 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         saveData(db,"mitarashi",0,"chara1");
         saveData(db,"tako",1,"chara1");
         saveData(db,"majin",2,"chara1");
+        saveData(db,"neko",0,"chara2");
+        saveData(db,"neko2",1,"chara2");
+        saveData(db,"neko3",2,"chara2");
+        saveData(db,"u_pa_",0,"chara3");
+        saveData(db,"u_pa_2",1,"chara3");
+        saveData(db,"u_pa_",2,"chara3");
     }
 
     public void saveData(SQLiteDatabase db, String name,int evolution, String origin) {

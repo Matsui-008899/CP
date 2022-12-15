@@ -28,11 +28,6 @@
             android:title="エボルヴDBログ出力"
             android:summary="DB内の進化体情報を確認" >
         </Preference>
-        <Preference
-            android:key="showEvolveDataBase"
-            android:title="進化体せっていんぐ"
-            android:summary="DB内の進化体情報を確認" >
-        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

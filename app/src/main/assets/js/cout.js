@@ -95,3 +95,19 @@ function mitarashi() {
 function tako() {
   document.getElementById("chara1").src = "images/tako.png";
 }
+
+function neko() {
+  document.getElementById("chara2").src = "images/neko.png";
+}
+function neko2() {
+  document.getElementById("chara2").src = "images/neko2.png";
+}
+function neko3() {
+  document.getElementById("chara2").src = "images/neko3.png";
+}
+function u_pa_() {
+  document.getElementById("chara3").src = "images/u_pa_.png";
+}
+function u_pa_2() {
+  document.getElementById("chara3").src = "images/u_pa_2.png";
+}
