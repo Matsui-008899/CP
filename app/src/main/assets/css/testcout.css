@@ -6,14 +6,27 @@ body {
 
 .container {
   width: 100%;
-  height: 32.6vw;
-  background: url('../file/backgroundpsp.png') repeat-x;
-  background-size: 50%;
-  animation: scroll-anim 5s linear infinite;
+  height: 100px;
+  background: url('../images/bg_natural_sougen.jpg') no-repeat center/80%;
+  background-size: 500px 100px;
 }
 
+
 #chara1{
-  top: 10px;
+  z-index: 30;
+  top: 30px;
+}
+
+#chara2{
+  z-index: 20;
+  right: 50%;
+  top: 30px;
+}
+
+#chara3{
+  z-index: 10;
+  right: -50%;
+  top: 30px;
 }
 
 @keyframes scroll-anim {

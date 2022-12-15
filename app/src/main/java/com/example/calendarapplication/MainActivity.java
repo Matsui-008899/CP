@@ -96,9 +96,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String taskNameDb = "task";
     private String levelCheck = "level";
 
-    private String chara1;
-    private String chara2;
-    private String chara3;
+    private String chara1 = "chara1";
+    private String chara2 = "chara2";
+    private String chara3 = "chara3";
+    private String charaName1;
+    private String charaName2;
+    private String charaName3;
 
     private  GameActivity gameActivity;
 
@@ -127,28 +130,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         TaskListLayout = findViewById(R.id.layerTaskList);
         AchievementLayout = findViewById(R.id.layerAchievement);
         GameLayout = findViewById(R.id.layerGame);
-
-
-        //ゲーム画面表示処理
-        gameView = findViewById(R.id.gameWeb);
-        gameView.setWebViewClient(new WebViewClient());
-        gameView.setClickable(true);
-        gameView.setEnabled(true);
-        gameView.getSettings().setJavaScriptEnabled(true);
-        gameView.loadUrl("file:///android_asset/testCout.html");
-
-        gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
-
-        //最初に表示するキャラクター挿入
-        gameView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url){
-                gameView.loadUrl("javascript:mitarashi()");
-            }
-        });
-
-        //ゲーム：待機画面モーション無限ループ
-        timeCount();
 
         flagTime = null;
         flagDate = null;
@@ -182,6 +163,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         moveScene = false;
 
+
+
         //予定一覧画面
 
         /*
@@ -195,8 +178,32 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                     taskDaySelect(message);
                 }
-
         );
+
+        charaName1 = gameActivity.callCharaName(chara1);
+        Log.d("debug", "サクリファイス"+chara1);
+
+        //ゲーム画面表示処理
+        gameView = findViewById(R.id.gameWeb);
+        gameView.setWebViewClient(new WebViewClient());
+        gameView.setClickable(true);
+        gameView.setEnabled(true);
+        gameView.getSettings().setJavaScriptEnabled(true);
+        gameView.loadUrl("file:///android_asset/testCout.html");
+
+        gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
+
+        //最初に表示するキャラクター挿入
+        gameView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url){
+                gameView.loadUrl("javascript:"+charaName1+"()");
+            }
+        });
+
+        //ゲーム：待機画面モーション無限ループ
+        timeCount();
+
 
         maxIdSetting();
 
@@ -253,7 +260,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 Log.d("debug","カウント終了");
                 Random random = new Random();
                 int randomValue = random.nextInt(7);
-                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"("+chara1+")");
+                Log.d("debug","アクション名："+charaMotion[randomValue]);
+                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"('"+chara1+"')");
                 timeCount();
             }
         }.start();
@@ -290,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:purun("+chara1+")");
+        gameView.loadUrl("javascript:papa('"+chara1+"')");
     }
 
 
@@ -317,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
 
-        gameView.loadUrl("javascript:puyon("+chara1+")");
+        gameView.loadUrl("javascript:papa('"+chara1+"')");
     }
 
     /**
@@ -337,7 +345,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:puyon("+chara1+")");
+        gameView.loadUrl("javascript:papa('"+chara1+"')");
 
         ListTask(view);
     }
@@ -359,7 +367,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:pururun("+chara1+")");
+        gameView.loadUrl("javascript:pururun('"+chara1+"')");
     }
 
     /**

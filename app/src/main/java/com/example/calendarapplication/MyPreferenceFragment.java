@@ -30,5 +30,11 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat {
             return true;
         });
 
+        Preference button3 = findPreference("showEvolveDataBase");
+        button3.setOnPreferenceClickListener(preference -> {
+            gameActivity.evolveSetting();
+            return true;
+        });
+
     }
 }

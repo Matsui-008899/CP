@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class GameActivity {
     private DataBaseGame dbGame;
+//    private DataBaseEvolve dbEvolve;
     public int  charaMany;
 
 
@@ -18,6 +19,7 @@ public class GameActivity {
         Log.d("debug", "くぎゅう" );
 
         dbGame = new DataBaseGame(MyApplication.getAppContext());
+        Log.d("debug", "通貨判定");
 
         charaMany = checkCharaMany();
     }
@@ -42,6 +44,28 @@ public class GameActivity {
             Log.d("debug", "キャラ名" + cursor.getString(0));
             Log.d("debug", "レベル" + cursor.getString(1));
             Log.d("debug", "進化段階" + cursor.getString(2));
+            cursor.moveToNext();
+        }
+        cursor.close();
+    }
+
+    public void evolveSetting(){
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        Cursor cursor = db.query(
+                "evolvedb",
+                new String[]{"evolveName, evolution, originName"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        for (int i = 0; i < cursor.getCount(); i++){
+            Log.d("debug", "進化名：" + cursor.getString(0));
+            Log.d("debug", "進化段階：" + cursor.getString(1));
+            Log.d("debug", "元キャラ名；" + cursor.getString(2));
             cursor.moveToNext();
         }
         cursor.close();
@@ -127,5 +151,42 @@ public class GameActivity {
         db.delete("charadb",null,null);
         Log.d("debug", "データベース初期化完了");
         dbGame.reCreate(db);
+        dbGame.reCreate2(db);
+    }
+
+    public String callCharaName(String charaName){
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        Cursor cursor = db.query(
+                "charadb",
+                new String[]{"charaName, evolution"},
+                "charaName = ?",
+                new String[]{charaName},
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        if (cursor.getCount()==1){
+            Log.d("debug", "抽出数"+cursor.getCount());
+            Log.d("debug", "抽出数"+cursor.getString(0)+"ぱぱ"+cursor.getString(1));
+            Cursor cursor2 = db.query(
+                    "evolvedb",
+                    new String[]{"evolveName"},
+                    "evolution = ? and originName = ?",
+                    new String[]{cursor.getString(1),charaName},
+                    null,
+                    null,
+                    null
+            );
+            cursor2.moveToFirst();
+            Log.d("debug", "抽出数"+cursor2.getCount());
+            String chara = cursor2.getString(0);
+            return chara;
+        }else {
+            Log.d("debug", "指定したキャラはいません");
+            return null;
+
+        }
     }
 }

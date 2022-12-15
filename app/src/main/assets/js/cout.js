@@ -1,15 +1,17 @@
 let motion;
+
+
 //背景の挙動設定
-document.querySelector(`.container`).animate(
-  [
-    { backgroundPosition: '0 0' },
-    { backgroundPosition: '-100% 0' }
-  ],
-  {
-    duration: 5000,
-    iterations: Infinity
-  }
-);
+// document.querySelector(`.container`).animate(
+//   [
+//     { backgroundPosition: '0 0' },
+//     { backgroundPosition: '-100% 0' }
+//   ],
+//   {
+//     duration: 5000,
+//     iterations: Infinity
+//   }
+// );
 
 
 // CSSアニメーションを間隔を空けてループ再生させる処理
@@ -33,9 +35,9 @@ function looopAnimation(id, className ) {
 /**
  * ホーム画面（待機モーション）
  */
-function purun() {
-  document.getElementById("mitarashi").classList.remove(motion);
-  looopAnimation("mitarashi", "purun");
+function purun(chara) {
+  document.getElementById(chara).classList.remove(motion);
+  looopAnimation(chara, "purun");
   motion = "purun";
 }
 
