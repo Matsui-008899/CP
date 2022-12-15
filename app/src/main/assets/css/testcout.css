@@ -18,12 +18,14 @@ body {
 }
 
 #chara2{
+  visibility: hidden;
   z-index: 20;
   right: 50%;
   top: 30px;
 }
 
 #chara3{
+  visibility: hidden;
   z-index: 10;
   right: -50%;
   top: 30px;
