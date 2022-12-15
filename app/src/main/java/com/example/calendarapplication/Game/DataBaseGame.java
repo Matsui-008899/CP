@@ -51,6 +51,8 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         );
 
         reCreate(db);
+        reCreate2(db);
+
     }
 
     public void reCreate(SQLiteDatabase db) {
