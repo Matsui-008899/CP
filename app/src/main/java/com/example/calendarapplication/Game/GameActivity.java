@@ -74,10 +74,8 @@ public class GameActivity {
 
     /**
      * 現在表示しているキャラクターの中からランダムでレベルをあげる
-     *
-     * @return
      */
-    public int levelUp() {
+    public boolean levelUp() {
         //レベルアップするキャラをランダムに決定
         Random random = new Random();
         int aiai = random.nextInt(charaMany) + 1;
@@ -93,6 +91,7 @@ public class GameActivity {
                 null
         );
         cursor.moveToFirst();
+
         //指定キャラのレベルを保持
         int levelSta = Integer.parseInt(cursor.getString(2));
 
@@ -101,37 +100,100 @@ public class GameActivity {
         ContentValues values = new ContentValues();
         levelSta++;
         values.put("level", levelSta);
+        //DBにレベルを反映
         dbInsert.update("charadb", values, "_id = " + cursor.getString(0), null);
 
-        //進化チェック
-        checkEvolve(cursor.getString(0), cursor.getString(1), levelSta, Integer.parseInt(cursor.getString(3)));
-
+        //進化：塁化キャラチェック
+        boolean visibleChara = checkEvolve(cursor.getString(0), cursor.getString(1), levelSta, Integer.parseInt(cursor.getString(3)));
+        Log.d("debug", "現在レベル"+levelSta+ "名前："+cursor.getString(1)+ "進化段階："+Integer.parseInt(cursor.getString(3)));
         cursor.close();
-        return levelSta;
-    }
-
-    private void checkEvolve(String id, String charaName, int level, int evolveLevel) {
-        //進化チェック
-        if ((level >= 10) && (evolveLevel == 0)) {
-
-        } else if ((level >= 20) && (evolveLevel == 1)) {
-
-        } else if ((level >= 30) && (evolveLevel == 2)) {
-
-        } else {
-            return;
+        if (visibleChara){
+            return true;
         }
+        return false;
     }
 
     /**
-     * 進化判定
+     * キャラ進化＆キャラ追加判定
+     * @param id　キャラID
+     * @param charaName　キャラネーム
+     * @param level　レベル
+     * @param evolveLevel　進化段階
+     * @return　進化orキャラ追加
      */
+    private boolean checkEvolve(String id, String charaName, int level, int evolveLevel) {
+        SQLiteDatabase db = dbGame.getWritableDatabase();
+        //追加キャラチェック
+        if ((level >= 5) ) {
+            if(charaName.equals("chara1") ){
+                //２体目追加
+                Log.d("debug", "２体目キャラ出現：" );
+                addChara(db,"2");
+                return true;
+            }
+            if(charaName.equals("chara2") ){
+                //２体目追加
+                Log.d("debug", "３体目キャラ出現：" );
+                addChara(db,"3");
+                return true;
+            }
+        }
+
+
+        //進化チェック
+        if ((level >= 10) && (evolveLevel == 0)) {
+            evolve(db,id,evolveLevel);
+            if(charaName.equals("chara1") ){
+                //２体目追加
+                Log.d("debug", "２体目キャラ出現：" );
+                addChara(db,"2");
+            }
+            return true;
+        } else if ((level >= 20) && (evolveLevel == 1)) {
+            evolve(db,id,evolveLevel);
+            return true;
+        } else if ((level >= 30) && (evolveLevel == 2)) {
+            return evolve(db,id,evolveLevel);
+        }
+        return false;
+    }
+
+    /**
+     * 追加キャラ処理
+     * @param db
+     * @param id
+     * @return
+     */
+    private boolean addChara(SQLiteDatabase db, String id) {
+        ContentValues values = new ContentValues();
+        values.put("level",1);
+        db.update("charadb", values, "_id = " + id, null);
+        charaMany = checkCharaMany();
+        return true;
+    }
+
+
+    /**
+     * 進化処理
+     * @param db
+     * @param id
+     * @param evolveLevel
+     * @return
+     */
+    private boolean evolve(SQLiteDatabase db, String id, int evolveLevel) {
+        ContentValues values = new ContentValues();
+        //db更新エボルヴテーブル
+        int i = evolveLevel + 1;
+        values.put("evolution",i);
+        db.update("charadb",values,"_id = " + id,null);
+        //webview更新
+        return true;
+    }
 
     /**
      * 表示できるキャラクター数確認
      */
     public int checkCharaMany() {
-        dbGame = new DataBaseGame(MyApplication.getAppContext());
         SQLiteDatabase db = dbGame.getReadableDatabase();
         Cursor cursor = db.query(
                 "charadb",
@@ -144,10 +206,14 @@ public class GameActivity {
         );
         cursor.moveToFirst();
         int many = cursor.getCount();
+        Log.d("debug", "表示キャラ数"+many);
         cursor.close();
         return many;
     }
 
+    /**
+     * デバッグ用：キャラ情報リセット
+     */
     public void resetDB() {
         Log.d("debug", "データベース初期化開始");
         SQLiteDatabase db = dbGame.getWritableDatabase();
@@ -159,32 +225,42 @@ public class GameActivity {
 
     }
 
+    /**
+     * キャラの進化情報取得
+     * @param charaName
+     * @return
+     */
     public String callCharaName(String charaName) {
         SQLiteDatabase db = dbGame.getReadableDatabase();
         Cursor cursor = db.query(
                 "charadb",
                 new String[]{"charaName, evolution"},
-                "charaName = ?",
+                "charaName = ? and level >= 1",
                 new String[]{charaName},
                 null,
                 null,
                 null
         );
         cursor.moveToFirst();
+        if (cursor.getCount()==1){
+            Log.d("debug", "抽出数" + cursor.getCount());
+            Cursor cursor2 = db.query(
+                    "evolvedb",
+                    new String[]{"evolveName"},
+                    "evolution = ? and originName = ?",
+                    new String[]{cursor.getString(1), charaName},
+                    null,
+                    null,
+                    null
+            );
+            cursor2.moveToFirst();
+            Log.d("debug", "抽出数" + cursor2.getCount());
+            String chara = cursor2.getString(0);
+            return chara;
+        }else {
+            Log.d("debug", charaName+"：抽出失敗");
+            return null;
+        }
 
-        Log.d("debug", "抽出数" + cursor.getCount());
-        Cursor cursor2 = db.query(
-                "evolvedb",
-                new String[]{"evolveName"},
-                "evolution = ? and originName = ?",
-                new String[]{cursor.getString(1), charaName},
-                null,
-                null,
-                null
-        );
-        cursor2.moveToFirst();
-        Log.d("debug", "抽出数" + cursor2.getCount());
-        String chara = cursor2.getString(0);
-        return chara;
     }
 }

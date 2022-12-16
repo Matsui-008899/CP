@@ -1,5 +1,6 @@
 package com.example.calendarapplication;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,10 +11,11 @@ import com.example.calendarapplication.Game.GameActivity;
 
 public class MyPreferenceFragment extends PreferenceFragmentCompat {
     private GameActivity gameActivity;
+    private DataBase seledb;
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
         setPreferencesFromResource(R.xml.preferences,rootKey);
-
+        seledb = new DataBase(MyApplication.getAppContext());
 
         gameActivity = new GameActivity();
         gameActivity.createDataBase();
@@ -33,6 +35,12 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat {
         Preference button3 = findPreference("showEvolveDataBase");
         button3.setOnPreferenceClickListener(preference -> {
             gameActivity.evolveSetting();
+            return true;
+        });
+        Preference button4 = findPreference("setTask10DataBase");
+        button4.setOnPreferenceClickListener(preference -> {
+            SQLiteDatabase db = seledb.getWritableDatabase();
+            seledb.debugCreate(db);
             return true;
         });
 

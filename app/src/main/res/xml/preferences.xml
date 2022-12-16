@@ -28,6 +28,11 @@
             android:title="エボルヴDBログ出力"
             android:summary="DB内の進化体情報を確認" >
         </Preference>
+        <Preference
+            android:key="setTask10DataBase"
+            android:title="予定追加"
+            android:summary="１０件分の予定を追加" >
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

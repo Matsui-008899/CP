@@ -87,6 +87,13 @@ function papa(chara) {
   motion = "papa";
 }
 
+//挿入準備
+function setVisible(chara) {
+  const ob = document.getElementById(chara);
+
+  ob.style.visibility = "visible";
+}
+
 //御手洗挿入
 function mitarashi() {
   document.getElementById("chara1").src = "images/mitarashi.png";

@@ -40,7 +40,6 @@ import com.example.calendarapplication.Casareal.CasarealRecycleViewAdapter;
 import com.example.calendarapplication.Casareal.CasarealRowData;
 import com.example.calendarapplication.Food.FoodRecycleAdapter;
 import com.example.calendarapplication.Food.FoodRowData;
-import com.example.calendarapplication.Game.DataBaseGame;
 import com.example.calendarapplication.Game.GameActivity;
 import com.example.calendarapplication.TimeFragment.DatePickerFragment;
 import com.example.calendarapplication.TimeFragment.TimePickerFragment;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private CountDown countSta;
     private WebView gameView;
     private int taskSetting;
-    private  boolean moveScene;
+    private boolean moveScene;
     private GameActivity dbGame;
 
     InputMethodManager inputMethodManager;
@@ -76,15 +75,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private Integer[] idList;
     private boolean[] checkLoad;
 
-    private String[] charaMotion = {"purun","korokoro","pyon","poyoon","purupurun","pururun","puyon","papa"};
+    private String[] charaMotion = {"purun", "korokoro", "pyon", "poyoon", "purupurun", "pururun", "puyon", "papa"};
 
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
 
-    LinearLayout CalendarLayout ;
-    LinearLayout TaskLayout ;
-    LinearLayout TaskListLayout ;
-    LinearLayout AchievementLayout ;
+    LinearLayout CalendarLayout;
+    LinearLayout TaskLayout;
+    LinearLayout TaskListLayout;
+    LinearLayout AchievementLayout;
     LinearLayout GameLayout;
 
     private String tableName = "taskdb";
@@ -96,15 +95,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String taskNameDb = "task";
     private String levelCheck = "level";
 
-    private String chara1 = "chara1";
-    private String chara2 = "chara2";
-    private String chara3 = "chara3";
-    private String charaName1;
-    private String charaName2;
-    private String charaName3;
+    private boolean charaCheck1;
+    private boolean charaCheck2;
+    private boolean charaCheck3;
 
-    private  GameActivity gameActivity;
-
+    private GameActivity gameActivity;
 
 
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
@@ -113,14 +108,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //初回起動時の処理
-        preference = getSharedPreferences("Preference Name",MODE_PRIVATE);
+        preference = getSharedPreferences("Preference Name", MODE_PRIVATE);
         editor = preference.edit();
 
         //true=初回起動の処理
-        if (preference.getBoolean("Launched",false)==false){
+        if (preference.getBoolean("Launched", false) == false) {
             findViewById(R.id.CalendarRecycleView).setVisibility(View.GONE);
 
-            editor.putBoolean("Launched",true);
+            editor.putBoolean("Launched", true);
             editor.commit();
         }
 
@@ -164,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         moveScene = false;
 
 
-
         //予定一覧画面
 
         /*
@@ -180,8 +174,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 }
         );
 
-        charaName1 = gameActivity.callCharaName(chara1);
-        Log.d("debug", "サクリファイス"+chara1);
 
         //ゲーム画面表示処理
         gameView = findViewById(R.id.gameWeb);
@@ -191,15 +183,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
 
+        StartGameCharaView("chara1","chara2","chara3");
+
+        Log.d("debug", "サクリファイス" + "chara3");
+
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
-        //最初に表示するキャラクター挿入
-        gameView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageFinished(WebView view, String url){
-                gameView.loadUrl("javascript:"+charaName1+"()");
-            }
-        });
 
         //ゲーム：待機画面モーション無限ループ
         timeCount();
@@ -207,6 +196,53 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         maxIdSetting();
 
+    }
+
+
+    /**
+     * 初回起動処理
+     * @param chara1
+     * @param chara2
+     * @param chara3
+     * @return
+     */
+    private boolean StartGameCharaView(String chara1, String chara2, String chara3) {
+        String charaName1 = gameActivity.callCharaName(chara1);
+        String charaName2 = gameActivity.callCharaName(chara2);
+        String charaName3 = gameActivity.callCharaName(chara3);
+
+            gameView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    GameCharaView(chara1);
+                    if (charaName2 != null) {
+                        GameCharaView(chara2);
+                        charaCheck2=true;
+                    }
+                    if (charaName3 != null) {
+                        GameCharaView(chara3);
+                        charaCheck3=true;
+                    }
+                }
+            });
+        return true;
+    }
+
+    private void AllCharaView() {
+        charaCheck1 = GameCharaView("chara1");
+        charaCheck2 = GameCharaView("chara2");
+        charaCheck3 = GameCharaView("chara3");
+    }
+
+    private boolean GameCharaView(String chara) {
+        String charaName = gameActivity.callCharaName(chara);
+        if (charaName != null) {
+            gameView.loadUrl("javascript:" + charaName + "()");
+            gameView.loadUrl("javascript:setVisible('" + chara + "')");
+            Log.d("debug", "表示キャラ名" + charaName);
+            Log.d("debug", "表示キャラID" + chara);
+        }
+        return true;
     }
 
 
@@ -227,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         );
         cursor.moveToFirst();
         Log.d("debug", "月true=" + cursor.getString(0));
-        if (cursor.getString(0) != null){
+        if (cursor.getString(0) != null) {
             idList = new Integer[Integer.parseInt(cursor.getString(0) + 1)];
             taskLayoutNum = new int[Integer.parseInt(cursor.getString(0) + 1)][12];
             Log.d("dubug", "配列作成" + cursor.getString(0));
@@ -242,14 +278,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5)*1000+10000;
-        CountDownTimer cdt = new CountDownTimer(tara,1000) {
+        int tara = random.nextInt(5) * 1000 + 10000;
+        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug","カウントまで"+l/1000);
-                if (moveScene){
+                Log.d("debug", "カウントまで" + l / 1000);
+                if (moveScene) {
                     timeCount();
-                    moveScene=false;
+                    moveScene = false;
                     cancel();
                     return;
                 }
@@ -257,11 +293,20 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug","カウント終了");
+                Log.d("debug", "カウント終了");
                 Random random = new Random();
-                int randomValue = random.nextInt(7);
-                Log.d("debug","アクション名："+charaMotion[randomValue]);
-                gameView.loadUrl("javascript:"+charaMotion[randomValue]+"('"+chara1+"')");
+                int randomValue1 = random.nextInt(7);
+                gameView.loadUrl("javascript:" + charaMotion[randomValue1] + "('" + "chara1" + "')");
+                if (charaCheck2){
+                    random = new Random();
+                    int randomValue2 = random.nextInt(7);
+                    gameView.loadUrl("javascript:" + charaMotion[randomValue2] + "('" + "chara2" + "')");
+                }
+                if (charaCheck3){
+                    random = new Random();
+                    int randomValue3 = random.nextInt(7);
+                    gameView.loadUrl("javascript:" + charaMotion[randomValue3] + "('" + "chara3" + "')");
+                }
                 timeCount();
             }
         }.start();
@@ -287,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         changeGameViewStandard();
 
-        moveScene=true;
+        moveScene = true;
 
         CalendarLayout.setVisibility(View.VISIBLE);
         TaskLayout.setVisibility(View.GONE);
@@ -298,10 +343,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:papa('"+chara1+"')");
+        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
     }
-
-
 
     /**
      * 予定追加画面表示
@@ -309,14 +352,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openTaskAdd(View view) {
 
         changeGameViewStandard();
-        moveScene=true;
+        moveScene = true;
         Calendar c = Calendar.getInstance();
-        timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
+        timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
         dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
 
-        timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
+        timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY) + 1, c.get(Calendar.MINUTE)));
         dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
 
+        Log.d("debug", "ハム" + String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
+        Log.d("debug", "玉ねぎ" + String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
 
 
         CalendarLayout.setVisibility(View.INVISIBLE);
@@ -325,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
 
-        gameView.loadUrl("javascript:papa('"+chara1+"')");
+        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
     }
 
     /**
@@ -334,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openTaskView(View view) {
 
         changeGameViewStandard();
-        moveScene=true;
+        moveScene = true;
 
         CalendarLayout.setVisibility(View.GONE);
         TaskLayout.setVisibility(View.GONE);
@@ -345,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:papa('"+chara1+"')");
+        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
 
         ListTask(view);
     }
@@ -356,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openAchievement(View view) {
 
         changeGameViewStandard();
-        moveScene=true;
+        moveScene = true;
 
         AchievementLayout.setVisibility(View.VISIBLE);
         CalendarLayout.setVisibility(View.GONE);
@@ -367,14 +412,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:pururun('"+chara1+"')");
+        gameView.loadUrl("javascript:pururun('" + "chara1" + "')");
     }
 
     /**
      * キャラ画面表示
+     *
      * @param view
      */
-    public void openChara(View view){
+    public void openChara(View view) {
         changeGameViewSetting();
 
         GameLayout.setVisibility(View.VISIBLE);
@@ -393,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         LinearLayout gameLayout = findViewById(R.id.gameLayout);
         ViewGroup.LayoutParams layoutParams = gameLayout.getLayoutParams();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200,getResources().getDisplayMetrics());
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
         gameLayout.setLayoutParams(layoutParams);
 
     }
@@ -405,7 +451,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         LinearLayout gameLayout = findViewById(R.id.gameLayout);
         ViewGroup.LayoutParams layoutParams = gameLayout.getLayoutParams();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,90,getResources().getDisplayMetrics());
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
         gameLayout.setLayoutParams(layoutParams);
 
     }
@@ -446,8 +492,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
 
-
-        Log.d("pepe",""+taskSetting);
+        Log.d("pepe", "" + taskSetting);
         ShowDialogView();
         flagTime = "timeSS";
         flagDate = "timeSS";
@@ -525,7 +570,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 values.put("endday", dateES);
                 values.put("endtime", timeES);
                 values.put("task", taskNameS);
-                values.put("level",0);
+                values.put("level", 0);
                 Log.d("debug", "**********" + values);
                 db.insert("taskdb", null, values);
                 CalendarLayout.setVisibility(View.VISIBLE);
@@ -888,7 +933,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 ContentValues values = new ContentValues();
                 values.put("startday", startMD);
                 values.put("starttime", startHM);
-                values.put("endday",endMD);
+                values.put("endday", endMD);
                 values.put("endtime", endHM);
                 values.put("task", task);
 
@@ -899,7 +944,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 View pan = findViewById(R.id.listMonthSelectBtn);
                 ListTask(pan);
             }
-        }else {
+        } else {
             Log.d("debug", "日付に矛盾が発生");
         }
     }
@@ -954,27 +999,27 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minu) {
-        if (flagTime =="timeE") {
+        if (flagTime == "timeE") {
             timeE.setText(String.format("%02d時%02d分", hour, minu));
-        } else if (flagTime =="timeS"){
+        } else if (flagTime == "timeS") {
             timeS.setText(String.format("%02d時%02d分", hour, minu));
-        }else if (flagTime == "timeSS"){
+        } else if (flagTime == "timeSS") {
             EditText startHours = findViewById(taskLayoutNum[taskSetting][3]);
             EditText startMin = findViewById(taskLayoutNum[taskSetting][4]);
 
 
-            startHours.setText(String.format("%02d",hour));
-            startMin.setText(String.format("%02d",minu));
-        }else if (flagTime == "timeEE"){
+            startHours.setText(String.format("%02d", hour));
+            startMin.setText(String.format("%02d", minu));
+        } else if (flagTime == "timeEE") {
             EditText endHours = findViewById(taskLayoutNum[taskSetting][7]);
             EditText endMin = findViewById(taskLayoutNum[taskSetting][8]);
 
-            endHours.setText(String.format("%02d",hour));
-            endMin.setText(String.format("%02d",minu));
+            endHours.setText(String.format("%02d", hour));
+            endMin.setText(String.format("%02d", minu));
         }
 
 
-        flagTime=null;
+        flagTime = null;
     }
 
     /**
@@ -983,34 +1028,34 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        if (flagDate =="timeE") {
+        if (flagDate == "timeE") {
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else if (flagDate =="timeS"){
+        } else if (flagDate == "timeS") {
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        }else if (flagTime == "timeSS"){
+        } else if (flagTime == "timeSS") {
             EditText yearH = findViewById(taskLayoutNum[taskSetting][9]);
             EditText startMonth = findViewById(taskLayoutNum[taskSetting][1]);
             EditText startDay = findViewById(taskLayoutNum[taskSetting][2]);
 
-            yearH.setText(String.format("%d",year));
-            startMonth.setText(String.format("%02d",month+1));
-            startDay.setText(String.format("%02d",dayOfMonth));
-        }else if (flagTime == "timeEE"){
+            yearH.setText(String.format("%d", year));
+            startMonth.setText(String.format("%02d", month + 1));
+            startDay.setText(String.format("%02d", dayOfMonth));
+        } else if (flagTime == "timeEE") {
             EditText endMonth = findViewById(taskLayoutNum[taskSetting][5]);
             EditText endDay = findViewById(taskLayoutNum[taskSetting][6]);
 
-            endMonth.setText(String.format("%02d",month+1));
-            endDay.setText(String.format("%02d",dayOfMonth));
+            endMonth.setText(String.format("%02d", month + 1));
+            endDay.setText(String.format("%02d", dayOfMonth));
         }
 
-        flagDate=null;
+        flagDate = null;
     }
 
 
     /**
      * キャラクター画面
      */
-    public void onFoodTask(View view){
+    public void onFoodTask(View view) {
         RecyclerView rv = findViewById(R.id.foodRecycleView);
         FoodRecycleAdapter adapter = new FoodRecycleAdapter(this.createFoodList());
 
@@ -1023,6 +1068,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 餌（予定）一覧画面表示
+     *
      * @return
      */
     private List<FoodRowData> createFoodList() {
@@ -1035,34 +1081,28 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Calendar c = Calendar.getInstance();
 
-        String item = String.format("%02d月%02d日", c.get(Calendar.MONTH)+1, c.get(Calendar.DATE));
+        String item = String.format("%02d月%02d日", c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
         String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
-        Log.d("debug","genzai"+item);
 
-        Log.d("debug","開始"+item);
-        Log.d("debug","開始"+item2);
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
         Cursor cursor = db.query(
                 tableName,
-                new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb,levelCheck},
+                new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb, levelCheck},
                 "endDay <= ? and endDay > ? and level = 0",
-                new String[]{"2022年" + item ,"2022年" + item2 },
+                new String[]{"2022年" + item, "2022年" + item2},
                 null,
                 null,
                 "startDay"
         );
         cursor.moveToFirst();
-        Log.d("debug","合計"+cursor.getCount());
-        Log.d("debug","開始");
         //DBから取り出した件数分回す
         for (int i = 0; i < cursor.getCount(); i++) {
             //リサイクル用データの入れ子を作成
             FoodRowData data = new FoodRowData();
 
-            Log.d("debug","結果＝"+cursor.getString(3));
-            data.setStartView(cursor.getString(1)+"："+cursor.getString(2));
-            data.setEndView(cursor.getString(3)+"："+cursor.getString(4));
+            data.setStartView(cursor.getString(1) + "：" + cursor.getString(2));
+            data.setEndView(cursor.getString(3) + "：" + cursor.getString(4));
             data.setTaskView(cursor.getString(5));
             data.setTag(Integer.parseInt(cursor.getString(0)));
 
@@ -1070,7 +1110,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             cursor.moveToNext();
         }
 
-        Log.d("debug","終了");
         //DBから呼びだしたデータの件数文Forを回す
         cursor.close();
 
@@ -1079,24 +1118,28 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 予定一件をタップ時
+     *
      * @param view
      */
-    public void checkTask(View view){
+    public void checkTask(View view) {
         int id = (int) view.getTag();
 
-         int i = gameActivity.levelUp();
-        Log.d("debug","ウニ饅頭と愉快な殺戮賞"+i);
+        boolean visibleChara = gameActivity.levelUp();
+        if (visibleChara) {
+            AllCharaView();
+        }
 
         //予定のチェック確認
         ContentValues values = new ContentValues();
-        values.put("level",1);
+        values.put("level", 1);
 
         SQLiteDatabase db = selectDB.getWritableDatabase();
-        db.update("taskdb",values, "_id = " + id, null);
-        Log.d("debug","削除成功ID="+id);
+        db.update("taskdb", values, "_id = " + id, null);
+        Log.d("debug", "削除成功ID=" + id);
 
         //リスト更新
         onFoodTask(view);
     }
+
 
 }
