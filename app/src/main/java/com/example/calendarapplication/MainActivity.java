@@ -59,11 +59,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private String flagTime;
     private String flagDate;
     private DataBase selectDB;
-    private CountDown countSta;
     private WebView gameView;
     private int taskSetting;
     private boolean moveScene;
-    private GameActivity dbGame;
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private Integer[] idList;
     private boolean[] checkLoad;
 
-    private String[] charaMotion = {"purun", "korokoro", "pyon", "poyoon", "purupurun", "pururun", "puyon", "papa"};
+    private final String[] charaMotion = {"purun", "korokoro", "pyon", "poyoon", "purupurun", "pururun", "puyon", "papa"};
 
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;
@@ -191,8 +189,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
         //ゲーム：待機画面モーション無限ループ
-        timeCount();
-
+        timeCount1();
+        timeCount2();
+        timeCount3();
 
         maxIdSetting();
 
@@ -239,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
             gameView.loadUrl("javascript:setVisible('" + chara + "')");
+            gameView.loadUrl("javascript:puyon('" + chara + "')");
             Log.d("debug", "表示キャラ名" + charaName);
             Log.d("debug", "表示キャラID" + chara);
         }
@@ -274,17 +274,18 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 一定周期でキャラクターのアニメーションを変える
+     * ver.キャラ１
      */
-    private void timeCount() {
+    private void timeCount1() {
         Random random = new Random();
         //レンジ：１５秒
         int tara = random.nextInt(5) * 1000 + 10000;
         CountDownTimer cdt = new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "カウントまで" + l / 1000);
+                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
                 if (moveScene) {
-                    timeCount();
+                    timeCount1();
                     moveScene = false;
                     cancel();
                     return;
@@ -295,24 +296,81 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             public void onFinish() {
                 Log.d("debug", "カウント終了");
                 Random random = new Random();
-                int randomValue1 = random.nextInt(7);
+                int randomValue1 = random.nextInt(8);
                 gameView.loadUrl("javascript:" + charaMotion[randomValue1] + "('" + "chara1" + "')");
-                if (charaCheck2){
-                    random = new Random();
-                    int randomValue2 = random.nextInt(7);
-                    gameView.loadUrl("javascript:" + charaMotion[randomValue2] + "('" + "chara2" + "')");
-                }
-                if (charaCheck3){
-                    random = new Random();
-                    int randomValue3 = random.nextInt(7);
-                    gameView.loadUrl("javascript:" + charaMotion[randomValue3] + "('" + "chara3" + "')");
-                }
-                timeCount();
+                timeCount1();
             }
         }.start();
 
     }
 
+    /**
+     * 一定周期でキャラクターのアニメーションを変える
+     * ver.キャラ２
+     */
+    private void timeCount2() {
+        Random random = new Random();
+        //レンジ：１５秒
+        int tara = random.nextInt(5) * 1000 + 10000;
+        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
+            @Override
+            public void onTick(long l) {
+                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
+                if (moveScene) {
+                    timeCount2();
+                    moveScene = false;
+                    cancel();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d("debug", "カウント終了");
+                Random random = new Random();
+                if (charaCheck2){
+                    int randomValue2 = random.nextInt(8);
+                    gameView.loadUrl("javascript:" + charaMotion[randomValue2] + "('" + "chara2" + "')");
+                }
+                timeCount2();
+            }
+        }.start();
+
+    }
+
+    /**
+     * 一定周期でキャラクターのアニメーションを変える
+     * ver.キャラ３
+     */
+    private void timeCount3() {
+        Random random = new Random();
+        //レンジ：１５秒
+        int tara = random.nextInt(5) * 1000 + 10000;
+        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
+            @Override
+            public void onTick(long l) {
+                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
+                if (moveScene) {
+                    timeCount3();
+                    moveScene = false;
+                    cancel();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                Log.d("debug", "カウント終了");
+                Random random = new Random();
+                if (charaCheck3){
+                    int randomValue3 = random.nextInt(8);
+                    gameView.loadUrl("javascript:" + charaMotion[randomValue3] + "('" + "chara3" + "')");
+                }
+                timeCount3();
+            }
+        }.start();
+
+    }
     /**
      * キーボード非表示（フォーカス外タッチ時）
      */
@@ -344,6 +402,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
         gameView.loadUrl("javascript:papa('" + "chara1" + "')");
+        gameView.loadUrl("javascript:smallBack()");
     }
 
     /**
@@ -369,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         TaskListLayout.setVisibility(View.INVISIBLE);
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
-
+        gameView.loadUrl("javascript:huhouShinnyuu()");
         gameView.loadUrl("javascript:papa('" + "chara1" + "')");
     }
 
@@ -390,6 +449,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
+        gameView.loadUrl("javascript:huhouShinnyuu()");
         gameView.loadUrl("javascript:papa('" + "chara1" + "')");
 
         ListTask(view);
@@ -428,6 +488,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         CalendarLayout.setVisibility(View.GONE);
         TaskLayout.setVisibility(View.GONE);
         TaskListLayout.setVisibility(View.GONE);
+
+        gameView.loadUrl("javascript:hugeBack()");
 
         onFoodTask(view);
     }
@@ -1136,6 +1198,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getWritableDatabase();
         db.update("taskdb", values, "_id = " + id, null);
         Log.d("debug", "削除成功ID=" + id);
+
+        String message = "レベルアップ";
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
         //リスト更新
         onFoodTask(view);
