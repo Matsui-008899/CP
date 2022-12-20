@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/border">
+    android:divider="@drawable/divider"
+    android:dividerPadding="5dp"
+    android:showDividers="beginning">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,11 +13,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="開始月日："/>
         <TextView
             android:id="@+id/startDayView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:text="２０２２年１０月１０日"/>
     </LinearLayout>
 
@@ -29,11 +33,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="開始時刻："/>
         <TextView
             android:id="@+id/startTimeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14dp"
             android:text="１０時１０分"/>
     </LinearLayout>
     <LinearLayout
@@ -43,11 +49,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="終了月日："/>
         <TextView
             android:id="@+id/endDayView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:text="２０２２年１０月１０日"/>
     </LinearLayout>
 
@@ -61,11 +69,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="終了時刻："/>
         <TextView
             android:id="@+id/endTimeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14dp"
             android:text="１０時１０分"/>
     </LinearLayout>
 
@@ -76,11 +86,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="予定内容："/>
         <TextView
             android:id="@+id/taskView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="肉まんを食べる"/>
     </LinearLayout>
 </LinearLayout>

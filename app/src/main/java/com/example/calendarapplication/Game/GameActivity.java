@@ -226,7 +226,7 @@ public class GameActivity {
     }
 
     /**
-     * キャラの進化情報取得
+     * DBからキャラクターが表示できるかのチェック
      * @param charaName
      * @return
      */

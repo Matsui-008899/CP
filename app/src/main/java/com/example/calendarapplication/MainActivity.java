@@ -227,14 +227,25 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         return true;
     }
 
+    /**
+     * キャラクターの表示チェック
+     */
     private void AllCharaView() {
         charaCheck1 = GameCharaView("chara1");
         charaCheck2 = GameCharaView("chara2");
         charaCheck3 = GameCharaView("chara3");
     }
 
+    /**
+     * キャラクター一件分の表示チェック
+     * @param chara
+     * @return
+     */
     private boolean GameCharaView(String chara) {
+        //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
         String charaName = gameActivity.callCharaName(chara);
+
+        //NULLでなければキャラクターを表示する
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
             gameView.loadUrl("javascript:setVisible('" + chara + "')");
@@ -398,12 +409,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
 
-        /*
-         * JavaScriptにゲームキャラクターのモーション操作を指示する
-         */
-        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
+        //背景変更
         gameView.loadUrl("javascript:smallBack()");
+        stayMotion();
     }
+
+
 
     /**
      * 予定追加画面表示
@@ -429,7 +440,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout.setVisibility(View.GONE);
         GameLayout.setVisibility(View.GONE);
         gameView.loadUrl("javascript:huhouShinnyuu()");
-        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
+        stayMotion();
     }
 
     /**
@@ -450,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
         gameView.loadUrl("javascript:huhouShinnyuu()");
-        gameView.loadUrl("javascript:papa('" + "chara1" + "')");
+        stayMotion();
 
         ListTask(view);
     }
@@ -472,7 +483,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
          */
-        gameView.loadUrl("javascript:pururun('" + "chara1" + "')");
+        stayMotion();
     }
 
     /**
@@ -490,9 +501,23 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         TaskListLayout.setVisibility(View.GONE);
 
         gameView.loadUrl("javascript:hugeBack()");
-
+        stayMotion();
         onFoodTask(view);
     }
+
+    /**
+     * 画面遷移時キャラモーション変更(モーションタイプ：待機)
+     */
+    private void stayMotion() {
+        gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
+        if (charaCheck2){
+            gameView.loadUrl("javascript:puyon('" + "chara2" + "')");
+        }
+        if (charaCheck3){
+            gameView.loadUrl("javascript:puyon('" + "chara3" + "')");
+        }
+    }
+
 
     /**
      * ゲーム画面調整
@@ -548,8 +573,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void selectTimeStartTaskBtn(View view) {
         //確定ボタンの親レイアウト
         LinearLayout viewPare = (LinearLayout) view.getParent();
+        LinearLayout viewPaPare = (LinearLayout) viewPare.getParent();
         //全体の親レイアウト
-        LinearLayout viewPPare = (LinearLayout) viewPare.getParent();
+        LinearLayout viewPPare = (LinearLayout) viewPaPare.getParent();
 
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
@@ -566,8 +592,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void selectTimeEndTaskBtn(View view) {
         //確定ボタンの親レイアウト
         LinearLayout viewPare = (LinearLayout) view.getParent();
+        LinearLayout viewPaPare = (LinearLayout) viewPare.getParent();
         //全体の親レイアウト
-        LinearLayout viewPPare = (LinearLayout) viewPare.getParent();
+        LinearLayout viewPPare = (LinearLayout) viewPaPare.getParent();
 
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
@@ -880,26 +907,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void selectUpdate(View view) {
         LinearLayout pare = (LinearLayout) view.getParent();
-        LinearLayout childLO = (LinearLayout) pare.getParent();
+        LinearLayout motherLayout = (LinearLayout) pare.getParent();
+        LinearLayout listLayout = (LinearLayout) motherLayout.getChildAt(0);
+        LinearLayout updateLayout = (LinearLayout) motherLayout.getChildAt(1);
 
-        //開始表示
-        childLO.getChildAt(0).setVisibility(View.GONE);
-        //終了表示
-        childLO.getChildAt(1).setVisibility(View.GONE);
-        //タスク表示
-        childLO.getChildAt(2).setVisibility(View.GONE);
-
-        //編集表示
-        childLO.getChildAt(3).setVisibility(View.VISIBLE);
-        childLO.getChildAt(4).setVisibility(View.VISIBLE);
-        childLO.getChildAt(5).setVisibility(View.VISIBLE);
-        childLO.getChildAt(6).setVisibility(View.VISIBLE);
-        childLO.getChildAt(7).setVisibility(View.VISIBLE);
-
-        LinearLayout child1 = (LinearLayout) childLO.getChildAt(9);
-        child1.getChildAt(2).setVisibility(View.VISIBLE);
-        child1.getChildAt(4).setVisibility(View.VISIBLE);
-
+        listLayout.setVisibility(View.GONE);
+        updateLayout.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -907,25 +920,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void onExit(View view) {
         LinearLayout pare = (LinearLayout) view.getParent();
-        LinearLayout childLO = (LinearLayout) pare.getParent();
+        LinearLayout pareLayout = (LinearLayout) pare.getParent();
+        LinearLayout motherLayout = (LinearLayout) pareLayout.getParent();
+        LinearLayout listLayout = (LinearLayout) motherLayout.getChildAt(0);
+        LinearLayout updateLayout = (LinearLayout) motherLayout.getChildAt(1);
 
-        //開始表示
-        childLO.getChildAt(0).setVisibility(View.VISIBLE);
-        //終了表示
-        childLO.getChildAt(1).setVisibility(View.VISIBLE);
-        //タスク表示
-        childLO.getChildAt(2).setVisibility(View.VISIBLE);
+        listLayout.setVisibility(View.VISIBLE);
+        updateLayout.setVisibility(View.GONE);
 
-        //編集表示
-        childLO.getChildAt(3).setVisibility(View.GONE);
-        childLO.getChildAt(4).setVisibility(View.GONE);
-        childLO.getChildAt(5).setVisibility(View.GONE);
-        childLO.getChildAt(6).setVisibility(View.GONE);
-        childLO.getChildAt(7).setVisibility(View.GONE);
-
-        LinearLayout child1 = (LinearLayout) childLO.getChildAt(9);
-        child1.getChildAt(2).setVisibility(View.INVISIBLE);
-        child1.getChildAt(4).setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -936,8 +938,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void onUpdate(View view) {
         //確定ボタンの親レイアウト
         LinearLayout viewPare = (LinearLayout) view.getParent();
+        LinearLayout viewPaPare = (LinearLayout) viewPare.getParent();
         //全体の親レイアウト
-        LinearLayout viewPPare = (LinearLayout) viewPare.getParent();
+        LinearLayout viewPPare = (LinearLayout) viewPaPare.getParent();
 
         //編集するIDを親レイアウトのIDから取得しidListから検索
         int id = Arrays.asList(idList).indexOf(viewPPare.getId());
@@ -1051,6 +1054,30 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     }
 
+
+    /**
+     * 月日ダイアログ表示
+     */
+    public void ShowDialogDateView() {
+        /*
+          newFragment.show(getSupportFragmentManager(), "timePicker");
+         */
+        DatePickerFragment datePicker = new DatePickerFragment();
+        datePicker.show(getSupportFragmentManager(), "datePicker");
+
+    }
+
+    /**
+     * 時刻ダイアログ表示
+     */
+    public void ShowDialogTimeView() {
+        /*
+          newFragment.show(getSupportFragmentManager(), "timePicker");
+         */
+        TimePickerFragment timePicker = new TimePickerFragment();
+        timePicker.show(getSupportFragmentManager(), "timePicker");
+
+    }
 
     /**
      * 時刻ダイアログ設定
@@ -1189,6 +1216,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         boolean visibleChara = gameActivity.levelUp();
         if (visibleChara) {
             AllCharaView();
+            gameView.loadUrl("javascript:hugeBack()");
         }
 
         //予定のチェック確認
