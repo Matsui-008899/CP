@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -548,20 +549,22 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         startActivity(intent);
     }
 
+
     /**
-     * 　開始日時選択ボタン表示
+     * 　予定追加開始日時選択ボタン表示
      */
     public void selectTimeStartBtn(View view) {
-        ShowDialogView();
+        ShowDialogTimeView();
         flagTime = "timeS";
         flagDate = "timeS";
     }
 
+
     /**
-     * 終了日時選択ボタン表示
+     * 予定追加終了日時選択ボタン表示
      */
     public void selectTimeEndBtn(View view) {
-        ShowDialogView();
+        ShowDialogTimeView();
         flagTime = "timeE";
         flagDate = "timeE";
 
@@ -581,9 +584,44 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
         Log.d("pepe", "" + taskSetting);
-        ShowDialogView();
+        ShowDialogTimeView();
         flagTime = "timeSS";
+    }
+
+    /**
+     * 　開始日時選択ボタン表示（タスク編集モード）
+     */
+    public void selectDateStartTaskBtn(View view) {
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout) view.getParent();
+        LinearLayout viewPaPare = (LinearLayout) viewPare.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout) viewPaPare.getParent();
+
+        taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
+
+
+        Log.d("pepe", "" + taskSetting);
+        ShowDialogDateView();
         flagDate = "timeSS";
+    }
+
+    /**
+     * 終了日時選択ボタン表示（タスク編集モード）
+     */
+    public void selectDateEndTaskBtn(View view) {
+        //確定ボタンの親レイアウト
+        LinearLayout viewPare = (LinearLayout) view.getParent();
+        LinearLayout viewPaPare = (LinearLayout) viewPare.getParent();
+        //全体の親レイアウト
+        LinearLayout viewPPare = (LinearLayout) viewPaPare.getParent();
+
+        taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
+
+
+        ShowDialogDateView();
+        flagDate = "timeEE";
+
     }
 
     /**
@@ -599,9 +637,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
 
-        ShowDialogView();
+        ShowDialogTimeView();
         flagTime = "timeEE";
-        flagDate = "timeEE";
 
     }
 
@@ -945,27 +982,27 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //編集するIDを親レイアウトのIDから取得しidListから検索
         int id = Arrays.asList(idList).indexOf(viewPPare.getId());
 
-        EditText year = findViewById(taskLayoutNum[id][9]);
-        EditText startMonth = findViewById(taskLayoutNum[id][1]);
-        EditText startDay = findViewById(taskLayoutNum[id][2]);
+        TextView year = findViewById(taskLayoutNum[id][9]);
+        TextView startMonth = findViewById(taskLayoutNum[id][1]);
+        TextView startDay = findViewById(taskLayoutNum[id][2]);
         //開始月日取得
         String startMD = year.getText() + "年" + startMonth.getText() + "月" + startDay.getText() + "日";
 
 
-        EditText startHours = findViewById(taskLayoutNum[id][3]);
-        EditText startMin = findViewById(taskLayoutNum[id][4]);
+        TextView startHours = findViewById(taskLayoutNum[id][3]);
+        TextView startMin = findViewById(taskLayoutNum[id][4]);
         //開始時刻取得
         String startHM = startHours.getText() + "時" + startMin.getText() + "分";
 
 
-        EditText endMonth = findViewById(taskLayoutNum[id][5]);
-        EditText endDay = findViewById(taskLayoutNum[id][6]);
+        TextView endMonth = findViewById(taskLayoutNum[id][5]);
+        TextView endDay = findViewById(taskLayoutNum[id][6]);
         //終了月日取得
         String endMD = year.getText() + "年" + endMonth.getText() + "月" + endDay.getText() + "日";
 
 
-        EditText endHours = findViewById(taskLayoutNum[id][7]);
-        EditText endMin = findViewById(taskLayoutNum[id][8]);
+        TextView endHours = findViewById(taskLayoutNum[id][7]);
+        TextView endMin = findViewById(taskLayoutNum[id][8]);
         //終了時刻取得
         String endHM = endHours.getText() + "時" + endMin.getText() + "分";
 
@@ -1093,15 +1130,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         } else if (flagTime == "timeS") {
             timeS.setText(String.format("%02d時%02d分", hour, minu));
         } else if (flagTime == "timeSS") {
-            EditText startHours = findViewById(taskLayoutNum[taskSetting][3]);
-            EditText startMin = findViewById(taskLayoutNum[taskSetting][4]);
+            TextView startHours = findViewById(taskLayoutNum[taskSetting][3]);
+            TextView startMin = findViewById(taskLayoutNum[taskSetting][4]);
 
 
             startHours.setText(String.format("%02d", hour));
             startMin.setText(String.format("%02d", minu));
         } else if (flagTime == "timeEE") {
-            EditText endHours = findViewById(taskLayoutNum[taskSetting][7]);
-            EditText endMin = findViewById(taskLayoutNum[taskSetting][8]);
+            TextView endHours = findViewById(taskLayoutNum[taskSetting][7]);
+            TextView endMin = findViewById(taskLayoutNum[taskSetting][8]);
 
             endHours.setText(String.format("%02d", hour));
             endMin.setText(String.format("%02d", minu));
@@ -1121,17 +1158,17 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
         } else if (flagDate == "timeS") {
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else if (flagTime == "timeSS") {
-            EditText yearH = findViewById(taskLayoutNum[taskSetting][9]);
-            EditText startMonth = findViewById(taskLayoutNum[taskSetting][1]);
-            EditText startDay = findViewById(taskLayoutNum[taskSetting][2]);
+        } else if (flagDate == "timeSS") {
+            TextView yearH = findViewById(taskLayoutNum[taskSetting][9]);
+            TextView startMonth = findViewById(taskLayoutNum[taskSetting][1]);
+            TextView startDay = findViewById(taskLayoutNum[taskSetting][2]);
 
             yearH.setText(String.format("%d", year));
             startMonth.setText(String.format("%02d", month + 1));
             startDay.setText(String.format("%02d", dayOfMonth));
-        } else if (flagTime == "timeEE") {
-            EditText endMonth = findViewById(taskLayoutNum[taskSetting][5]);
-            EditText endDay = findViewById(taskLayoutNum[taskSetting][6]);
+        } else if (flagDate == "timeEE") {
+            TextView endMonth = findViewById(taskLayoutNum[taskSetting][5]);
+            TextView endDay = findViewById(taskLayoutNum[taskSetting][6]);
 
             endMonth.setText(String.format("%02d", month + 1));
             endDay.setText(String.format("%02d", dayOfMonth));

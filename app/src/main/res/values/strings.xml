@@ -41,6 +41,7 @@
     <string name="fgt_re">新しいパスワードを再入力</string>
     <string name="fgt_change">変更する</string>
     <string name="taskAddBtn">予定追加</string>
+    <string name="year"><u>２０２２</u></string>
 
 
 </resources>
