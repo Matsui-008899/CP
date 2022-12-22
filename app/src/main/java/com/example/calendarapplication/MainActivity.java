@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -49,14 +50,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private EditText taskName;
-    private EditText dateS;
-    private EditText timeS;
-    private EditText dateE;
-    private EditText timeE;
+    private TextView dateS;
+    private TextView timeS;
+    private TextView dateE;
+    private TextView timeE;
     private String flagTime;
     private String flagDate;
     private DataBase selectDB;
@@ -85,14 +87,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     LinearLayout AchievementLayout;
     LinearLayout GameLayout;
 
-    private String tableName = "taskdb";
-    private String idName = "_id";
-    private String startDayName = "startDay";
-    private String startTimeName = "startTime";
-    private String endDayName = "endDay";
-    private String endTimeName = "endTime";
-    private String taskNameDb = "task";
-    private String levelCheck = "level";
+    private final String tableName = "taskdb";
+    private final String idName = "_id";
+    private final String startDayName = "startDay";
+    private final String startTimeName = "startTime";
+    private final String endDayName = "endDay";
+    private final String endTimeName = "endTime";
+    private final String taskNameDb = "task";
+    private final String levelCheck = "level";
 
     private boolean charaCheck1;
     private boolean charaCheck2;
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private GameActivity gameActivity;
 
 
-    @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility"})
+    @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility", "CutPasteId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         editor = preference.edit();
 
         //true=初回起動の処理
-        if (preference.getBoolean("Launched", false) == false) {
+        if (!preference.getBoolean("Launched", false)) {
             findViewById(R.id.CalendarRecycleView).setVisibility(View.GONE);
 
             editor.putBoolean("Launched", true);
@@ -161,8 +163,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //予定一覧画面
 
         /*
-        テスト：カレンダーの標識確認
-        削除予定
+        テスト：カレンダーの標識確認：削除予定
          */
         CalendarView calendar = findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(
@@ -182,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.getSettings().setJavaScriptEnabled(true);
         gameView.loadUrl("file:///android_asset/testCout.html");
 
-        StartGameCharaView("chara1","chara2","chara3");
+        StartGameCharaView();
 
         Log.d("debug", "サクリファイス" + "chara3");
 
@@ -201,31 +202,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 初回起動処理
-     * @param chara1
-     * @param chara2
-     * @param chara3
-     * @return
      */
-    private boolean StartGameCharaView(String chara1, String chara2, String chara3) {
-        String charaName1 = gameActivity.callCharaName(chara1);
-        String charaName2 = gameActivity.callCharaName(chara2);
-        String charaName3 = gameActivity.callCharaName(chara3);
+    private void StartGameCharaView() {
 
             gameView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    GameCharaView(chara1);
-                    if (charaName2 != null) {
-                        GameCharaView(chara2);
-                        charaCheck2=true;
-                    }
-                    if (charaName3 != null) {
-                        GameCharaView(chara3);
-                        charaCheck3=true;
-                    }
+                    AllCharaView();
                 }
             });
-        return true;
     }
 
     /**
@@ -239,10 +224,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * キャラクター一件分の表示チェック
-     * @param chara
-     * @return
      */
     private boolean GameCharaView(String chara) {
+        //起動済みチェック
+        if (Objects.equals(chara, "chara1") &&charaCheck1){
+            return true;
+        }
+        if (Objects.equals(chara, "chara2") &&charaCheck2){
+            return true;
+        }
+        if (Objects.equals(chara, "chara3") &&charaCheck3){
+            return true;
+        }
+
         //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
         String charaName = gameActivity.callCharaName(chara);
 
@@ -250,11 +244,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
             gameView.loadUrl("javascript:setVisible('" + chara + "')");
-            gameView.loadUrl("javascript:puyon('" + chara + "')");
+            gameView.loadUrl("javascript:kurukuru('" + chara + "')");
             Log.d("debug", "表示キャラ名" + charaName);
             Log.d("debug", "表示キャラID" + chara);
+            return true;
         }
-        return true;
+        return false;
     }
 
 
@@ -291,8 +286,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount1() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
-        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
+        int tara = random.nextInt(5) * 1000 + 20000;
+        new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
                 Log.d("debug", "キャラ１：カウントまで" + l / 1000);
@@ -300,7 +295,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     timeCount1();
                     moveScene = false;
                     cancel();
-                    return;
                 }
             }
 
@@ -323,8 +317,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount2() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
-        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
+        int tara = random.nextInt(5) * 1000 + 20000;
+        new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
                 Log.d("debug", "キャラ２：カウントまで" + l / 1000);
@@ -332,7 +326,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     timeCount2();
                     moveScene = false;
                     cancel();
-                    return;
                 }
             }
 
@@ -340,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             public void onFinish() {
                 Log.d("debug", "カウント終了");
                 Random random = new Random();
-                if (charaCheck2){
+                if (charaCheck2) {
                     int randomValue2 = random.nextInt(8);
                     gameView.loadUrl("javascript:" + charaMotion[randomValue2] + "('" + "chara2" + "')");
                 }
@@ -357,8 +350,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount3() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
-        CountDownTimer cdt = new CountDownTimer(tara, 1000) {
+        int tara = random.nextInt(5) * 1000 + 20000;
+        new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
                 Log.d("debug", "キャラ３：カウントまで" + l / 1000);
@@ -366,7 +359,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     timeCount3();
                     moveScene = false;
                     cancel();
-                    return;
                 }
             }
 
@@ -374,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             public void onFinish() {
                 Log.d("debug", "カウント終了");
                 Random random = new Random();
-                if (charaCheck3){
+                if (charaCheck3) {
                     int randomValue3 = random.nextInt(8);
                     gameView.loadUrl("javascript:" + charaMotion[randomValue3] + "('" + "chara3" + "')");
                 }
@@ -399,16 +391,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void openHome(View view) {
 
-
         changeGameViewStandard();
 
         moveScene = true;
 
-        CalendarLayout.setVisibility(View.VISIBLE);
-        TaskLayout.setVisibility(View.GONE);
-        TaskListLayout.setVisibility(View.GONE);
-        AchievementLayout.setVisibility(View.GONE);
-        GameLayout.setVisibility(View.GONE);
+        layerVisible(View.VISIBLE,View.GONE,View.GONE,View.GONE,View.GONE);
 
         //背景変更
         gameView.loadUrl("javascript:smallBack()");
@@ -420,26 +407,24 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     /**
      * 予定追加画面表示
      */
+    @SuppressLint("DefaultLocale")
     public void openTaskAdd(View view) {
 
         changeGameViewStandard();
         moveScene = true;
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
+        timeS.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+        dateS.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY) + 1, c.get(Calendar.MINUTE)));
+        timeE.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+        dateE.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
-        Log.d("debug", "ハム" + String.format("%02d時%02d分", c.get(Calendar.HOUR), c.get(Calendar.MINUTE)));
-        Log.d("debug", "玉ねぎ" + String.format("%02d時%02d分", c.get(Calendar.HOUR) + 1, c.get(Calendar.MINUTE)));
+        layerVisible(View.GONE,View.VISIBLE,View.GONE,View.GONE,View.GONE);
 
-
-        CalendarLayout.setVisibility(View.INVISIBLE);
-        TaskLayout.setVisibility(View.VISIBLE);
-        TaskListLayout.setVisibility(View.INVISIBLE);
-        AchievementLayout.setVisibility(View.GONE);
-        GameLayout.setVisibility(View.GONE);
         gameView.loadUrl("javascript:huhouShinnyuu()");
         stayMotion();
     }
@@ -452,11 +437,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         changeGameViewStandard();
         moveScene = true;
 
-        CalendarLayout.setVisibility(View.GONE);
-        TaskLayout.setVisibility(View.GONE);
-        TaskListLayout.setVisibility(View.VISIBLE);
-        AchievementLayout.setVisibility(View.GONE);
-        GameLayout.setVisibility(View.GONE);
+        layerVisible(View.GONE,View.GONE,View.VISIBLE,View.GONE,View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
@@ -475,35 +456,29 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         changeGameViewStandard();
         moveScene = true;
 
-        AchievementLayout.setVisibility(View.VISIBLE);
-        CalendarLayout.setVisibility(View.GONE);
-        TaskLayout.setVisibility(View.GONE);
-        TaskListLayout.setVisibility(View.GONE);
-        GameLayout.setVisibility(View.GONE);
+        layerVisible(View.GONE,View.GONE,View.GONE,View.VISIBLE,View.GONE);
 
-        /*
-         * JavaScriptにゲームキャラクターのモーション操作を指示する
-         */
         stayMotion();
     }
 
     /**
      * キャラ画面表示
-     *
-     * @param view
      */
     public void openChara(View view) {
         changeGameViewSetting();
 
-        GameLayout.setVisibility(View.VISIBLE);
-        AchievementLayout.setVisibility(View.GONE);
-        CalendarLayout.setVisibility(View.GONE);
-        TaskLayout.setVisibility(View.GONE);
-        TaskListLayout.setVisibility(View.GONE);
-
+        layerVisible(View.GONE,View.GONE,View.GONE,View.GONE,View.VISIBLE);
         gameView.loadUrl("javascript:hugeBack()");
         stayMotion();
         onFoodTask(view);
+    }
+
+    private void layerVisible(int home, int taskAdd, int taskList, int achievement, int game) {
+        CalendarLayout.setVisibility(home);
+        TaskLayout.setVisibility(taskAdd);
+        TaskListLayout.setVisibility(taskList);
+        AchievementLayout.setVisibility(achievement);
+        GameLayout.setVisibility(game);
     }
 
     /**
@@ -553,12 +528,27 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     /**
      * 　予定追加開始日時選択ボタン表示
      */
+    public void selectDateStartBtn(View view) {
+        ShowDialogDateView();
+        flagDate = "timeS";
+    }
+    /**
+     * 　予定追加開始日時選択ボタン表示
+     */
     public void selectTimeStartBtn(View view) {
         ShowDialogTimeView();
         flagTime = "timeS";
-        flagDate = "timeS";
     }
 
+
+    /**
+     * 予定追加終了日時選択ボタン表示
+     */
+    public void selectDateEndBtn(View view) {
+        ShowDialogDateView();
+        flagDate = "timeE";
+
+    }
 
     /**
      * 予定追加終了日時選択ボタン表示
@@ -566,7 +556,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void selectTimeEndBtn(View view) {
         ShowDialogTimeView();
         flagTime = "timeE";
-        flagDate = "timeE";
 
     }
 
@@ -1065,11 +1054,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getWritableDatabase();
 
         int i = Arrays.asList(idList).indexOf(viewId);
-//        for (int a = 0;a < idList.length;a++){
-//            Log.d("dubug","リスト出力ID ￥＝"+idList[a]);
-//        }
-//        Log.d("dubug","idlistの格納インデックス番号 ￥＝"+i);
-//        Log.d("dubug","おやID ￥＝"+viewId);
         db.delete("taskdb", "_id = " + i, null);
 
 //        Log.d("dubug","削除成功判定ID ￥＝"+ewt);
@@ -1117,26 +1101,22 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * 時刻ダイアログ設定
-     */
-    /**
      * 時刻セット
      */
     @SuppressLint("DefaultLocale")
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minu) {
-        if (flagTime == "timeE") {
+        if (Objects.equals(flagTime, "timeE")) {
             timeE.setText(String.format("%02d時%02d分", hour, minu));
-        } else if (flagTime == "timeS") {
+        } else if (Objects.equals(flagTime, "timeS")) {
             timeS.setText(String.format("%02d時%02d分", hour, minu));
-        } else if (flagTime == "timeSS") {
+        } else if (Objects.equals(flagTime, "timeSS")) {
             TextView startHours = findViewById(taskLayoutNum[taskSetting][3]);
             TextView startMin = findViewById(taskLayoutNum[taskSetting][4]);
 
-
             startHours.setText(String.format("%02d", hour));
             startMin.setText(String.format("%02d", minu));
-        } else if (flagTime == "timeEE") {
+        } else if (Objects.equals(flagTime, "timeEE")) {
             TextView endHours = findViewById(taskLayoutNum[taskSetting][7]);
             TextView endMin = findViewById(taskLayoutNum[taskSetting][8]);
 
@@ -1154,11 +1134,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @SuppressLint("DefaultLocale")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        if (flagDate == "timeE") {
+        if (Objects.equals(flagDate, "timeE")) {
             dateE.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else if (flagDate == "timeS") {
+        } else if (Objects.equals(flagDate, "timeS")) {
             dateS.setText(String.format("%d年%02d月%02d日", year, month + 1, dayOfMonth));
-        } else if (flagDate == "timeSS") {
+        } else if (Objects.equals(flagDate, "timeSS")) {
             TextView yearH = findViewById(taskLayoutNum[taskSetting][9]);
             TextView startMonth = findViewById(taskLayoutNum[taskSetting][1]);
             TextView startDay = findViewById(taskLayoutNum[taskSetting][2]);
@@ -1166,7 +1146,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             yearH.setText(String.format("%d", year));
             startMonth.setText(String.format("%02d", month + 1));
             startDay.setText(String.format("%02d", dayOfMonth));
-        } else if (flagDate == "timeEE") {
+        } else if (Objects.equals(flagDate, "timeEE")) {
             TextView endMonth = findViewById(taskLayoutNum[taskSetting][5]);
             TextView endDay = findViewById(taskLayoutNum[taskSetting][6]);
 
@@ -1194,8 +1174,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 餌（予定）一覧画面表示
-     *
-     * @return
      */
     private List<FoodRowData> createFoodList() {
          /*
@@ -1207,8 +1185,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Calendar c = Calendar.getInstance();
 
-        String item = String.format("%02d月%02d日", c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
-        String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        @SuppressLint("DefaultLocale") String item = String.format("%02d月%02d日", c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
+        @SuppressLint("DefaultLocale") String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
 
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
@@ -1244,8 +1222,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * 予定一件をタップ時
-     *
-     * @param view
      */
     public void checkTask(View view) {
         int id = (int) view.getTag();

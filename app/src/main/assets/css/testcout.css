@@ -179,4 +179,12 @@ img, div {
       66%  { transform: translatex(-100%)  rotate(-1turn);}
 }
 
+.kurukuru{
+  animation: kurukuru 3s linear;
+}
+@keyframes kurukuru {
+      0%  { transform: translateY(-100%) rotate(0);}
+      100%  { transform: translateY(0%) rotate(720deg)}
+}   
+
     
