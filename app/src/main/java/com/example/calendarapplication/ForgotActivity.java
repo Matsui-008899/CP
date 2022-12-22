@@ -144,6 +144,11 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             current.setError("入力してください");
         }// current.length() != 0 && current.length() == 5
+
+        if (view.getId() == R.id.fgtButton2) {
+            Intent intent = new Intent(getApplication(), SettingActivity.class);
+            startActivity(intent);
+        }
     } // Click
 
     private void updateData(EditText nnew) {

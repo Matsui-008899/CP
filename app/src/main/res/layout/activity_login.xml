@@ -24,13 +24,11 @@
         android:layout_marginStart="106dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="104dp"
-        android:layout_marginBottom="107dp"
         android:autoSizeMaxTextSize="@dimen/bootstrap_h2_text_size"
         android:autoSizeTextType="uniform"
         android:minHeight="48dp"
         app:bootstrapBrand="primary"
         app:bootstrapText="@string/pwd_title"
-        app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +38,8 @@
         android:layout_width="276dp"
         android:layout_height="69dp"
         android:layout_marginStart="67dp"
+        android:layout_marginTop="107dp"
         android:layout_marginEnd="68dp"
-        android:layout_marginBottom="52dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/pwd_enter"
@@ -51,9 +49,9 @@
         android:singleLine="true"
         android:textColorHint="#757575"
         app:bootstrapBrand="primary"
-        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:roundedCorners="true" />
 
 <!--    <EditText-->
@@ -79,15 +77,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="168dp"
-        android:layout_marginBottom="296dp"
         android:minHeight="48dp"
         app:bootstrapBrand="primary"
         app:bootstrapSize="lg"
         app:bootstrapText="@string/pwd_send"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
         app:roundedCorners="true"
         app:showOutline="true" />
 
