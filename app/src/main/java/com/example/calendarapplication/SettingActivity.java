@@ -1,5 +1,6 @@
 package com.example.calendarapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -33,7 +34,8 @@ public class SettingActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(getApplication(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
