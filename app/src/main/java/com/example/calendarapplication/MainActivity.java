@@ -161,8 +161,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //予定一覧画面
 
         /*
-        テスト：カレンダーの標識確認
-        削除予定
+        テスト：カレンダーの標識確認：削除予定
          */
         CalendarView calendar = findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(
@@ -207,22 +206,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * @return
      */
     private boolean StartGameCharaView(String chara1, String chara2, String chara3) {
-        String charaName1 = gameActivity.callCharaName(chara1);
-        String charaName2 = gameActivity.callCharaName(chara2);
-        String charaName3 = gameActivity.callCharaName(chara3);
 
             gameView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
-                    GameCharaView(chara1);
-                    if (charaName2 != null) {
-                        GameCharaView(chara2);
-                        charaCheck2=true;
-                    }
-                    if (charaName3 != null) {
-                        GameCharaView(chara3);
-                        charaCheck3=true;
-                    }
+                    AllCharaView();
                 }
             });
         return true;
@@ -243,6 +231,17 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * @return
      */
     private boolean GameCharaView(String chara) {
+        //起動済みチェック
+        if (chara=="chara1"&&charaCheck1){
+            return true;
+        }
+        if (chara=="chara2"&&charaCheck2){
+            return true;
+        }
+        if (chara=="chara3"&&charaCheck3){
+            return true;
+        }
+
         //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
         String charaName = gameActivity.callCharaName(chara);
 
@@ -250,11 +249,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
             gameView.loadUrl("javascript:setVisible('" + chara + "')");
-            gameView.loadUrl("javascript:puyon('" + chara + "')");
+            gameView.loadUrl("javascript:kurukuru('" + chara + "')");
             Log.d("debug", "表示キャラ名" + charaName);
             Log.d("debug", "表示キャラID" + chara);
+            return true;
         }
-        return true;
+        return false;
     }
 
 
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount1() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
+        int tara = random.nextInt(5) * 1000 + 20000;
         CountDownTimer cdt = new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount2() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
+        int tara = random.nextInt(5) * 1000 + 20000;
         CountDownTimer cdt = new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
@@ -357,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private void timeCount3() {
         Random random = new Random();
         //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 10000;
+        int tara = random.nextInt(5) * 1000 + 20000;
         CountDownTimer cdt = new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
@@ -398,7 +398,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * ホーム画面表示
      */
     public void openHome(View view) {
-
 
         changeGameViewStandard();
 

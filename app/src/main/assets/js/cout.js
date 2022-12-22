@@ -130,6 +130,17 @@ function papa(chara) {
   }
 }
 
+function kurukuru(chara) {
+  if (chara == 'chara1') {
+    anim(chara,motion1,'kurukuru');
+  } else if (chara == 'chara2') {
+    anim(chara,motion2,'kurukuru');
+  }else if (chara == 'chara3') {
+    anim(chara,motion3,'kurukuru');
+  }
+  window.setTimeout(purun,5000,chara);
+}
+
 function anim(chara,motion,motionName) {
   document.getElementById(chara).classList.remove(motion);
   looopAnimation(chara, motionName);

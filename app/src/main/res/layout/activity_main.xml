@@ -8,7 +8,8 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:translationZ="0dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -252,6 +253,7 @@
                 android:backgroundTint="@android:color/black"
                 android:onClick="ListTask"
                 android:text="選択" />
+
 
             <ScrollView
                 android:layout_width="match_parent"
