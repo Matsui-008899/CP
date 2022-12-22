@@ -10,28 +10,34 @@
         android:id="@+id/ImgTextView"
         android:layout_width="333dp"
         android:layout_height="73dp"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:autoSizeTextType="uniform"
         android:text="@string/img_title"
         app:bootstrapBrand="primary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/button2"
         android:layout_width="84dp"
         android:layout_height="48dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="88dp"
         android:layout_marginBottom="48dp"
-        android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="@dimen/bootstrap_h5_text_size"
+        android:autoSizeTextType="uniform"
         android:text="@string/img_send"
         app:bootstrapBrand="primary"
-        app:showOutline="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:roundedCorners="true" />
+        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/nautilus"
+        app:roundedCorners="true"
+        app:showOutline="true" />
 
     <ImageView
         android:id="@+id/imageZero"
@@ -53,11 +59,13 @@
         android:layout_height="200px"
         android:layout_row="0"
         android:layout_column="1"
+        android:layout_marginTop="124dp"
         android:src="@drawable/illustrain01_moji01"
         app:layout_column="1"
         app:layout_constraintBottom_toTopOf="@+id/imageSix"
         app:layout_constraintEnd_toStartOf="@+id/imageTwo"
         app:layout_constraintStart_toEndOf="@+id/imageZero"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView2"
         app:layout_row="0" />
 
     <ImageView
@@ -66,11 +74,13 @@
         android:layout_height="200px"
         android:layout_row="0"
         android:layout_column="2"
+        android:layout_marginTop="134dp"
         android:src="@drawable/illustrain01_moji02"
         app:layout_column="2"
         app:layout_constraintBottom_toTopOf="@+id/imageSeven"
         app:layout_constraintEnd_toStartOf="@+id/imageThree"
         app:layout_constraintStart_toEndOf="@+id/imageOne"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView3"
         app:layout_row="0" />
 
     <ImageView
@@ -79,23 +89,27 @@
         android:layout_height="76dp"
         android:layout_row="0"
         android:layout_column="3"
+        android:layout_marginTop="134dp"
         android:src="@drawable/illustrain01_moji03"
         app:layout_column="3"
         app:layout_constraintBottom_toTopOf="@+id/imageEight"
         app:layout_constraintEnd_toStartOf="@+id/imageFour"
         app:layout_constraintStart_toEndOf="@+id/imageTwo"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView3"
         app:layout_row="0" />
 
     <ImageView
         android:id="@+id/imageFour"
         android:layout_width="200px"
         android:layout_height="200px"
+        android:layout_marginTop="134dp"
         android:layout_marginEnd="14dp"
         android:src="@drawable/illustrain01_moji04"
         app:layout_column="4"
         app:layout_constraintBottom_toTopOf="@+id/imageNine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageThree"
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView3"
         app:layout_row="0" />
 
     <ImageView
@@ -204,10 +218,12 @@
         android:layout_marginStart="38dp"
         android:layout_marginTop="66dp"
         android:layout_marginEnd="6dp"
+        android:layout_marginBottom="124dp"
         android:autoSizeTextType="uniform"
         android:text="@string/img_count"
         android:textAlignment="center"
         app:bootstrapBrand="primary"
+        app:layout_constraintBottom_toTopOf="@+id/imageZero"
         app:layout_constraintEnd_toStartOf="@+id/ImgTextView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImgTextView"
@@ -220,8 +236,10 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="36dp"
+        android:layout_marginBottom="134dp"
         android:text="@string/img_count_msg"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageOne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ImgTextView2"
         app:layout_constraintTop_toBottomOf="@+id/ImgTextView" />
@@ -231,14 +249,16 @@
         android:layout_width="84dp"
         android:layout_height="48dp"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="52dp"
         android:layout_marginBottom="48dp"
-        android:autoSizeTextType="uniform"
         android:autoSizeMaxTextSize="@dimen/bootstrap_h1_text_size"
+        android:autoSizeTextType="uniform"
         android:text="@string/img_reset"
         app:bootstrapBrand="primary"
-        app:showOutline="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:roundedCorners="true" />
+        app:layout_constraintTop_toBottomOf="@+id/anomalocaris"
+        app:roundedCorners="true"
+        app:showOutline="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
