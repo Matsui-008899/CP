@@ -46,7 +46,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         // データベース
         helper = new DataBaseLogin(getApplicationContext());
+
     }
+
 
     // エラー回数
     int numError = 0;
