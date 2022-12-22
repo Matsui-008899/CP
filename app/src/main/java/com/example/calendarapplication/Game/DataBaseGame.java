@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.time.LocalDate;
-
 public class DataBaseGame extends  SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 3;
 
@@ -27,6 +25,8 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     private  static final String ACHIEVENAME = "achieveName";
     private  static final String ACHIEVECONTENT = "achieveContent";
     private  static final String ACHIEVEDATE = "achieveDate";
+    private  static final String CHECKING = "comple";
+
 
 
     private static final String SQL_CREATE_ENTRIES =
@@ -48,6 +48,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
                     _ID3 + " INTEGER PRIMARY KEY," +
                     ACHIEVENAME + " TEXT," +
                     ACHIEVECONTENT + " TEXT," +
+                    CHECKING + " INTEGER," +
                     ACHIEVEDATE + " TEXT)";
 
 
@@ -105,14 +106,15 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     }
 
     private void reCreate3(SQLiteDatabase db) {
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","");
+        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
     }
 
-    private void saveData(SQLiteDatabase db, String achiName, String achiContent, String date) {
+    private void saveData(SQLiteDatabase db, String achiName, String achiContent, String date, int i) {
         ContentValues values = new ContentValues();
         values.put("achieveName",achiName);
         values.put("achieveContent",achiContent);
         values.put("achieveDate",date);
+        values.put("comple",i);
 
         db.insert("achievedb",null,values);
     }
