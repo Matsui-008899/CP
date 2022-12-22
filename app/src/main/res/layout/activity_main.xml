@@ -91,12 +91,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapButton
                         android:id="@+id/exit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="openHome"
-                        android:text="@string/cancel" />
+                        android:text="@string/cancel"
+                        app:bootstrapBrand="primary"
+                        app:showOutline="true"
+                        app:roundedCorners="true"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -159,12 +162,15 @@
                         android:enabled="false"
                         android:textColor="@color/black"/>
 
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapButton
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:id="@+id/selectStartB"
                         android:onClick="selectTimeStartBtn"
-                        android:text="@string/SelectTime" />
+                        android:text="@string/SelectTime"
+                        app:bootstrapBrand="primary"
+                        app:showOutline="true"
+                        app:roundedCorners="true"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -202,12 +208,15 @@
                         android:enabled="false"
                         android:textColor="@color/black" />
 
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapButton
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:id="@+id/selectEndB"
                         android:onClick="selectTimeEndBtn"
-                        android:text="@string/SelectTime" />
+                        android:text="@string/SelectTime"
+                        app:bootstrapBrand="primary"
+                        app:showOutline="true"
+                        app:roundedCorners="true"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -215,12 +224,15 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.beardedhen.androidbootstrap.BootstrapButton
                         android:id="@+id/set"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:onClick="selectTaskSetBtn"
-                        android:text="@string/taskAddBtn" />
+                        android:text="@string/taskAddBtn"
+                        app:bootstrapBrand="primary"
+                        app:showOutline="true"
+                        app:roundedCorners="true"/>
                 </LinearLayout>
         </LinearLayout>
 
@@ -230,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             >
 
             <Space
@@ -245,13 +257,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center|top" />
 
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/listMonthSelectBtn"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:backgroundTint="@android:color/black"
                 android:onClick="ListTask"
-                android:text="選択" />
+                android:text="選択"
+                app:bootstrapBrand="primary"
+                app:showOutline="true"
+                app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/black"-->
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -289,12 +303,15 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/debugSetDataBase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="test"
-                android:onClick="dataSet"/>
+                android:onClick="dataSet"
+                app:bootstrapBrand="primary"
+                app:showOutline="true"
+                app:roundedCorners="true"/>
 
 
         </LinearLayout>
@@ -363,13 +380,16 @@
 
             <TableRow android:gravity="right">
 
-                <Button
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/buttonTaskMenu"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right|bottom"
                     android:onClick="openTaskAdd"
                     android:text="予定追加"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -380,48 +400,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <Button
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/taskBtn"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/black"
                     android:onClick="openTaskView"
-                    android:text="予定" />
+                    android:text="予定"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/black"-->
 
-                <Button
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CharaBtn"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_red_light"
                     android:onClick="openChara"
-                    android:text="キャラ" />
+                    android:text="キャラ"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/holo_red_light"-->
 
-                <Button
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/homeBtn"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/darker_gray"
                     android:onClick="openHome"
-                    android:text="HOME" />
+                    android:text="HOME"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/darker_gray"-->
 
-                <Button
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CotBtn"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_blue_light"
-                    android:text="実績" />
-                <Button
+                    android:text="実績"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/holo_blue_light"-->
+                <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/settingBtn"
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_green_light"
                     android:onClick="openSetting"
-                    android:text="設定" />
+                    android:text="設定"
+                    app:bootstrapBrand="primary"
+                    app:showOutline="true"
+                    app:roundedCorners="true"/> <!--android:backgroundTint="@android:color/holo_green_light"-->
             </TableRow>
         </TableLayout>
     </LinearLayout>

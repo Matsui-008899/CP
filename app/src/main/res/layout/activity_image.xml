@@ -6,26 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ImageActivity">
 
-    <TextView
+    <com.beardedhen.androidbootstrap.BootstrapLabel
         android:id="@+id/ImgTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="333dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:autoSizeTextType="uniform"
         android:text="@string/img_title"
-        android:textSize="30sp"
+        app:bootstrapBrand="primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="84dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="48dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="@dimen/bootstrap_h5_text_size"
         android:text="@string/img_send"
+        app:bootstrapBrand="primary"
+        app:showOutline="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:roundedCorners="true" />
 
     <ImageView
         android:id="@+id/imageZero"
@@ -154,8 +160,7 @@
         android:id="@+id/coelacanth"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toStartOf="@+id/nautilus"
         app:layout_constraintStart_toEndOf="@+id/anomalocaris"
@@ -165,7 +170,6 @@
         android:id="@+id/nautilus"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginStart="1dp"
         android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mammoth"
@@ -176,7 +180,7 @@
         android:id="@+id/mammoth"
         android:layout_width="200px"
         android:layout_height="200px"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toStartOf="@+id/smilodon"
         app:layout_constraintStart_toEndOf="@+id/nautilus"
@@ -193,26 +197,28 @@
         app:layout_constraintStart_toEndOf="@+id/mammoth"
         app:srcCompat="@drawable/smilodon" />
 
-    <TextView
+    <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/ImgTextView2"
         android:layout_width="67dp"
         android:layout_height="56dp"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="66dp"
         android:layout_marginEnd="6dp"
+        android:autoSizeTextType="uniform"
         android:text="@string/img_count"
         android:textAlignment="center"
-        android:textSize="48sp"
+        app:bootstrapBrand="primary"
         app:layout_constraintEnd_toStartOf="@+id/ImgTextView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImgTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/ImgTextView"
+        app:showOutline="true" />
 
     <TextView
         android:id="@+id/ImgTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="36dp"
         android:text="@string/img_count_msg"
         android:textSize="24sp"
@@ -220,15 +226,19 @@
         app:layout_constraintStart_toEndOf="@+id/ImgTextView2"
         app:layout_constraintTop_toBottomOf="@+id/ImgTextView" />
 
-    <Button
+    <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="74dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="#F44336"
+        android:layout_width="84dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="48dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMaxTextSize="@dimen/bootstrap_h1_text_size"
         android:text="@string/img_reset"
+        app:bootstrapBrand="primary"
+        app:showOutline="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:roundedCorners="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

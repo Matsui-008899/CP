@@ -40,6 +40,9 @@
     <string name="fgt_new">新しいパスワード</string>
     <string name="fgt_re">新しいパスワードを再入力</string>
     <string name="fgt_change">変更する</string>
+    <string name="fgt_back">戻る</string>
+
+    //
     <string name="taskAddBtn">予定追加</string>
     <string name="year"><u>２０２２</u></string>
 

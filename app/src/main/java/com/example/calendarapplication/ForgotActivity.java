@@ -16,12 +16,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
 public class ForgotActivity extends AppCompatActivity implements View.OnClickListener {
 
    private EditText current;
    private EditText nnew;
    private EditText re;
-   private Button fgtButton;
+   private BootstrapButton fgtButton;
+   private BootstrapButton fgtButton2;
    private DataBaseLogin helper;
 
     @Override
@@ -34,9 +37,11 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         nnew = findViewById(R.id.fgtNewPassword);
         re = findViewById(R.id.fgtRePassword);
         fgtButton = findViewById(R.id.fgtButton);
+        fgtButton2 = findViewById(R.id.fgtButton2);
 
         // リスナーをセット
         fgtButton.setOnClickListener(this);
+        fgtButton2.setOnClickListener(this);
 
         // スクショを無効化
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -139,6 +144,11 @@ public class ForgotActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             current.setError("入力してください");
         }// current.length() != 0 && current.length() == 5
+
+        if (view.getId() == R.id.fgtButton2) {
+            Intent intent = new Intent(getApplication(), SettingActivity.class);
+            startActivity(intent);
+        }
     } // Click
 
     private void updateData(EditText nnew) {

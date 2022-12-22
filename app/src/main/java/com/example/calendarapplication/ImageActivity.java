@@ -16,12 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
 public class ImageActivity extends AppCompatActivity implements View.OnClickListener{
 
     View zero, one, two, three, four, five, six, seven, eight, nine;
     View ano, coe, nau, mam, smi;
     TextView count;
-    Button button2, button3;
+    BootstrapButton button2, button3;
 
     // 配列
     String[] Varray = new String[5];
@@ -243,6 +245,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                     // リセット
                     Log.d("debug", "リセットボタン押下:");
                     Log.d("debug", "リセットします➡" + Varray[0] + "," + Varray[1] + "," + Varray[2] + "," + Varray[3] + "," + Varray[4]);
+
                     n = 0;
                     Varray[0] = null;
                     Varray[1] = null;
@@ -300,6 +303,9 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                 // リセット
                 Log.d("debug", "リセットボタン押下:");
                 Log.d("debug", "リセットします➡" + Varray[0] + "," + Varray[1] + "," + Varray[2] + "," + Varray[3] + "," + Varray[4]);
+
+                Toast.makeText(getApplicationContext(), "リセットしました", Toast.LENGTH_LONG).show();
+
                 n = 0;
                 Varray[0] = null;
                 Varray[1] = null;

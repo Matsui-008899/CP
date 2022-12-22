@@ -9,17 +9,19 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+//import android.widget.Button;
+import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
-
     private EditText password;
-    private Button button;
-    private Button buttonForgot;
+    private BootstrapButton button;
+//    private Button button;
+//    private Button buttonForgot;
     private DataBaseLogin helper;
 
 
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         // Viewの取得
         password = findViewById(R.id.password);
