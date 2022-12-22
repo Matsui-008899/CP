@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.time.LocalDate;
+
 public class DataBaseGame extends  SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 3;
 
@@ -16,8 +18,16 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     private  static final String EVOLUTION = "evolution";
 
     private  static final String TABLE_NAME2 = "evolvedb";
+    private  static final String _ID2 = "_id";
     private  static final String NAME = "evolveName";
     private  static final String ORIGIN = "originName";
+
+    private  static final String TABLE_NAME3 = "achievedb";
+    private  static final String _ID3 = "_id";
+    private  static final String ACHIEVENAME = "achieveName";
+    private  static final String ACHIEVECONTENT = "achieveContent";
+    private  static final String ACHIEVEDATE = "achieveDate";
+
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -28,13 +38,28 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
     private static final String SQL_CREATE_ENTRIES_EVOLVE =
             "CREATE TABLE " + TABLE_NAME2 + " (" +
-                    _ID + " INTEGER PRIMARY KEY," +
+                    _ID2 + " INTEGER PRIMARY KEY," +
                     NAME + " TEXT," +
                     EVOLUTION + " INTEGER," +
                     ORIGIN + " TEXT)";
 
+    private static  final String SQL_CREATE_ENTRIES_ACHIEVE =
+            "CREATE TABLE " + TABLE_NAME3 + " (" +
+                    _ID3 + " INTEGER PRIMARY KEY," +
+                    ACHIEVENAME + " TEXT," +
+                    ACHIEVECONTENT + " TEXT," +
+                    ACHIEVEDATE + " TEXT)";
+
+
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+    private static final String SQL_DELETE_ENTRIES_EVOLVE =
+            "DROP TABLE IF EXISTS " + TABLE_NAME2;
+
+    private static final String SQL_DELETE_ENTRIES_ACHIEVE =
+            "DROP TABLE IF EXISTS " + TABLE_NAME3;
+
 
     DataBaseGame(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
@@ -42,6 +67,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(
                 SQL_CREATE_ENTRIES
         );
@@ -50,10 +76,15 @@ public class DataBaseGame extends  SQLiteOpenHelper{
                 SQL_CREATE_ENTRIES_EVOLVE
         );
 
+        db.execSQL(
+                SQL_CREATE_ENTRIES_ACHIEVE
+        );
+
         reCreate(db);
         reCreate2(db);
-
+        reCreate3(db);
     }
+
 
     public void reCreate(SQLiteDatabase db) {
         saveData(db,"chara1",0,1);
@@ -71,6 +102,19 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         saveData(db,"u_pa_",0,"chara3");
         saveData(db,"u_pa_2",1,"chara3");
         saveData(db,"u_pa_",2,"chara3");
+    }
+
+    private void reCreate3(SQLiteDatabase db) {
+        saveData(db,"実績名の入力テスト","実績内容の入力テスト","");
+    }
+
+    private void saveData(SQLiteDatabase db, String achiName, String achiContent, String date) {
+        ContentValues values = new ContentValues();
+        values.put("achieveName",achiName);
+        values.put("achieveContent",achiContent);
+        values.put("achieveDate",date);
+
+        db.insert("achievedb",null,values);
     }
 
     public void saveData(SQLiteDatabase db, String name,int evolution, String origin) {
@@ -97,6 +141,12 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
         db.execSQL(
                 SQL_DELETE_ENTRIES
+        );
+        db.execSQL(
+                SQL_DELETE_ENTRIES_EVOLVE
+        );
+        db.execSQL(
+                SQL_DELETE_ENTRIES_ACHIEVE
         );
         onCreate(db);
     }

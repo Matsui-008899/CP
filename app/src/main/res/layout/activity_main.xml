@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,23 +7,22 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:translationZ="0dp"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/gameLayout"
             android:layout_width="match_parent"
             android:layout_height="90dp">
+
             <WebView
                 android:id="@+id/gameWeb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"/>
+                android:visibility="visible" />
         </LinearLayout>
 
 
@@ -60,16 +58,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/TaskView"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:text="" />-->
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/CalendarRecycleView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
                 </LinearLayout>
             </ScrollView>
 
@@ -87,142 +79,158 @@
             android:visibility="gone">
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/exit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:onClick="openHome"
+                    android:text="@string/cancel" />
+            </LinearLayout>
 
-                    <Button
-                        android:id="@+id/exit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="openHome"
-                        android:text="@string/cancel" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text="@string/title" />
+            </LinearLayout>
 
-                    <TextView android:text="@string/title"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"/>
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/taskName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:hint="@string/taskHint"
+                    android:inputType="text"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/testVIew"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/StartDayStartTime" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dateS"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="selectDateStartBtn"
+                    android:text="2022年12月22日"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-                    <EditText
-                        android:id="@+id/taskName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:inputType="text"
-                        android:textSize="14sp"
-                        android:hint="@string/taskHint"/>
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" ： " />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/timeS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="selectTimeStartBtn"
+                    android:text="10時25分"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/EndDayEndTime" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dateE"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="selectDateEndBtn"
+                    android:text="2022年12月22日"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/testVIew"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/StartDayStartTime" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:text=" ： " />
 
-                    <EditText
-                        android:id="@+id/dateS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:textSize="16sp"
-                        android:enabled="false"
-                        android:textColor="@color/black"/>
-
-                    <EditText
-                        android:id="@+id/timeS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"
-                        android:textSize="16sp"
-                        tools:ignore="DuplicateIds"
-                        android:enabled="false"
-                        android:textColor="@color/black"/>
-
-                    <Button
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:id="@+id/selectStartB"
-                        android:onClick="selectTimeStartBtn"
-                        android:text="@string/SelectTime" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/timeE"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:onClick="selectTimeEndBtn"
+                    android:text="10時25分"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/EndDayEndTime" />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="通知："/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"/>
 
-                    <EditText
-                        android:id="@+id/dateE"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="date"
-                        android:textSize="16sp"
-                        android:enabled="false"
-                        android:textColor="@color/black" />
+            </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/timeE"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"
-                        android:textSize="16sp"
-                        tools:ignore="DuplicateIds"
-                        android:enabled="false"
-                        android:textColor="@color/black" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                    <Button
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:id="@+id/selectEndB"
-                        android:onClick="selectTimeEndBtn"
-                        android:text="@string/SelectTime" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/set"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:onClick="selectTaskSetBtn"
-                        android:text="@string/taskAddBtn" />
-                </LinearLayout>
+                <Button
+                    android:id="@+id/set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:onClick="selectTaskSetBtn"
+                    android:text="@string/taskAddBtn" />
+            </LinearLayout>
         </LinearLayout>
 
         <!--        予定一覧レイアウト-->
@@ -231,13 +239,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
-            >
+            android:visibility="gone">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
-
 
 
             <Spinner
@@ -269,13 +275,14 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/RecycleView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </ScrollView>
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="80dp"/>
+                android:layout_height="80dp" />
 
         </LinearLayout>
 
@@ -285,18 +292,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:onClick="openAchievement">
-
+            android:visibility="visible">
             <Space
+                android:id="@+id/tintin3"
                 android:layout_width="match_parent"
-                android:layout_height="90dp" />
-            <Button
-                android:id="@+id/debugSetDataBase"
-                android:layout_width="wrap_content"
+                android:layout_height="100dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="test"
-                android:onClick="dataSet"/>
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="実績一覧"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -311,13 +326,12 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                />
-<!--            <WebView-->
-<!--                android:id="@+id/gameSetWeb"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="140dp"-->
-<!--                android:visibility="visible"/>-->
+                android:layout_height="200dp" />
+            <!--            <WebView-->
+            <!--                android:id="@+id/gameSetWeb"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="140dp"-->
+            <!--                android:visibility="visible"/>-->
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -333,22 +347,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="達成した予定をタップしろ"/>
+                        android:text="達成した予定をタップしろ" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodRecycleView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </ScrollView>
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="90dp"/>
+                android:layout_height="90dp" />
 
 
         </LinearLayout>
-
 
 
     </FrameLayout>
@@ -414,8 +428,10 @@
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:onClick="openAchievement"
                     android:backgroundTint="@android:color/holo_blue_light"
                     android:text="実績" />
+
                 <Button
                     android:id="@+id/settingBtn"
                     android:layout_width="200dp"
