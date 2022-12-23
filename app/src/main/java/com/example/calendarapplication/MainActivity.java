@@ -45,6 +45,8 @@ import com.example.calendarapplication.Food.FoodRowData;
 import com.example.calendarapplication.Game.GameActivity;
 import com.example.calendarapplication.TimeFragment.DatePickerFragment;
 import com.example.calendarapplication.TimeFragment.TimePickerFragment;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -205,12 +207,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     private void StartGameCharaView() {
 
-            gameView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    AllCharaView();
-                }
-            });
+        gameView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                AllCharaView();
+            }
+        });
     }
 
     /**
@@ -227,13 +229,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     private boolean GameCharaView(String chara) {
         //起動済みチェック
-        if (Objects.equals(chara, "chara1") &&charaCheck1){
+        if (Objects.equals(chara, "chara1") && charaCheck1) {
             return true;
         }
-        if (Objects.equals(chara, "chara2") &&charaCheck2){
+        if (Objects.equals(chara, "chara2") && charaCheck2) {
             return true;
         }
-        if (Objects.equals(chara, "chara3") &&charaCheck3){
+        if (Objects.equals(chara, "chara3") && charaCheck3) {
             return true;
         }
 
@@ -375,6 +377,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         }.start();
 
     }
+
     /**
      * キーボード非表示（フォーカス外タッチ時）
      */
@@ -395,13 +398,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         moveScene = true;
 
-        layerVisible(View.VISIBLE,View.GONE,View.GONE,View.GONE,View.GONE);
+        layerVisible(View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE);
 
         //背景変更
         gameView.loadUrl("javascript:smallBack()");
         stayMotion();
     }
-
 
 
     /**
@@ -423,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
         dateE.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
-        layerVisible(View.GONE,View.VISIBLE,View.GONE,View.GONE,View.GONE);
+        layerVisible(View.GONE, View.VISIBLE, View.GONE, View.GONE, View.GONE);
 
         gameView.loadUrl("javascript:huhouShinnyuu()");
         stayMotion();
@@ -437,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         changeGameViewStandard();
         moveScene = true;
 
-        layerVisible(View.GONE,View.GONE,View.VISIBLE,View.GONE,View.GONE);
+        layerVisible(View.GONE, View.GONE, View.VISIBLE, View.GONE, View.GONE);
 
         /*
          * JavaScriptにゲームキャラクターのモーション操作を指示する
@@ -456,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         changeGameViewStandard();
         moveScene = true;
 
-        layerVisible(View.GONE,View.GONE,View.GONE,View.VISIBLE,View.GONE);
+        layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 
         stayMotion();
     }
@@ -467,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openChara(View view) {
         changeGameViewSetting();
 
-        layerVisible(View.GONE,View.GONE,View.GONE,View.GONE,View.VISIBLE);
+        layerVisible(View.GONE, View.GONE, View.GONE, View.GONE, View.VISIBLE);
         gameView.loadUrl("javascript:hugeBack()");
         stayMotion();
         onFoodTask(view);
@@ -486,10 +488,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     private void stayMotion() {
         gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
-        if (charaCheck2){
+        if (charaCheck2) {
             gameView.loadUrl("javascript:puyon('" + "chara2" + "')");
         }
-        if (charaCheck3){
+        if (charaCheck3) {
             gameView.loadUrl("javascript:puyon('" + "chara3" + "')");
         }
     }
@@ -532,6 +534,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         ShowDialogDateView();
         flagDate = "timeS";
     }
+
     /**
      * 　予定追加開始日時選択ボタン表示
      */
@@ -636,14 +639,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     public void selectTaskSetBtn(View view) {
         //データ挿入
-        InsertTask();
+        InsertTask(view);
     }
 
     /**
      * DBインサート文
      */
     @SuppressLint("DefaultLocale")
-    private void InsertTask() {
+    private void InsertTask(View view) {
         LinearLayout CalendarLayout = findViewById(R.id.layerCalendar);
         LinearLayout TaskLayout = findViewById(R.id.layerTask);
 
@@ -659,6 +662,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         String timeSS = timeS.getText().toString();
         String dateES = dateE.getText().toString();
         String timeES = timeE.getText().toString();
+
+        TextInputLayout emailField = findViewById(R.id.emailField);
 
 
         int test = dateSS.compareTo(dateES);
@@ -678,6 +683,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     TextUtils.isEmpty(timeSS) ||
                     TextUtils.isEmpty(dateES) ||
                     TextUtils.isEmpty(timeES)) {
+                emailField.setError("予定を入力してください");
+
+                dateE.setError("ころすろぞ");
+
+
                 Log.d("debug", "null値判定,いずれかの値が空欄です");
             } else {
                 values.put("startday", dateSS);
@@ -690,6 +700,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 db.insert("taskdb", null, values);
                 CalendarLayout.setVisibility(View.VISIBLE);
                 TaskLayout.setVisibility(View.INVISIBLE);
+                Snackbar.make(view, taskNameS + "が追加されました", Snackbar.LENGTH_LONG).show();
 
                 taskName.setText("");
                 Calendar c = Calendar.getInstance();

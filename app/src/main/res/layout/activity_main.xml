@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="10">
 
             <Space
@@ -82,7 +82,7 @@
             android:background="@drawable/border"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,29 +100,29 @@
                     app:showOutline="true" />
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailField"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/title" />
-            </LinearLayout>
+                    android:hint="@string/taskHint">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/taskName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:hint="　　　　　　　　　　　　"
+                        android:inputType="text"
+                        android:textSize="17sp" />
 
-                <EditText
-                    android:id="@+id/taskName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:hint="@string/taskHint"
-                    android:inputType="text"
-                    android:textSize="17sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -304,7 +304,6 @@
             android:id="@+id/layerAchievement"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="openAchievement"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -312,15 +311,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
 
-            <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/debugSetDataBase"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="dataSet"
-                android:text="test"
-                app:bootstrapBrand="primary"
-                app:roundedCorners="true"
-                app:showOutline="true" />
+            <!--            <com.beardedhen.androidbootstrap.BootstrapButton-->
+            <!--                android:id="@+id/debugSetDataBase"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:onClick="dataSet"-->
+            <!--                android:text="test"-->
+            <!--                app:bootstrapBrand="primary"-->
+            <!--                app:roundedCorners="true"-->
+            <!--                app:showOutline="true" />-->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/achieveList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/achieveRecycleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </ScrollView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
 
 
         </LinearLayout>
@@ -446,6 +467,7 @@
                     android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:onClick="openAchievement"
                     android:text="実績"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
