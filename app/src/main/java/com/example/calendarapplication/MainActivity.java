@@ -1266,8 +1266,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         db.update("taskdb", values, "_id = " + id, null);
         Log.d("debug", "削除成功ID=" + id);
 
-        String message = "レベルアップ";
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
         //リスト更新
         onFoodTask(view);

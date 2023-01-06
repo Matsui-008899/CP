@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.calendarapplication.AchieveView.AchieveViewRowData;
 import com.example.calendarapplication.MyApplication;
@@ -105,6 +106,11 @@ public class GameActivity {
         //DBにレベルを反映
         dbInsert.update("charadb", values, "_id = " + cursor.getString(0), null);
 
+
+        String message = cursor.getString(1)+"がレベルアップ：現在レベル"+levelSta;
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
+
+
         //進化：塁化キャラチェック
         boolean visibleChara = checkEvolve(cursor.getString(0), cursor.getString(1), levelSta, Integer.parseInt(cursor.getString(3)));
         Log.d("debug", "現在レベル"+levelSta+ "名前："+cursor.getString(1)+ "進化段階："+Integer.parseInt(cursor.getString(3)));
@@ -117,11 +123,6 @@ public class GameActivity {
 
     /**
      * キャラ進化＆キャラ追加判定
-     * @param id　キャラID
-     * @param charaName　キャラネーム
-     * @param level　レベル
-     * @param evolveLevel　進化段階
-     * @return　進化orキャラ追加
      */
     private boolean checkEvolve(String id, String charaName, int level, int evolveLevel) {
         SQLiteDatabase db = dbGame.getWritableDatabase();

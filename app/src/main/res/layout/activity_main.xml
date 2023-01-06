@@ -310,6 +310,10 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="解放済み実績一覧"/>
 
             <!--            <com.beardedhen.androidbootstrap.BootstrapButton-->
             <!--                android:id="@+id/debugSetDataBase"-->
@@ -322,7 +326,8 @@
             <!--                app:showOutline="true" />-->
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:id="@+id/achieveList"
@@ -337,6 +342,7 @@
 
                 </LinearLayout>
             </ScrollView>
+
 
             <Space
                 android:layout_width="match_parent"
