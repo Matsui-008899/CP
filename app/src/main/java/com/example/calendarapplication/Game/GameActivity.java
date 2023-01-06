@@ -5,8 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.calendarapplication.AchieveView.AchieveViewRowData;
 import com.example.calendarapplication.MyApplication;
 
+import java.util.List;
 import java.util.Random;
 
 public class GameActivity {
@@ -262,5 +264,44 @@ public class GameActivity {
             return null;
         }
 
+    }
+
+
+    public List<AchieveViewRowData> listAchieve(List<AchieveViewRowData> dataset) {
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "achievedb",
+                new String[]{"achieveName, achieveContent"},
+                "comple = 1",
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        Log.d("debug","総合実績件数"+cursor.getCount());
+
+        for (int i = 0; i < cursor.getCount(); i++){
+            AchieveViewRowData data = new AchieveViewRowData();
+
+            data.setAchieveName(cursor.getString(0));
+            data.setAchieveInfo(cursor.getString(1));
+
+            dataset.add(data);
+            cursor.moveToNext();
+            Log.d("debug","実績処理実行");
+        }
+
+        cursor.close();
+
+        return dataset;
+    }
+
+    public void resetAchieve() {
+        SQLiteDatabase db = dbGame.getWritableDatabase();
+        db.delete("achievedb", null, null);
+        dbGame.reCreate3(db);
     }
 }

@@ -26,6 +26,12 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat {
             return true;
         });
 
+        Preference buttonA = findPreference("setAchieve");
+        buttonA.setOnPreferenceClickListener(preference -> {
+            gameActivity.resetAchieve();
+            return true;
+        });
+
         Preference button2 = findPreference("showGameDataBase");
         button2.setOnPreferenceClickListener(preference -> {
             gameActivity.gameSetting();

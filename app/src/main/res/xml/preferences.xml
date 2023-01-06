@@ -15,6 +15,11 @@
             android:title="ゲームDB初期化"
             android:summary="DB内のキャラクター情報の再設定をします" >
         </Preference>
+        <Preference
+            android:key="setAchieve"
+            android:title="実績初期化"
+            android:summary="実績の取得状況をリセット" >
+        </Preference>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="デバッグ用">
@@ -33,6 +38,7 @@
             android:title="予定追加"
             android:summary="１０件分の予定を追加" >
         </Preference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

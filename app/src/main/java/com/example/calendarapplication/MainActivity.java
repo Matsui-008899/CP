@@ -36,6 +36,8 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.calendarapplication.AchieveView.AchieveRecyclerViewAdapter;
+import com.example.calendarapplication.AchieveView.AchieveViewRowData;
 import com.example.calendarapplication.CalendarTaskView.CTaskRecyclerViewAdapter;
 import com.example.calendarapplication.CalendarTaskView.CTaskViewRowData;
 import com.example.calendarapplication.Casareal.CasarealRecycleViewAdapter;
@@ -460,8 +462,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 
+        //キャラクター待機モーション
         stayMotion();
+
+        //実績一覧表示処理
+        onAchieveView(view);
     }
+
+
 
     /**
      * キャラ画面表示
@@ -1170,7 +1178,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
     /**
-     * キャラクター画面
+     * キャラクター画面（以下キャラ画面）
      */
     public void onFoodTask(View view) {
         RecyclerView rv = findViewById(R.id.foodRecycleView);
@@ -1184,7 +1192,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * 餌（予定）一覧画面表示
+     * キャラ画面表示
      */
     private List<FoodRowData> createFoodList() {
          /*
@@ -1196,8 +1204,14 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Calendar c = Calendar.getInstance();
 
-        @SuppressLint("DefaultLocale") String item = String.format("%02d月%02d日", c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
-        @SuppressLint("DefaultLocale") String item2 = String.format("%02d月%02d日", c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        String item;
+        String item2;
+        item = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR),c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
+        if(c.get(Calendar.MONTH)==0){
+            item2 = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR)-1,12, c.get(Calendar.DATE));
+        }else {
+            item2 = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR),c.get(Calendar.MONTH), c.get(Calendar.DATE));
+        }
 
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
@@ -1205,7 +1219,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 tableName,
                 new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb, levelCheck},
                 "endDay <= ? and endDay > ? and level = 0",
-                new String[]{"2022年" + item, "2022年" + item2},
+                new String[]{ item, item2},
                 null,
                 null,
                 "startDay"
@@ -1232,6 +1246,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
+     * キャラ画面
      * 予定一件をタップ時
      */
     public void checkTask(View view) {
@@ -1258,5 +1273,23 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         onFoodTask(view);
     }
 
+    private void onAchieveView(View view) {
+        RecyclerView rv = findViewById(R.id.achieveRecycleView);
+        AchieveRecyclerViewAdapter adapter = new AchieveRecyclerViewAdapter(this.createAchieveList());
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setAdapter(adapter);
+    }
+
+    private List<AchieveViewRowData> createAchieveList() {
+        List<AchieveViewRowData> dataset = new ArrayList<>();
+
+        dataset = gameActivity.listAchieve(dataset);
+
+        return dataset;
+    }
 
 }
