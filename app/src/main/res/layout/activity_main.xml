@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:weightSum="10">
 
             <Space
@@ -258,11 +258,21 @@
                 android:layout_height="90dp" />
 
 
-            <Spinner
-                android:id="@+id/spinner"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center|top" />
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|top" />
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|top" />
+            </LinearLayout>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/listMonthSelectBtn"
@@ -305,7 +315,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:layout_width="match_parent"

@@ -10,6 +10,9 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 public  class TimePickerFragment extends DialogFragment{
+    public boolean check = false;
+    public int setHour;
+    public int setMinute;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -18,8 +21,20 @@ public  class TimePickerFragment extends DialogFragment{
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
+        if (check){
+            hour = setHour;
+            minute = setMinute;
+            check = false;
+        }
+
         // Create a new instance of TimePickerDialog and return it
         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), (TimePickerDialog.OnTimeSetListener)getActivity(), hour, minute, DateFormat.is24HourFormat(getActivity()));
         return timePickerDialog;
+    }
+
+    public void selected(int hou,int min){
+        setHour = hou;
+        setMinute = min;
+        check = true;
     }
 }

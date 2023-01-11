@@ -2,7 +2,7 @@ package com.example.calendarapplication.Casareal;
 
 public class CasarealRowData {
     private String Year;
-
+    private  String endYear;
 
     private String startDay;
     private String startTime;
@@ -19,6 +19,7 @@ public class CasarealRowData {
     private int idETime1;
     private int idETime2;
     private int idYear;
+    private int idEndYear;
     private int idTask;
 
     public String SDay1;
@@ -229,5 +230,21 @@ public class CasarealRowData {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public int getIdEndYear() {
+        return idEndYear;
+    }
+
+    public void setIdEndYear(int idEndYear) {
+        this.idEndYear = idEndYear;
+    }
+
+    public String getEndYear() {
+        return endYear;
+    }
+
+    public void setEndYear(String endYear) {
+        this.endYear = endYear;
     }
 }

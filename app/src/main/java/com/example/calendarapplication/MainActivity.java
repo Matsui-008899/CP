@@ -73,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
 
+    private  final  String[] spinnerYearItems = {
+            "2020年","2021年","2022年","2023年"
+    };
+
     private final String[] spinnerItems = {"01月", "02月", "03月", "04月", "05月", "06月",
             "07月", "08月", "09月", "10月", "11月", "12月"};
 
@@ -157,6 +161,17 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         Spinner spinner = findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
+
+        //年選択プルダウン設定
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                spinnerYearItems
+        );
+        adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        Spinner spinner2 = findViewById(R.id.spinner2);
+        spinner2.setAdapter(adapter2);
+
 
         //月日ごとに呼び出し済みかどうかのチェック
         checkLoad = new boolean[13];
@@ -539,7 +554,21 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 　予定追加開始日時選択ボタン表示
      */
     public void selectDateStartBtn(View view) {
-        ShowDialogDateView();
+        TextView origin = findViewById(R.id.dateS);
+
+        int year = Integer.parseInt(origin.getText().toString().substring(
+                0,origin.getText().toString().indexOf("年")
+        ));
+
+        int month = Integer.parseInt(origin.getText().toString().substring(
+                origin.getText().toString().indexOf("年")+1,origin.getText().toString().indexOf("月")
+        ));
+
+        int day = Integer.parseInt(origin.getText().toString().substring(
+                origin.getText().toString().indexOf("月")+1,origin.getText().toString().indexOf("日")
+        ));
+
+        ShowDialogDateView(year,month,day);
         flagDate = "timeS";
     }
 
@@ -547,7 +576,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 　予定追加開始日時選択ボタン表示
      */
     public void selectTimeStartBtn(View view) {
-        ShowDialogTimeView();
+        TextView origin = findViewById(R.id.timeS);
+        int hour = Integer.parseInt(origin.getText().toString().substring(0,origin.getText().toString().indexOf("時")));
+
+        int min = Integer.parseInt(origin.getText().toString().substring(origin.getText().toString().indexOf("時")+1,origin.getText().toString().indexOf("分")));
+
+        ShowDialogTimeView(hour,min);
         flagTime = "timeS";
     }
 
@@ -556,7 +590,20 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定追加終了日時選択ボタン表示
      */
     public void selectDateEndBtn(View view) {
-        ShowDialogDateView();
+        TextView origin = findViewById(R.id.dateE);
+
+        int year = Integer.parseInt(origin.getText().toString().substring(
+                0,origin.getText().toString().indexOf("年")
+        ));
+
+        int month = Integer.parseInt(origin.getText().toString().substring(
+                origin.getText().toString().indexOf("年")+1,origin.getText().toString().indexOf("月")
+        ));
+
+        int day = Integer.parseInt(origin.getText().toString().substring(
+                origin.getText().toString().indexOf("月")+1,origin.getText().toString().indexOf("日")
+        ));
+        ShowDialogDateView(year, month, day);
         flagDate = "timeE";
 
     }
@@ -565,7 +612,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 予定追加終了日時選択ボタン表示
      */
     public void selectTimeEndBtn(View view) {
-        ShowDialogTimeView();
+        TextView origin = findViewById(R.id.timeE);
+        int hour = Integer.parseInt(origin.getText().toString().substring(0,origin.getText().toString().indexOf("時")));
+
+        int min = Integer.parseInt(origin.getText().toString().substring(origin.getText().toString().indexOf("時")+1,origin.getText().toString().indexOf("分")));
+
+        ShowDialogTimeView(hour, min);
         flagTime = "timeE";
 
     }
@@ -584,7 +636,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
         Log.d("pepe", "" + taskSetting);
-        ShowDialogTimeView();
+
+        LinearLayout lv = (LinearLayout) view;
+
+        TextView hou = (TextView) lv.getChildAt(0);
+
+        TextView mi = (TextView) lv.getChildAt(2);
+
+
+        int hour = Integer.parseInt(hou.getText().toString());
+
+        int min = Integer.parseInt(mi.getText().toString());
+
+        ShowDialogTimeView(hour, min);
         flagTime = "timeSS";
     }
 
@@ -600,9 +664,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
+        LinearLayout lv = (LinearLayout)view;
+        TextView yea = (TextView) lv.getChildAt(0);
+        TextView mont = (TextView) lv.getChildAt(2);
+        TextView da = (TextView) lv.getChildAt(4);
 
-        Log.d("pepe", "" + taskSetting);
-        ShowDialogDateView();
+        int year = Integer.parseInt(yea.getText().toString());
+        int month = Integer.parseInt(mont.getText().toString());
+        int day = Integer.parseInt(da.getText().toString());
+
+        ShowDialogDateView(year, month, day);
         flagDate = "timeSS";
     }
 
@@ -619,7 +690,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
 
-        ShowDialogDateView();
+//        ShowDialogDateView(year, month, day);
         flagDate = "timeEE";
 
     }
@@ -636,8 +707,18 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         taskSetting = Arrays.asList(idList).indexOf(viewPPare.getId());
 
+        LinearLayout lv = (LinearLayout) view;
 
-        ShowDialogTimeView();
+        TextView hou = (TextView) lv.getChildAt(0);
+
+        TextView mi = (TextView) lv.getChildAt(2);
+
+
+        int hour = Integer.parseInt(hou.getText().toString());
+
+        int min = Integer.parseInt(mi.getText().toString());
+
+        ShowDialogTimeView(hour, min);
         flagTime = "timeEE";
 
     }
@@ -833,6 +914,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         SQLiteDatabase db = selectDB.getReadableDatabase();
         Spinner spinner = findViewById(R.id.spinner);
         String item = (String) spinner.getSelectedItem();
+
+
+        Spinner spinner2 = findViewById(R.id.spinner2);
+        String item2 = (String) spinner2.getSelectedItem();
+
         int id;
 
         //指定した月を条件にDBからその月の予定を一件ずつ呼び出す
@@ -840,7 +926,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 tableName,
                 new String[]{idName, startDayName, startTimeName, endDayName, endTimeName, taskNameDb},
                 "startDay LIKE ?",
-                new String[]{"2022年" + item + "%"},
+                new String[]{item2 + item + "%"},
                 null,
                 null,
                 "startDay"
@@ -904,6 +990,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             //例 ｜２０２２｜年１０月１１日
             data.setYear(cursor.getString(1).substring(0, cursor.getString(1).indexOf("年")));
+
+            //例 ｜２０２２｜年１０月１１日
+            data.setEndYear(cursor.getString(3).substring(0, cursor.getString(3).indexOf("年")));
 
             //予定内容
             data.setTaskName(cursor.getString(5));
@@ -1081,40 +1170,33 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * 時刻・月日ダイアログ表示
-     */
-    public void ShowDialogView() {
-        /*
-          newFragment.show(getSupportFragmentManager(), "timePicker");
-         */
-        TimePickerFragment timePicker = new TimePickerFragment();
-        timePicker.show(getSupportFragmentManager(), "timePicker");
-        DatePickerFragment datePicker = new DatePickerFragment();
-        datePicker.show(getSupportFragmentManager(), "datePicker");
-
-    }
-
-
-    /**
      * 月日ダイアログ表示
+     * @param year
+     * @param month
+     * @param day
      */
-    public void ShowDialogDateView() {
+    public void ShowDialogDateView(int year, int month, int day) {
         /*
           newFragment.show(getSupportFragmentManager(), "timePicker");
          */
         DatePickerFragment datePicker = new DatePickerFragment();
+        datePicker.selected(year,month,day);
         datePicker.show(getSupportFragmentManager(), "datePicker");
 
     }
 
     /**
      * 時刻ダイアログ表示
+     * @param hour
+     * @param min
      */
-    public void ShowDialogTimeView() {
+    public void ShowDialogTimeView(int hour, int min) {
         /*
           newFragment.show(getSupportFragmentManager(), "timePicker");
          */
+        Log.d("ddd",hour+"**"+min);
         TimePickerFragment timePicker = new TimePickerFragment();
+        timePicker.selected(hour,min);
         timePicker.show(getSupportFragmentManager(), "timePicker");
 
     }
