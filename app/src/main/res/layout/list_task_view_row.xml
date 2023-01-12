@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/UpDateSDayLayout"
@@ -390,15 +390,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <Button
             android:id="@+id/viewId"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:textStyle="bold"
             android:textSize="13dp"
             android:text="編集"
-            android:onClick="selectUpdate"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:onClick="selectUpdate"/>
     </LinearLayout>
     <Space
         android:layout_width="match_parent"

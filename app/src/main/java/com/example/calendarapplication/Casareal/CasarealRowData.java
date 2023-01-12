@@ -10,17 +10,6 @@ public class CasarealRowData {
     private String endTime;
     private String taskName;
     private int id;
-    private int idSDay1;
-    private int idSDay2;
-    private int idSTime1;
-    private int idSTime2;
-    private int idEDay1;
-    private int idEDay2;
-    private int idETime1;
-    private int idETime2;
-    private int idYear;
-    private int idEndYear;
-    private int idTask;
 
     public String SDay1;
     public String SDay2;
@@ -53,22 +42,6 @@ public class CasarealRowData {
 
     public void setEDay2(String EDay2) {
         this.EDay2 = EDay2;
-    }
-
-    public int getIdEDay1() {
-        return idEDay1;
-    }
-
-    public void setIdEDay1(int idEDay1) {
-        this.idEDay1 = idEDay1;
-    }
-
-    public int getIdEDay2() {
-        return idEDay2;
-    }
-
-    public void setIdEDay2(int idEDay2) {
-        this.idEDay2 = idEDay2;
     }
 
     public String getYear() {
@@ -136,69 +109,6 @@ public class CasarealRowData {
         this.id = id;
     }
 
-    public int getIdSDay1() {
-        return idSDay1;
-    }
-
-    public void setIdSDay1(int idSDay1) {
-        this.idSDay1 = idSDay1;
-    }
-
-    public int getIdSDay2() {
-        return idSDay2;
-    }
-
-    public void setIdSDay2(int idSDay2) {
-        this.idSDay2 = idSDay2;
-    }
-
-    public int getIdSTime1() {
-        return idSTime1;
-    }
-
-    public void setIdSTime1(int idSTime1) {
-        this.idSTime1 = idSTime1;
-    }
-
-    public int getIdSTime2() {
-        return idSTime2;
-    }
-
-    public void setIdSTime2(int idSTime2) {
-        this.idSTime2 = idSTime2;
-    }
-
-    public int getIdETime1() {
-        return idETime1;
-    }
-
-    public void setIdETime1(int idETime1) {
-        this.idETime1 = idETime1;
-    }
-
-    public int getIdETime2() {
-        return idETime2;
-    }
-
-    public void setIdETime2(int idETime2) {
-        this.idETime2 = idETime2;
-    }
-
-    public int getIdYear() {
-        return idYear;
-    }
-
-    public void setIdYear(int idYear) {
-        this.idYear = idYear;
-    }
-
-    public int getIdTask() {
-        return idTask;
-    }
-
-    public void setIdTask(int idTask) {
-        this.idTask = idTask;
-    }
 
     public String getStartDay() {
         return startDay;
@@ -230,14 +140,6 @@ public class CasarealRowData {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-    }
-
-    public int getIdEndYear() {
-        return idEndYear;
-    }
-
-    public void setIdEndYear(int idEndYear) {
-        this.idEndYear = idEndYear;
     }
 
     public String getEndYear() {
