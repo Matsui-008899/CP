@@ -3,10 +3,13 @@ package com.example.calendarapplication.Game;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.calendarapplication.AchieveView.AchieveViewRowData;
+import com.example.calendarapplication.DataBaseLogin;
+import com.example.calendarapplication.DbImg;
 import com.example.calendarapplication.MyApplication;
 
 import java.util.List;
@@ -18,10 +21,12 @@ public class GameActivity {
     public int charaMany;
 
 
+
     public void createDataBase() {
         Log.d("debug", "くぎゅう");
 
         dbGame = new DataBaseGame(MyApplication.getAppContext());
+
         Log.d("debug", "通貨判定");
 
         charaMany = checkCharaMany();
@@ -273,8 +278,8 @@ public class GameActivity {
 
         Cursor cursor = db.query(
                 "achievedb",
-                new String[]{"achieveName, achieveContent"},
-                "comple = 1",
+                new String[]{"achieveName, achieveContent, comple"},
+                null,
                 null,
                 null,
                 null,
@@ -289,6 +294,13 @@ public class GameActivity {
 
             data.setAchieveName(cursor.getString(0));
             data.setAchieveInfo(cursor.getString(1));
+            if (Integer.parseInt(cursor.getString(2)) == 0){
+                data.setAchieveInfoColor(Color.LTGRAY);
+                data.setAchieveNameColor(Color.LTGRAY);
+            }else {
+                data.setAchieveInfoColor(Color.BLACK);
+                data.setAchieveNameColor(Color.BLACK);
+            }
 
             dataset.add(data);
             cursor.moveToNext();
@@ -400,4 +412,5 @@ public class GameActivity {
         cursor.close();
         return  chara;
     }
+
 }

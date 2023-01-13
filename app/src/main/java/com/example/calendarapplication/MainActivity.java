@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -1407,5 +1408,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         return dataset;
     }
+
+
 
 }
