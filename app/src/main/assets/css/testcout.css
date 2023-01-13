@@ -31,6 +31,103 @@ body {
   top: 30px;
 }
 
+p{
+  line-height: 0%;
+}
+#chara1com{
+  visibility: hidden;
+  font-size:  x-small;
+}
+#chara2com{
+  visibility: hidden;
+  font-size:  x-small;
+}
+#chara3com{
+  visibility: hidden;
+  font-size:  x-small;
+}
+
+.balloon2 {
+  position: absolute;
+  display: inline-block;
+  background: #ff9158;
+  right: 60%;
+  left: 10%;
+  bottom: 60%;
+  top: 10%;
+  border-radius: 30px;
+  padding: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.balloon2::before {
+  content: "";
+  /* borderで三角形を作る */
+  border-width: 10px;
+  border-style: solid;
+  border-color: #ff9158 transparent transparent transparent;
+  /* 配置する */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.balloon1 {
+  position: absolute;
+  display: inline-block;
+  background: #ff9158;
+  right: 35%;
+  left: 35%;
+  bottom: 40%;
+  top: 35%;
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.balloon1::before {
+  content: "";
+  /* borderで三角形を作る */
+  border-width: 10px;
+  border-style: solid;
+  border-color: #ff9158 transparent transparent transparent;
+  /* 配置する */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.balloon3 {
+  position: absolute;
+  display: inline-block;
+  background: #ff9158;
+  right: 10%;
+  left: 60%;
+  bottom: 60%;
+  top: 10%;
+  border-radius: 30px;
+  padding: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.balloon3::before {
+  content: "";
+  /* borderで三角形を作る */
+  border-width: 10px;
+  border-style: solid;
+  border-color: #ff9158 transparent transparent transparent;
+  /* 配置する */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @keyframes scroll-anim {
   100% {
     background-position:  center;

@@ -305,4 +305,99 @@ public class GameActivity {
         db.delete("achievedb", null, null);
         dbGame.reCreate3(db);
     }
+
+    public int[] levelBalloon() {
+        SQLiteDatabase dbRead = dbGame.getReadableDatabase();
+        Cursor cursor = dbRead.query(
+                "charadb",
+                new String[]{"_id, level"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+
+        int[] level = new int[3];
+        for (int i = 0 ; i < cursor.getCount() ;i++){
+            level[i] = Integer.parseInt(cursor.getString(1));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return level;
+    }
+
+    public String[] nameBalloon() {
+        SQLiteDatabase dbRead = dbGame.getReadableDatabase();
+        Cursor cursor = dbRead.query(
+                "charadb",
+                new String[]{"_id, charaName"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        Cursor cursor2 = dbRead.query(
+                "evolvedb",
+                new String[]{"evolveName"},
+                "originName = ?",
+                new String[]{cursor.getString(1)},
+                null,
+                null,
+                null
+        );
+        cursor2.moveToFirst();
+
+        String[] name = new String[3];
+        for (int i = 0 ; i < cursor.getCount() ;i++){
+            name[i] = cursor.getString(1);
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return name;
+    }
+
+    public String[] charaNameBalloon() {
+
+        String[] chara = new String[3];
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        Cursor cursor = db.query(
+                "charadb",
+                new String[]{"charaName, evolution"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        for (int i = 0;i < cursor.getCount();i++){
+            Cursor cursor2 = db.query(
+                    "evolvedb",
+                    new String[]{"evolveName"},
+                    "evolution = ? and originName = ?",
+                    new String[]{cursor.getString(1), cursor.getString(0)},
+                    null,
+                    null,
+                    null
+            );
+            cursor2.moveToFirst();
+            chara[i] = cursor2.getString(0);
+            cursor.moveToNext();
+            cursor2.close();
+        }
+
+        cursor.close();
+        return  chara;
+    }
 }

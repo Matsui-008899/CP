@@ -496,10 +496,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * キャラ画面表示
      */
     public void openChara(View view) {
+        //ゲーム画面サイズ変更
         changeGameViewSetting();
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.GONE, View.VISIBLE);
         gameView.loadUrl("javascript:hugeBack()");
+
         stayMotion();
         onFoodTask(view);
     }
@@ -536,6 +538,22 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
         gameLayout.setLayoutParams(layoutParams);
 
+        popCharaInfo();
+    }
+
+    private void popCharaInfo(){
+        int level[] = gameActivity.levelBalloon();
+        String name[] = gameActivity.nameBalloon();
+        String charaName[] = gameActivity.charaNameBalloon();
+
+
+        for (int i = 0 ; i < 3 ; i++){
+            Log.d("dddd","れべ："+level[i]+"れべ："+name[i]);
+            if (level[i] == 0){
+                return;
+            }
+            gameView.loadUrl("javascript:visibleBalloon('" + name[i] + "','" +level[i] + "','" +charaName[i]+"')");
+        }
     }
 
     /**
@@ -547,6 +565,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, getResources().getDisplayMetrics());
         gameLayout.setLayoutParams(layoutParams);
+        gameView.loadUrl("javascript:invisibleBalloon()");
 
     }
 
@@ -1365,6 +1384,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         Log.d("debug", "削除成功ID=" + id);
 
 
+        popCharaInfo();
         //リスト更新
         onFoodTask(view);
     }
