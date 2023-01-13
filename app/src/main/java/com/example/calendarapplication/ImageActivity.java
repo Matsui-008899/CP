@@ -304,7 +304,7 @@ public class ImageActivity extends AppCompatActivity implements View.OnClickList
                 Log.d("debug", "リセットボタン押下:");
                 Log.d("debug", "リセットします➡" + Varray[0] + "," + Varray[1] + "," + Varray[2] + "," + Varray[3] + "," + Varray[4]);
 
-                Toast.makeText(getApplicationContext(), "リセットしました", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "リセットしました", Toast.LENGTH_LONG).show();
 
                 n = 0;
                 Varray[0] = null;

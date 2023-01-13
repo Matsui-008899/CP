@@ -46,6 +46,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         // データベース
         helper = new DataBaseLogin(getApplicationContext());
+
+        // 新規チェック
+        // パスワード(パスワードがない＝画像も登録してない)
+        SQLiteDatabase readPswd = helper.getReadableDatabase();
+        Cursor cursorP = readPswd.query(
+                "pswddb",
+                new String[]{"password"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursorP.getCount();
+        if (cursorP.getCount() == 0) {
+            Intent intent = new Intent(getApplication(), FirstActivity.class);
+            startActivity(intent);
+        }
     }
 
     // エラー回数
@@ -94,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Log.d("debug", "成功:" + dswd + "," + pswd);
 
-                        // 画像認証に遷移
+                        // ホーム画面に遷移
                         Intent intent = new Intent(getApplication(), MainActivity.class);
                         startActivity(intent);
 

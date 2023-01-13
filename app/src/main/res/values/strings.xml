@@ -32,7 +32,8 @@
 
 
     // StopActivity
-    <string name="stop">15秒お待ちください</string>
+    <string name="stop">ロックアウトしました</string>
+    <string name="stop_msg">３０分後に解除されます</string>
 
     // ForgetActivity
     <string name="fgt_title">パスワードの設定・再設定</string>
@@ -45,6 +46,22 @@
     //
     <string name="taskAddBtn">予定追加</string>
     <string name="year"><u>２０２２</u></string>
+
+    // FirstActivity
+    <string name="fst_title">パスワードを作成</string>
+    <string name="fst_warning">（注）数字、5文字</string>
+    <string name="fst_enter">パスワードを入力してください</string>
+    <string name="fst_send">設定</string>
+
+    // SecondActivity
+    <string name="scd_title">画像を5つ選択してください</string>
+    <string name="scd_count">0</string>
+    <string name="scd_count_msg">個目がセットされました</string>
+    <string name="scd_send">設定</string>
+    <string name="scd_reset">リセット</string>
+
+    // Common First・SecondActivity
+    <string name="syoki">初期設定</string>
 
 
 </resources>

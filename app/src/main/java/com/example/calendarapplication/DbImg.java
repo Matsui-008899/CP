@@ -35,11 +35,11 @@ public class DbImg extends SQLiteOpenHelper {
                 SQL_CREATE_ENTRIES
         );
 
-        saveData(db, "anomalocaris");
-        saveData(db, "coelacanth");
-        saveData(db, "nautilus");
-        saveData(db, "mammoth");
-        saveData(db, "smilodon");
+//        saveData(db, "anomalocaris");
+//        saveData(db, "coelacanth");
+//        saveData(db, "nautilus");
+//        saveData(db, "mammoth");
+//        saveData(db, "smilodon");
 
     }
 

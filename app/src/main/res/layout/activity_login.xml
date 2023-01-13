@@ -33,28 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.beardedhen.androidbootstrap.BootstrapEditText
-        android:id="@+id/password"
-        android:layout_width="276dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="68dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/pwd_enter"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:maxLength="5"
-        android:singleLine="true"
-        android:textColorHint="#757575"
-        app:bootstrapBrand="primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:roundedCorners="true" />
-
-<!--    <EditText-->
+    <!--    <EditText-->
 <!--        android:id="@+id/password"-->
 <!--        android:layout_width="276dp"-->
 <!--        android:layout_height="69dp"-->
@@ -72,18 +51,41 @@
 <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/password"
+        android:layout_width="276dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="68dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/pwd_enter"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="5"
+        android:singleLine="true"
+        android:textColorHint="#757575"
+        app:bootstrapBrand="primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:roundedCorners="true" />
+
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="172dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="59dp"
         android:layout_marginEnd="168dp"
         android:minHeight="48dp"
         app:bootstrapBrand="primary"
         app:bootstrapSize="lg"
         app:bootstrapText="@string/pwd_send"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:roundedCorners="true"
