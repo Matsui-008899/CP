@@ -3,7 +3,9 @@ let motion2 = null;
 let motion3 = null;
 let visiChara2 = 'hidden';
 let visiChara3 = 'hidden';
-
+let visifuki1 = 'hidden';
+let visifuki2 = 'hidden';
+let visifuki3 = 'hidden';
 
 //背景の挙動設定
 // document.querySelector(`.container`).animate(
@@ -19,7 +21,7 @@ let visiChara3 = 'hidden';
 
 
 // CSSアニメーションを間隔を空けてループ再生させる処理
-function looopAnimation(id, className ) {
+function looopAnimation(id, className) {
   var element = document.getElementById(id);
   element.className = className;
   // element.addEventListener("animationend", listener);
@@ -32,7 +34,7 @@ function looopAnimation(id, className ) {
   // function playAnimation() {
   //   element.className = className;
   // }
-  
+
 }
 
 
@@ -41,13 +43,13 @@ function looopAnimation(id, className ) {
  */
 function purun(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"purun");
+    anim(chara, motion1, "purun");
   } else if (chara == 'chara2') {
-    anim(chara,motion1,"purun");
-  }else if (chara == 'chara3') {
-    anim(chara,motion1,"purun");
+    anim(chara, motion1, "purun");
+  } else if (chara == 'chara3') {
+    anim(chara, motion1, "purun");
   }
-  
+
 }
 
 /**
@@ -55,93 +57,93 @@ function purun(chara) {
  */
 function korokoro(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"korokoro");
+    anim(chara, motion1, "korokoro");
   } else if (chara == 'chara2') {
-    anim(chara,motion2,"korokoro");
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,"korokoro");
+    anim(chara, motion2, "korokoro");
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, "korokoro");
   }
-  
+
 }
 
 function pyon(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"pyon");
+    anim(chara, motion1, "pyon");
   } else if (chara == 'chara2') {
-    anim(chara,motion2,"pyon");
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,"pyon");
+    anim(chara, motion2, "pyon");
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, "pyon");
   }
-  
+
 }
 
 function poyoon(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"poyoon");
+    anim(chara, motion1, "poyoon");
   } else if (chara == 'chara2') {
-    anim(chara,motion2,"poyoon");
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,"poyoon"); 
+    anim(chara, motion2, "poyoon");
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, "poyoon");
   }
-  
+
 }
 
 function purupurun(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"purupurun");
+    anim(chara, motion1, "purupurun");
   } else if (chara == 'chara2') {
-    anim(chara,motion2,"purupurun");
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,"purupurun");
+    anim(chara, motion2, "purupurun");
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, "purupurun");
   }
-  
+
 }
 
 function pururun(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,"pururun");
+    anim(chara, motion1, "pururun");
   } else if (chara == 'chara2') {
-    anim(chara,motion2,"pururun");
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,"pururun");
+    anim(chara, motion2, "pururun");
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, "pururun");
   }
-  
+
 }
 
 function puyon(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,'puyon');
+    anim(chara, motion1, 'puyon');
   } else if (chara == 'chara2') {
-    anim(chara,motion2,'puyon');
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,'puyon');
+    anim(chara, motion2, 'puyon');
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, 'puyon');
   }
-  
+
 }
 
 
 function papa(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,'papa');
+    anim(chara, motion1, 'papa');
   } else if (chara == 'chara2') {
-    anim(chara,motion2,'papa');
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,'papa');
+    anim(chara, motion2, 'papa');
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, 'papa');
   }
 }
 
 function kurukuru(chara) {
   if (chara == 'chara1') {
-    anim(chara,motion1,'kurukuru');
+    anim(chara, motion1, 'kurukuru');
   } else if (chara == 'chara2') {
-    anim(chara,motion2,'kurukuru');
-  }else if (chara == 'chara3') {
-    anim(chara,motion3,'kurukuru');
+    anim(chara, motion2, 'kurukuru');
+  } else if (chara == 'chara3') {
+    anim(chara, motion3, 'kurukuru');
   }
-  window.setTimeout(purun,5000,chara);
+  window.setTimeout(purun, 5000, chara);
 }
 
-function anim(chara,motion,motionName) {
+function anim(chara, motion, motionName) {
   document.getElementById(chara).classList.remove(motion);
   looopAnimation(chara, motionName);
   motion = motionName;
@@ -195,9 +197,9 @@ function hugeBack() {
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
-    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 100px;';  
+    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 100px;';
   }
-  
+
 }
 
 function smallBack() {
@@ -208,11 +210,11 @@ function smallBack() {
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';
-      
+
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
-    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';  
+    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';
   }
 }
 
@@ -225,10 +227,53 @@ function huhouShinnyuu() {
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';
-      
+
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
-    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';  
-  } 
+    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';
+  }
+}
+
+function visibleBalloon(name, level,chara) {
+  const putName = document.getElementById(name + 'name');
+  const putLevel = document.getElementById(name + 'level');
+  console.log(name+"com");
+  const ob = document.getElementById(name+'com');
+  ob.style.visibility='visible';
+  if (name == 'chara1') {
+    visifuki1 = 'visible';
+  }
+  if (name == 'chara2') {
+    visifuki2 = 'visible';
+  }
+  if (name == 'chara3') {
+    visifuki3 = 'visible';
+  }
+
+
+  console.log('名前：' + chara);
+  console.log('現在レベル：' + level);
+  putName.textContent = '名前：' + chara;
+  putLevel.textContent = '現在レベル：' + level;
+
+}
+
+function invisibleBalloon(){
+  if (visifuki1 == 'visible') {
+    visifuki1 = 'hidden';
+    const ob = document.getElementById('chara1com');
+    ob.style.visibility='hidden';
+  
+  }
+  if (visifuki2 == 'visible') {
+    visifuki2 = 'hidden';
+    const ob = document.getElementById('chara2com');
+    ob.style.visibility='hidden';
+  }
+  if (visifuki3 == 'visible') {
+    visifuki3 = 'hidden';
+    const ob = document.getElementById('chara3com');
+    ob.style.visibility='hidden';
+  }
 }

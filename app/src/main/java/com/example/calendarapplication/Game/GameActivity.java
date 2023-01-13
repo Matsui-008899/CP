@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.calendarapplication.AchieveView.AchieveViewRowData;
 import com.example.calendarapplication.MyApplication;
 
+import java.util.List;
 import java.util.Random;
 
 public class GameActivity {
@@ -103,6 +106,11 @@ public class GameActivity {
         //DBにレベルを反映
         dbInsert.update("charadb", values, "_id = " + cursor.getString(0), null);
 
+
+        String message = cursor.getString(1)+"がレベルアップ：現在レベル"+levelSta;
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
+
+
         //進化：塁化キャラチェック
         boolean visibleChara = checkEvolve(cursor.getString(0), cursor.getString(1), levelSta, Integer.parseInt(cursor.getString(3)));
         Log.d("debug", "現在レベル"+levelSta+ "名前："+cursor.getString(1)+ "進化段階："+Integer.parseInt(cursor.getString(3)));
@@ -115,11 +123,6 @@ public class GameActivity {
 
     /**
      * キャラ進化＆キャラ追加判定
-     * @param id　キャラID
-     * @param charaName　キャラネーム
-     * @param level　レベル
-     * @param evolveLevel　進化段階
-     * @return　進化orキャラ追加
      */
     private boolean checkEvolve(String id, String charaName, int level, int evolveLevel) {
         SQLiteDatabase db = dbGame.getWritableDatabase();
@@ -262,5 +265,139 @@ public class GameActivity {
             return null;
         }
 
+    }
+
+
+    public List<AchieveViewRowData> listAchieve(List<AchieveViewRowData> dataset) {
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "achievedb",
+                new String[]{"achieveName, achieveContent"},
+                "comple = 1",
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        Log.d("debug","総合実績件数"+cursor.getCount());
+
+        for (int i = 0; i < cursor.getCount(); i++){
+            AchieveViewRowData data = new AchieveViewRowData();
+
+            data.setAchieveName(cursor.getString(0));
+            data.setAchieveInfo(cursor.getString(1));
+
+            dataset.add(data);
+            cursor.moveToNext();
+            Log.d("debug","実績処理実行");
+        }
+
+        cursor.close();
+
+        return dataset;
+    }
+
+    public void resetAchieve() {
+        SQLiteDatabase db = dbGame.getWritableDatabase();
+        db.delete("achievedb", null, null);
+        dbGame.reCreate3(db);
+    }
+
+    public int[] levelBalloon() {
+        SQLiteDatabase dbRead = dbGame.getReadableDatabase();
+        Cursor cursor = dbRead.query(
+                "charadb",
+                new String[]{"_id, level"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+
+        int[] level = new int[3];
+        for (int i = 0 ; i < cursor.getCount() ;i++){
+            level[i] = Integer.parseInt(cursor.getString(1));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return level;
+    }
+
+    public String[] nameBalloon() {
+        SQLiteDatabase dbRead = dbGame.getReadableDatabase();
+        Cursor cursor = dbRead.query(
+                "charadb",
+                new String[]{"_id, charaName"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        Cursor cursor2 = dbRead.query(
+                "evolvedb",
+                new String[]{"evolveName"},
+                "originName = ?",
+                new String[]{cursor.getString(1)},
+                null,
+                null,
+                null
+        );
+        cursor2.moveToFirst();
+
+        String[] name = new String[3];
+        for (int i = 0 ; i < cursor.getCount() ;i++){
+            name[i] = cursor.getString(1);
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return name;
+    }
+
+    public String[] charaNameBalloon() {
+
+        String[] chara = new String[3];
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        Cursor cursor = db.query(
+                "charadb",
+                new String[]{"charaName, evolution"},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+
+        for (int i = 0;i < cursor.getCount();i++){
+            Cursor cursor2 = db.query(
+                    "evolvedb",
+                    new String[]{"evolveName"},
+                    "evolution = ? and originName = ?",
+                    new String[]{cursor.getString(1), cursor.getString(0)},
+                    null,
+                    null,
+                    null
+            );
+            cursor2.moveToFirst();
+            chara[i] = cursor2.getString(0);
+            cursor.moveToNext();
+            cursor2.close();
+        }
+
+        cursor.close();
+        return  chara;
     }
 }

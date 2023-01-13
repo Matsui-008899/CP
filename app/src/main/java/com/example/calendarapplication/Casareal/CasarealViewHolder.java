@@ -27,6 +27,7 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
     public TextView upETime1;
     public TextView upETime2;
     public TextView upYear;
+    public TextView upEndYear;
     public EditText upTask;
 
     public CasarealViewHolder(@NonNull View itemView) {
@@ -47,6 +48,7 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
         upETime1 = (TextView) itemView.findViewById(R.id.endTimeRecycleUp1);
         upETime2 = (TextView) itemView.findViewById(R.id.endTimeRecycleUp2);
         upYear = (TextView) itemView.findViewById(R.id.yearRecycleUp);
+        upEndYear = (TextView)itemView.findViewById(R.id.endYearRecycleUp);
         upTask = (EditText) itemView.findViewById(R.id.taskNameRecycleUp);
 
         upSDay1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -58,6 +60,7 @@ public class CasarealViewHolder extends RecyclerView.ViewHolder {
         upETime1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         upETime2.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         upYear.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        upEndYear.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
     }
 

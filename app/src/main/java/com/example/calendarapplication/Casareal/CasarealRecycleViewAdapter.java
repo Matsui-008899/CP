@@ -36,15 +36,6 @@ public class CasarealRecycleViewAdapter extends RecyclerView.Adapter<CasarealVie
         holder.endTime.setText(list.get(position).getEndTime());
         holder.taskName.setText(list.get(position).getTaskName());
         holder.setId.setId(list.get(position).getId());
-        holder.upSDay1.setId(list.get(position).getIdSDay1());
-        holder.upSDay2.setId(list.get(position).getIdSDay2());
-        holder.upSTime1.setId(list.get(position).getIdSTime1());
-        holder.upSTime2.setId(list.get(position).getIdSTime2());
-        holder.upEDay1.setId(list.get(position).getIdEDay1());
-        holder.upEDay2.setId(list.get(position).getIdEDay2());
-        holder.upETime1.setId(list.get(position).getIdETime1());
-        holder.upETime2.setId(list.get(position).getIdETime2());
-        holder.upYear.setId(list.get(position).getIdYear());
         holder.upSDay1.setText(list.get(position).getSDay1());
         holder.upSDay2.setText(list.get(position).getSDay2());
         holder.upSTime1.setText(list.get(position).getSTime1());
@@ -55,11 +46,9 @@ public class CasarealRecycleViewAdapter extends RecyclerView.Adapter<CasarealVie
         holder.upETime2.setText(list.get(position).getETime2());
 
         holder.upYear.setText(list.get(position).getYear());
+        holder.upEndYear.setText(list.get(position).getEndYear());
 
         holder.upTask.setText(list.get(position).getTaskName());
-        holder.upTask.setId(list.get(position).getIdTask());
-
-
     }
 
     @Override

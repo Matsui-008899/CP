@@ -105,8 +105,12 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         saveData(db,"u_pa_",2,"chara3");
     }
 
-    private void reCreate3(SQLiteDatabase db) {
+    public void reCreate3(SQLiteDatabase db) {
+        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
+        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
         saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
+        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
+
     }
 
     private void saveData(SQLiteDatabase db, String achiName, String achiContent, String date, int i) {
