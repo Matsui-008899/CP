@@ -1297,6 +1297,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * キャラクター画面（以下キャラ画面）
+     * RecyclerViewより餌情報の要求
      */
     public void onFoodTask(View view) {
         RecyclerView rv = findViewById(R.id.foodRecycleView);
@@ -1310,7 +1311,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * キャラ画面表示
+     * キャラの餌（完了済み予定）の出力
      */
     private List<FoodRowData> createFoodList() {
          /*
@@ -1364,7 +1365,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * キャラ画面
+     * キャラ画面で
      * 予定一件をタップ時
      */
     public void checkTask(View view) {
@@ -1390,6 +1391,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         onFoodTask(view);
     }
 
+    /**
+     * RecyclerViewより要求された実績情報を制作する
+     * @param view
+     */
     private void onAchieveView(View view) {
         RecyclerView rv = findViewById(R.id.achieveRecycleView);
         AchieveRecyclerViewAdapter adapter = new AchieveRecyclerViewAdapter(this.createAchieveList());
@@ -1401,6 +1406,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         rv.setAdapter(adapter);
     }
 
+    /**
+     * 実績情報を画面に出力
+     * @return
+     */
     private List<AchieveViewRowData> createAchieveList() {
         List<AchieveViewRowData> dataset = new ArrayList<>();
 
