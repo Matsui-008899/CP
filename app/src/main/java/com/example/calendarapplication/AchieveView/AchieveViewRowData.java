@@ -5,6 +5,7 @@ public class AchieveViewRowData {
     private String achieveInfo;
     private int achieveNameColor;
     private int achieveInfoColor;
+    private  String achieveDate;
 
     public String getAchieveName() {
         return achieveName;
@@ -38,4 +39,11 @@ public class AchieveViewRowData {
         this.achieveInfoColor = achieveInfoColor;
     }
 
+    public String getAchieveDate() {
+        return achieveDate;
+    }
+
+    public void setAchieveDate(String achieveDate) {
+        this.achieveDate = achieveDate;
+    }
 }

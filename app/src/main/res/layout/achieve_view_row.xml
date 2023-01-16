@@ -20,6 +20,18 @@
             android:textSize="15dp"
             android:textStyle="bold"
             android:text="ジッセキメイ"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/achieveDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:visibility="invisible"
+            android:text="取得日：2022/22/22"/>
     </LinearLayout>
 
     <LinearLayout

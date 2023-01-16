@@ -33,6 +33,11 @@ public class AchieveRecyclerViewAdapter extends RecyclerView.Adapter<AchieveView
         holder.achieveInfo.setText(list.get(position).getAchieveInfo());
         holder.achieveInfo.setTextColor(list.get(position).getAchieveInfoColor());
         holder.achieveName.setTextColor(list.get(position).getAchieveNameColor());
+        holder.achieveDate.setText(list.get(position).getAchieveDate());
+        if (list.get(position).getAchieveDate()!=null){
+            holder.achieveDate.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override

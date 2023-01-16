@@ -2,6 +2,7 @@ package com.example.calendarapplication;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -47,6 +48,16 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat {
         button4.setOnPreferenceClickListener(preference -> {
             SQLiteDatabase db = seledb.getWritableDatabase();
             seledb.debugCreate(db);
+            return true;
+        });
+
+        Preference button5 = findPreference("deleteAllTask");
+        button5.setOnPreferenceClickListener(preference -> {
+            Log.d("debug", "日程データベース初期化開始");
+            SQLiteDatabase db = seledb.getWritableDatabase();
+            db.delete("taskdb", null, null);
+            seledb.debugCreate(db);
+            Log.d("debug", "日程データベース初期化完了");
             return true;
         });
 

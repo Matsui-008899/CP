@@ -26,6 +26,11 @@
             android:title="実績初期化"
             android:summary="実績の取得状況をリセット" >
         </Preference>
+        <Preference
+            android:key="deleteAllTask"
+            android:title="予定初期化"
+            android:summary="予定全件削除">
+        </Preference>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="デバッグ用">

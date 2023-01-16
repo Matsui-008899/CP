@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Calendar;
+
 /**
  * https://qiita.com/kengo_kuwahara/items/a8ef858a9810cad42ca6
  */
@@ -74,23 +76,29 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     public void debugCreate(SQLiteDatabase db){
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん12","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん12","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん12","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん123","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん123","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん123","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
-        saveData(db, "2022年12月12日", "12時30分", "2022年12月12日", "13時40分", "肉まん1234","0");
+        Calendar c = Calendar.getInstance();
+        String startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)-1);
+        String startD = String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+        String endY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)-1);
+        String endD = String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY)+1, c.get(Calendar.MINUTE));
+
+        saveData(db, startY, startD, endY, endD, "肉まん1","0");
+        saveData(db, startY, startD, endY, endD, "肉まん12","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1","0");
+        saveData(db, startY, startD, endY, endD, "肉まん12","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1","0");
+        saveData(db, startY, startD, endY, endD, "肉まん12","0");
+        saveData(db, startY, startD, endY, endD, "肉まん123","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん123","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん123","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
     }
 }

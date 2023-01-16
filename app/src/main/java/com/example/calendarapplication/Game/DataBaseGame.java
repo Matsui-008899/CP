@@ -48,7 +48,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
                     _ID3 + " INTEGER PRIMARY KEY," +
                     ACHIEVENAME + " TEXT," +
                     ACHIEVECONTENT + " TEXT," +
-                    CHECKING + " INTEGER," +
+                    CHECKING + " TEXT," +
                     ACHIEVEDATE + " TEXT)";
 
 
@@ -106,10 +106,9 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     }
 
     public void reCreate3(SQLiteDatabase db) {
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
+        saveData(db,"丸い生き物","１体目のキャラを獲得","",0);
+        saveData(db,"ネコ？","２体目のキャラを獲得","",0);
+        saveData(db,"さかな","３体目のキャラを獲得","",0);
         saveData(db,"始まりの一歩","予定を１件達成","",0);
         saveData(db,"一休み","予定を５件達成","",0);
         saveData(db,"使い慣れてきたかな？","予定を１５件達成","",0);

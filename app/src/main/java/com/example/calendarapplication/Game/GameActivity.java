@@ -8,10 +8,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.calendarapplication.AchieveView.AchieveViewRowData;
-import com.example.calendarapplication.DataBaseLogin;
-import com.example.calendarapplication.DbImg;
 import com.example.calendarapplication.MyApplication;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -19,7 +18,6 @@ public class GameActivity {
     private DataBaseGame dbGame;
     //    private DataBaseEvolve dbEvolve;
     public int charaMany;
-
 
 
     public void createDataBase() {
@@ -107,20 +105,26 @@ public class GameActivity {
         SQLiteDatabase dbInsert = dbGame.getWritableDatabase();
         ContentValues values = new ContentValues();
         levelSta++;
+        Log.d("eheheh","レベル挿入"+levelSta);
         values.put("level", levelSta);
         //DBにレベルを反映
         dbInsert.update("charadb", values, "_id = " + cursor.getString(0), null);
 
+        if (levelSta % 5 == 0){
+            checkingAchieve(2, levelSta);
+        }
 
-        String message = cursor.getString(1)+"がレベルアップ：現在レベル"+levelSta;
+
+        //Toast表示
+        String message = cursor.getString(1) + "がレベルアップ：現在レベル" + levelSta;
         Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
 
 
         //進化：塁化キャラチェック
         boolean visibleChara = checkEvolve(cursor.getString(0), cursor.getString(1), levelSta, Integer.parseInt(cursor.getString(3)));
-        Log.d("debug", "現在レベル"+levelSta+ "名前："+cursor.getString(1)+ "進化段階："+Integer.parseInt(cursor.getString(3)));
+        Log.d("debug", "現在レベル" + levelSta + "名前：" + cursor.getString(1) + "進化段階：" + Integer.parseInt(cursor.getString(3)));
         cursor.close();
-        if (visibleChara){
+        if (visibleChara) {
             return true;
         }
         return false;
@@ -132,57 +136,60 @@ public class GameActivity {
     private boolean checkEvolve(String id, String charaName, int level, int evolveLevel) {
         SQLiteDatabase db = dbGame.getWritableDatabase();
         //追加キャラチェック
-        if ((level >= 5) ) {
-            if(charaName.equals("chara1") ){
+        if ((level == 5)) {
+            if (charaName.equals("chara1")) {
                 //２体目追加
-                Log.d("debug", "２体目キャラ出現：" );
-                addChara(db,"2");
+                Log.d("debug", "２体目キャラ出現：");
+                addChara(db, "2");
                 return true;
             }
-            if(charaName.equals("chara2") ){
+            if (charaName.equals("chara2")) {
                 //２体目追加
-                Log.d("debug", "３体目キャラ出現：" );
-                addChara(db,"3");
+                Log.d("debug", "３体目キャラ出現：");
+                addChara(db, "3");
                 return true;
             }
         }
 
 
         //進化チェック
-        if ((level >= 10) && (evolveLevel == 0)) {
-            evolve(db,id,evolveLevel);
-            if(charaName.equals("chara1") ){
-                //２体目追加
-                Log.d("debug", "２体目キャラ出現：" );
-                addChara(db,"2");
-            }
-            return true;
-        } else if ((level >= 20) && (evolveLevel == 1)) {
-            evolve(db,id,evolveLevel);
-            return true;
-        } else if ((level >= 30) && (evolveLevel == 2)) {
-            return evolve(db,id,evolveLevel);
-        }
+//        if ((level >= 10) && (evolveLevel == 0)) {
+//            evolve(db, id, evolveLevel);
+//            if (charaName.equals("chara1")) {
+//                //２体目追加
+//                Log.d("debug", "２体目キャラ出現：");
+//                addChara(db, "2");
+//            }
+//            return true;
+//        } else if ((level >= 20) && (evolveLevel == 1)) {
+//            evolve(db, id, evolveLevel);
+//            return true;
+//        } else if ((level >= 30) && (evolveLevel == 2)) {
+//            return evolve(db, id, evolveLevel);
+//        }
         return false;
     }
 
     /**
      * 追加キャラ処理
+     *
      * @param db
      * @param id
      * @return
      */
     private boolean addChara(SQLiteDatabase db, String id) {
         ContentValues values = new ContentValues();
-        values.put("level",1);
+        values.put("level", 1);
         db.update("charadb", values, "_id = " + id, null);
         charaMany = checkCharaMany();
+        checkingAchieve(1,0);
         return true;
     }
 
 
     /**
      * 進化処理
+     *
      * @param db
      * @param id
      * @param evolveLevel
@@ -192,8 +199,8 @@ public class GameActivity {
         ContentValues values = new ContentValues();
         //db更新エボルヴテーブル
         int i = evolveLevel + 1;
-        values.put("evolution",i);
-        db.update("charadb",values,"_id = " + id,null);
+        values.put("evolution", i);
+        db.update("charadb", values, "_id = " + id, null);
         //webview更新
         return true;
     }
@@ -214,7 +221,7 @@ public class GameActivity {
         );
         cursor.moveToFirst();
         int many = cursor.getCount();
-        Log.d("debug", "表示キャラ数"+many);
+        Log.d("debug", "表示キャラ数" + many);
         cursor.close();
         return many;
     }
@@ -235,6 +242,7 @@ public class GameActivity {
 
     /**
      * DBからキャラクターが表示できるかのチェック
+     *
      * @param charaName
      * @return
      */
@@ -250,7 +258,7 @@ public class GameActivity {
                 null
         );
         cursor.moveToFirst();
-        if (cursor.getCount()==1){
+        if (cursor.getCount() == 1) {
             Log.d("debug", "抽出数" + cursor.getCount());
             Cursor cursor2 = db.query(
                     "evolvedb",
@@ -265,20 +273,25 @@ public class GameActivity {
             Log.d("debug", "抽出数" + cursor2.getCount());
             String chara = cursor2.getString(0);
             return chara;
-        }else {
-            Log.d("debug", charaName+"：抽出失敗");
+        } else {
+            Log.d("debug", charaName + "：抽出失敗");
             return null;
         }
 
     }
 
-
+    /**
+     * 実績のリスト作成
+     *
+     * @param dataset
+     * @return
+     */
     public List<AchieveViewRowData> listAchieve(List<AchieveViewRowData> dataset) {
         SQLiteDatabase db = dbGame.getReadableDatabase();
 
         Cursor cursor = db.query(
                 "achievedb",
-                new String[]{"achieveName, achieveContent, comple"},
+                new String[]{"achieveName, achieveContent, achieveDate, comple"},
                 null,
                 null,
                 null,
@@ -287,24 +300,25 @@ public class GameActivity {
         );
 
         cursor.moveToFirst();
-        Log.d("debug","総合実績件数"+cursor.getCount());
+        Log.d("debug", "総合実績件数" + cursor.getCount());
 
-        for (int i = 0; i < cursor.getCount(); i++){
+        for (int i = 0; i < cursor.getCount(); i++) {
             AchieveViewRowData data = new AchieveViewRowData();
 
             data.setAchieveName(cursor.getString(0));
             data.setAchieveInfo(cursor.getString(1));
-            if (Integer.parseInt(cursor.getString(2)) == 0){
+            if (Integer.parseInt(cursor.getString(3)) == 0) {
                 data.setAchieveInfoColor(Color.LTGRAY);
                 data.setAchieveNameColor(Color.LTGRAY);
-            }else {
+            } else {
                 data.setAchieveInfoColor(Color.BLACK);
                 data.setAchieveNameColor(Color.BLACK);
+                data.setAchieveDate(cursor.getString(2));
             }
 
             dataset.add(data);
             cursor.moveToNext();
-            Log.d("debug","実績処理実行");
+            Log.d("debug", "実績処理実行");
         }
 
         cursor.close();
@@ -318,6 +332,11 @@ public class GameActivity {
         dbGame.reCreate3(db);
     }
 
+    /**
+     * 吹き出しのレベル表示用出力
+     *
+     * @return
+     */
     public int[] levelBalloon() {
         SQLiteDatabase dbRead = dbGame.getReadableDatabase();
         Cursor cursor = dbRead.query(
@@ -333,7 +352,7 @@ public class GameActivity {
 
 
         int[] level = new int[3];
-        for (int i = 0 ; i < cursor.getCount() ;i++){
+        for (int i = 0; i < cursor.getCount(); i++) {
             level[i] = Integer.parseInt(cursor.getString(1));
 
             cursor.moveToNext();
@@ -343,6 +362,11 @@ public class GameActivity {
         return level;
     }
 
+    /**
+     * 吹き出しのキャラ名表示用出力
+     *
+     * @return
+     */
     public String[] nameBalloon() {
         SQLiteDatabase dbRead = dbGame.getReadableDatabase();
         Cursor cursor = dbRead.query(
@@ -368,7 +392,7 @@ public class GameActivity {
         cursor2.moveToFirst();
 
         String[] name = new String[3];
-        for (int i = 0 ; i < cursor.getCount() ;i++){
+        for (int i = 0; i < cursor.getCount(); i++) {
             name[i] = cursor.getString(1);
 
             cursor.moveToNext();
@@ -393,7 +417,7 @@ public class GameActivity {
         );
         cursor.moveToFirst();
 
-        for (int i = 0;i < cursor.getCount();i++){
+        for (int i = 0; i < cursor.getCount(); i++) {
             Cursor cursor2 = db.query(
                     "evolvedb",
                     new String[]{"evolveName"},
@@ -410,7 +434,160 @@ public class GameActivity {
         }
 
         cursor.close();
-        return  chara;
+        return chara;
     }
 
+    public void checkingAchieve(int kind, int level) {
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        SQLiteDatabase dbw = dbGame.getWritableDatabase();
+        //キャラ獲得時
+        if (kind == 1) {
+            Cursor cursor = db.query(
+                    "charadb",
+                    new String[]{"_id"},
+                    "level != 0",
+                    null,
+                    null,
+                    null,
+                    null
+            );
+            int count = cursor.getCount();
+
+
+            int setId = 0;
+            if (count == 1) {
+                setId = 1;
+            } else if (count == 2) {
+                setId = 2;
+            } else if (count == 3) {
+                setId = 3;
+            }
+            if (setId != 0){
+                setAchieve(setId);
+            }
+            cursor.close();
+        }
+        //レベルアップ時
+        if (kind == 2) {
+            int search = 0;
+            if (level == 5){
+                search = 5;
+            }
+            if (level == 10){
+                search = 10;
+            }
+            if (level == 30){
+                search = 30;
+            }
+            if (search != 0){
+                Cursor cursor = db.query(
+                        "charadb",
+                        new String[]{"_id, level"},
+                        "level >= ?",
+                        new String[]{String.valueOf(search)},
+                        null,
+                        null,
+                        null
+                );
+                int count = cursor.getCount();
+
+                int setId = 0;
+                if (count == 1){
+                    if (search == 5){
+                        setId = 9;
+                    }
+                    if (search == 10){
+                        setId = 10;
+                    }
+                    if (search == 30){
+                        setId = 11;
+                    }
+                }
+                if(count == 2){
+                    if (search == 5){
+                        setId = 12;
+                    }
+                    if (search == 10){
+                        setId = 13;
+                    }
+                    if (search == 30){
+                        setId = 14;
+                    }
+                }
+                if(count == 3){
+                    if (search == 5){
+                        setId = 15;
+                    }
+                    if (search == 10){
+                        setId = 16;
+                    }
+                    if (search == 30){
+                        setId = 17;
+                    }
+                }
+                if(setId != 0 ){
+                    setAchieve(setId);
+                }
+
+                cursor.close();
+            }
+        }
+        //進化時
+        if (kind != 0) {
+
+        }
+        if(kind == 3){
+            int setId = 0;
+            if (level == 1){
+                setId = 4;
+            }
+            if (level == 5){
+                setId = 5;
+            }
+            if (level == 15){
+                setId = 6;
+            }if (level == 20){
+                setId = 7;
+            }if (level == 30){
+                setId = 8;
+            }
+
+            if (setId != 0){
+                setAchieve(setId);
+            }
+
+
+        }
+
+    }
+
+    private void setAchieve(int setId){
+        SQLiteDatabase dbw = dbGame.getWritableDatabase();
+        Calendar c = Calendar.getInstance();
+        String date = String.format("%d/%02d/%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
+        ContentValues values = new ContentValues();
+        values.put("achieveDate", date);
+        values.put("comple", 1);
+        dbw.update("achievedb", values, "_id = " + setId, null);
+        popUpAC(setId);
+    }
+
+    private void popUpAC(int setId) {
+        Log.d("dd","うに"+setId);
+        SQLiteDatabase db = dbGame.getReadableDatabase();
+        Cursor cursor = db.query(
+                "achievedb",
+                new String[]{"_id, achieveName"},
+                "_id = ?",
+                new String[]{String.valueOf(setId)},
+                null,
+                null,
+                null
+        );
+        cursor.moveToFirst();
+        Log.d("dd","ddddd"+cursor.getCount());
+        Log.d("dd","ddddd"+cursor.getString(1));
+        String message = "実績："+cursor.getString(1) + "を達成";
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
+    }
 }

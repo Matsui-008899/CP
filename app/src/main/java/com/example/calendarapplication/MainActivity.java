@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount1();
                     moveScene = false;
@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount2();
                     moveScene = false;
@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount3();
                     moveScene = false;
@@ -484,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 
+        gameView.loadUrl("javascript:huhouShinnyuu()");
         //キャラクター待機モーション
         stayMotion();
 
@@ -1189,6 +1190,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         ListTask(pan);
     }
 
+    public void onAllDelete(){
+
+    }
+
     /**
      * 月日ダイアログ表示
      * @param year
@@ -1381,10 +1386,22 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         ContentValues values = new ContentValues();
         values.put("level", 1);
 
+
         SQLiteDatabase db = selectDB.getWritableDatabase();
         db.update("taskdb", values, "_id = " + id, null);
-        Log.d("debug", "削除成功ID=" + id);
+        SQLiteDatabase dbR = selectDB.getReadableDatabase();
 
+        Cursor cursor = dbR.query(
+                "taskdb",
+                new String[]{"_id"},
+                "level = 1",
+                null,
+                null,
+                null,
+                null
+        );
+        gameActivity.checkingAchieve(3,cursor.getCount());
+        cursor.close();
 
         popCharaInfo();
         //リスト更新
