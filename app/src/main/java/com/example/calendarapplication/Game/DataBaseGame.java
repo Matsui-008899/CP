@@ -88,7 +88,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
 
     public void reCreate(SQLiteDatabase db) {
-        saveData(db,"chara1",0,1);
+        saveData(db,"chara1",0,0);
         saveData(db,"chara2",0,0);
         saveData(db,"chara3",0,0);
     }

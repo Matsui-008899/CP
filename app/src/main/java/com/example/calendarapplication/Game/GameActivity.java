@@ -19,6 +19,7 @@ public class GameActivity {
     private DataBaseGame dbGame;
     //    private DataBaseEvolve dbEvolve;
     public int charaMany;
+    boolean che = false;
 
 
     public void createDataBase() {
@@ -145,22 +146,23 @@ public class GameActivity {
                 return true;
             }
             if (charaName.equals("chara2")) {
-                //２体目追加
+                //３体目追加
                 Log.d("debug", "３体目キャラ出現：");
                 addChara(db, "3");
                 return true;
             }
+
         }
-
-
+        if (level == 1&&charaName.equals("chara1")&&!che) {
+            //１体目追加
+            Log.d("debug", "１体目キャラ出現：");
+            addChara(db, "1");
+            che = true;
+            return true;
+        }
         //進化チェック
 //        if ((level >= 10) && (evolveLevel == 0)) {
 //            evolve(db, id, evolveLevel);
-//            if (charaName.equals("chara1")) {
-//                //２体目追加
-//                Log.d("debug", "２体目キャラ出現：");
-//                addChara(db, "2");
-//            }
 //            return true;
 //        } else if ((level >= 20) && (evolveLevel == 1)) {
 //            evolve(db, id, evolveLevel);
@@ -225,6 +227,9 @@ public class GameActivity {
         int many = cursor.getCount();
         Log.d("debug", "表示キャラ数" + many);
         cursor.close();
+        if (many == 0){
+            many++;
+        }
         return many;
     }
 

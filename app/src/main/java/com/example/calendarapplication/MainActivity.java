@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         //true=初回起動の処理
         if (!preference.getBoolean("Launched", false)) {
+            //ホーム画面の日別予定の出力
             findViewById(R.id.CalendarRecycleView).setVisibility(View.GONE);
 
             editor.putBoolean("Launched", true);
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AchievementLayout = findViewById(R.id.layerAchievement);
         GameLayout = findViewById(R.id.layerGame);
 
+        //ダイアログ設定用フラグ
         flagTime = null;
         flagDate = null;
         taskName = findViewById(R.id.taskName);
@@ -195,7 +197,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         calendar.setOnDateChangeListener(
                 (calendarView, year, month, date) -> {
                     String message = (String.format("%d年%02d月%02d日", year, month + 1, date));
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    //日別の予定一覧表示
                     taskDaySelect(message);
                 }
         );
@@ -210,8 +213,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         gameView.loadUrl("file:///android_asset/testCout.html");
 
         StartGameCharaView();
-
-        Log.d("debug", "サクリファイス" + "chara3");
 
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
 
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * キャラクター一件分の表示チェック
      */
     private boolean GameCharaView(String chara) {
+        Log.d("dasda","肉"+chara);
         //起動済みチェック
         if (Objects.equals(chara, "chara1") && charaCheck1) {
             return true;
@@ -427,6 +429,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //背景変更
         gameView.loadUrl("javascript:smallBack()");
         stayMotion();
+        Log.d("dsdda","s："+charaCheck1);
     }
 
 
@@ -520,7 +523,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * 画面遷移時キャラモーション変更(モーションタイプ：待機)
      */
     private void stayMotion() {
-        gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
+        if(charaCheck1){
+            gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
+        }
         if (charaCheck2) {
             gameView.loadUrl("javascript:puyon('" + "chara2" + "')");
         }
