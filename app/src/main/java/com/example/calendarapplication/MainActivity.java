@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 int randomValue1 = random.nextInt(8);
                 gameView.loadUrl("javascript:" + charaMotion[randomValue1] + "('" + "chara1" + "')");
@@ -357,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 if (charaCheck2) {
                     int randomValue2 = random.nextInt(8);
@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 if (charaCheck3) {
                     int randomValue3 = random.nextInt(8);

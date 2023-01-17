@@ -1,5 +1,6 @@
 package com.example.calendarapplication.Game;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -202,6 +203,7 @@ public class GameActivity {
         values.put("evolution", i);
         db.update("charadb", values, "_id = " + id, null);
         //webview更新
+
         return true;
     }
 
@@ -555,8 +557,6 @@ public class GameActivity {
             if (setId != 0){
                 setAchieve(setId);
             }
-
-
         }
 
     }
@@ -564,7 +564,7 @@ public class GameActivity {
     private void setAchieve(int setId){
         SQLiteDatabase dbw = dbGame.getWritableDatabase();
         Calendar c = Calendar.getInstance();
-        String date = String.format("%d/%02d/%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
+        @SuppressLint("DefaultLocale") String date = String.format("%d/%02d/%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE));
         ContentValues values = new ContentValues();
         values.put("achieveDate", date);
         values.put("comple", 1);

@@ -82,23 +82,23 @@ public class DataBase extends SQLiteOpenHelper {
         String endY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)-1);
         String endD = String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY)+1, c.get(Calendar.MINUTE));
 
-        saveData(db, startY, startD, endY, endD, "肉まん1","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
         saveData(db, startY, startD, endY, endD, "肉まん12","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1","0");
-        saveData(db, startY, startD, endY, endD, "肉まん12","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1","0");
-        saveData(db, startY, startD, endY, endD, "肉まん12","0");
-        saveData(db, startY, startD, endY, endD, "肉まん123","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん123","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん123","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
-        saveData(db, startY, startD, endY, endD, "肉まん1234","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "バイト","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, startY, startD, endY, endD, "学校","0");
     }
 }

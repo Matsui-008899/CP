@@ -35,7 +35,7 @@ public class DataBaseLogin extends SQLiteOpenHelper {
                 SQL_CREATE_ENTRIES
         );
 
-        // saveData(db, Integer.parseInt(("12345")));
+//         saveData(db, Integer.parseInt(("12345")));
 
     }
 
@@ -59,5 +59,8 @@ public class DataBaseLogin extends SQLiteOpenHelper {
 
 
 
+    }
+
+    public void reCreate(SQLiteDatabase db){
     }
 }
