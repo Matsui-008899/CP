@@ -101,7 +101,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     check = true;
                     Log.d("debug", "ボタン押下:");
                     savaData();
-                    Intent intent = new Intent(getApplication(), MainActivity.class);
+                    Intent intent = new Intent(getApplication(), LoginActivity.class);
                     startActivity(intent);
                     break;
 

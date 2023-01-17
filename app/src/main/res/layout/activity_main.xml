@@ -240,8 +240,7 @@
                     android:onClick="selectTaskSetBtn"
                     android:text="@string/taskAddBtn"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" />
+                    app:roundedCorners="true" />
             </LinearLayout>
         </LinearLayout>
 
@@ -430,14 +429,14 @@
                     android:layout_height="50dp"
                     android:layout_gravity="right|bottom"
                     android:onClick="openTaskAdd"
-                    android:text="予定追加"
+                    app:bootstrapText="{fa_plus}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:roundedCorners="true"
-                    app:showOutline="true" />
+                    app:roundedCorners="true" />
             </TableRow>
 
             <TableRow
@@ -450,7 +449,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:onClick="openTaskView"
-                    android:text="予定"
+                    app:bootstrapText="{fa_calendar_check_o}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
                     app:showOutline="true" /> <!--android:backgroundTint="@android:color/black"-->
@@ -461,7 +461,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:onClick="openChara"
-                    android:text="キャラ"
+                    app:bootstrapText="{fa_android}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
                     app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_red_light"-->
@@ -472,7 +473,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:onClick="openHome"
-                    android:text="HOME"
+                    app:bootstrapText="{fa_home}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
                     app:showOutline="true" /> <!--android:backgroundTint="@android:color/darker_gray"-->
@@ -483,7 +485,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:onClick="openAchievement"
-                    android:text="実績"
+                    app:bootstrapText="{fa_trophy}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
                     app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_blue_light"-->
@@ -493,7 +496,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:onClick="openSetting"
-                    android:text="設定"
+                    app:bootstrapText="{fa_gear}"
+                    app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
                     app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_green_light"-->

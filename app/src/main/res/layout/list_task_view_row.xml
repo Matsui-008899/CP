@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setId"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -350,22 +351,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/deleteBtn"
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:onClick="onDelete"
                 android:text="削除"
+                app:bootstrapBrand="primary"
+                app:roundedCorners="true"
+                app:showOutline="true"
                 android:visibility="visible"/>
             <Space
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"/>
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/updateBtn"
                 android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:onClick="onUpdate"
                 android:text="確定"
+                app:bootstrapBrand="primary"
+                app:roundedCorners="true"
                 android:visibility="visible"/>
         </LinearLayout>
     </LinearLayout>
@@ -390,13 +396,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/viewId"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:textStyle="bold"
             android:textSize="13dp"
             android:text="編集"
+            app:bootstrapBrand="primary"
+            app:roundedCorners="true"
             android:onClick="selectUpdate"/>
     </LinearLayout>
     <Space
