@@ -8,6 +8,12 @@
                 android:targetPackage="com.example.calendarapplication"
                 android:targetClass="com.example.calendarapplication.ForgotActivity"/>
         </Preference>
+        <Preference
+            android:key="deletePass"
+            android:title="パス＆画像初期化"
+            android:summary="パスワードと画像の初期化をします" >
+
+        </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="初期化">
         <Preference
@@ -19,6 +25,11 @@
             android:key="setAchieve"
             android:title="実績初期化"
             android:summary="実績の取得状況をリセット" >
+        </Preference>
+        <Preference
+            android:key="deleteAllTask"
+            android:title="予定初期化"
+            android:summary="予定全件削除">
         </Preference>
 
     </PreferenceCategory>

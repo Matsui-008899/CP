@@ -322,7 +322,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="解放済み実績一覧"/>
+                android:text="実績一覧"/>
 
             <!--            <com.beardedhen.androidbootstrap.BootstrapButton-->
             <!--                android:id="@+id/debugSetDataBase"-->

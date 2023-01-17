@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -315,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount1();
                     moveScene = false;
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 int randomValue1 = random.nextInt(8);
                 gameView.loadUrl("javascript:" + charaMotion[randomValue1] + "('" + "chara1" + "')");
@@ -346,7 +347,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount2();
                     moveScene = false;
@@ -356,7 +357,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 if (charaCheck2) {
                     int randomValue2 = random.nextInt(8);
@@ -379,7 +380,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         new CountDownTimer(tara, 1000) {
             @Override
             public void onTick(long l) {
-                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
+//                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
                 if (moveScene) {
                     timeCount3();
                     moveScene = false;
@@ -389,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             @Override
             public void onFinish() {
-                Log.d("debug", "カウント終了");
+//                Log.d("debug", "カウント終了");
                 Random random = new Random();
                 if (charaCheck3) {
                     int randomValue3 = random.nextInt(8);
@@ -483,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 
+        gameView.loadUrl("javascript:huhouShinnyuu()");
         //キャラクター待機モーション
         stayMotion();
 
@@ -1188,6 +1190,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         ListTask(pan);
     }
 
+    public void onAllDelete(){
+
+    }
+
     /**
      * 月日ダイアログ表示
      * @param year
@@ -1296,6 +1302,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     /**
      * キャラクター画面（以下キャラ画面）
+     * RecyclerViewより餌情報の要求
      */
     public void onFoodTask(View view) {
         RecyclerView rv = findViewById(R.id.foodRecycleView);
@@ -1309,7 +1316,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * キャラ画面表示
+     * キャラの餌（完了済み予定）の出力
      */
     private List<FoodRowData> createFoodList() {
          /*
@@ -1363,7 +1370,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * キャラ画面
+     * キャラ画面で
      * 予定一件をタップ時
      */
     public void checkTask(View view) {
@@ -1379,16 +1386,32 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         ContentValues values = new ContentValues();
         values.put("level", 1);
 
+
         SQLiteDatabase db = selectDB.getWritableDatabase();
         db.update("taskdb", values, "_id = " + id, null);
-        Log.d("debug", "削除成功ID=" + id);
+        SQLiteDatabase dbR = selectDB.getReadableDatabase();
 
+        Cursor cursor = dbR.query(
+                "taskdb",
+                new String[]{"_id"},
+                "level = 1",
+                null,
+                null,
+                null,
+                null
+        );
+        gameActivity.checkingAchieve(3,cursor.getCount());
+        cursor.close();
 
         popCharaInfo();
         //リスト更新
         onFoodTask(view);
     }
 
+    /**
+     * RecyclerViewより要求された実績情報を制作する
+     * @param view
+     */
     private void onAchieveView(View view) {
         RecyclerView rv = findViewById(R.id.achieveRecycleView);
         AchieveRecyclerViewAdapter adapter = new AchieveRecyclerViewAdapter(this.createAchieveList());
@@ -1400,6 +1423,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         rv.setAdapter(adapter);
     }
 
+    /**
+     * 実績情報を画面に出力
+     * @return
+     */
     private List<AchieveViewRowData> createAchieveList() {
         List<AchieveViewRowData> dataset = new ArrayList<>();
 
@@ -1407,5 +1434,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         return dataset;
     }
+
+
 
 }

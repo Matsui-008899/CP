@@ -48,7 +48,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
                     _ID3 + " INTEGER PRIMARY KEY," +
                     ACHIEVENAME + " TEXT," +
                     ACHIEVECONTENT + " TEXT," +
-                    CHECKING + " INTEGER," +
+                    CHECKING + " TEXT," +
                     ACHIEVEDATE + " TEXT)";
 
 
@@ -94,22 +94,36 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     }
 
     public void reCreate2(SQLiteDatabase db) {
-        saveData(db,"mitarashi",0,"chara1");
-        saveData(db,"tako",1,"chara1");
-        saveData(db,"majin",2,"chara1");
-        saveData(db,"neko",0,"chara2");
+        saveData(db,"みたらし",0,"chara1");
+        saveData(db,"たこ",1,"chara1");
+        saveData(db,"マジン",2,"chara1");
+        saveData(db,"ネコ",0,"chara2");
         saveData(db,"neko2",1,"chara2");
         saveData(db,"neko3",2,"chara2");
-        saveData(db,"u_pa_",0,"chara3");
+        saveData(db,"ウーパー",0,"chara3");
         saveData(db,"u_pa_2",1,"chara3");
         saveData(db,"u_pa_",2,"chara3");
     }
 
     public void reCreate3(SQLiteDatabase db) {
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",1);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
-        saveData(db,"実績名の入力テスト","実績内容の入力テスト","",0);
+        saveData(db,"丸い生き物","１体目のキャラを獲得","",0);
+        saveData(db,"ネコ？","２体目のキャラを獲得","",0);
+        saveData(db,"さかな","３体目のキャラを獲得","",0);
+        saveData(db,"始まりの一歩","予定を１件達成","",0);
+        saveData(db,"一休み","予定を５件達成","",0);
+        saveData(db,"使い慣れてきたかな？","予定を１５件達成","",0);
+        saveData(db,"おやおやおやおや","予定を２０件達成","",0);
+        saveData(db,"休息もお大事に","予定を３０件達成","",0);
+        saveData(db,"くるくる","１体のキャラクターがレベル５に到達","",0);
+        saveData(db,"ｷｪｰｰ","１体のキャラクターがレベル１０に到達","",0);
+        saveData(db,"テスト","１体のキャラクターがレベル３０に到達","",0);
+        saveData(db,"テスト","２体のキャラクターがレベル５に到達","",0);
+        saveData(db,"テスト","２体のキャラクターがレベル１０に到達","",0);
+        saveData(db,"テスト","２体のキャラクターがレベル３０に到達","",0);
+        saveData(db,"テスト","３体のキャラクターがレベル５に到達","",0);
+        saveData(db,"テスト","３体のキャラクターがレベル１０に到達","",0);
+        saveData(db,"テスト","３体のキャラクターがレベル３０に到達","",0);
+
 
     }
 
