@@ -42,7 +42,7 @@
 
             <CalendarView
                 android:id="@+id/calendar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_weight="3" />
@@ -91,8 +91,8 @@
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/exit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
                     android:onClick="openHome"
                     android:text="@string/cancel"
                     app:bootstrapBrand="primary"
@@ -115,7 +115,7 @@
 
                     <EditText
                         android:id="@+id/taskName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="　　　　　　　　　　　　"
                         android:inputType="text"
@@ -235,8 +235,8 @@
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/set"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:onClick="selectTaskSetBtn"
                     android:text="@string/taskAddBtn"
                     app:bootstrapBrand="primary"
@@ -263,19 +263,19 @@
                 android:orientation="horizontal">
                 <Spinner
                     android:id="@+id/spinner2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
                     android:gravity="center|top" />
                 <Spinner
                     android:id="@+id/spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
                     android:gravity="center|top" />
             </LinearLayout>
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/listMonthSelectBtn"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:onClick="ListTask"
                 android:text="選択"
@@ -388,10 +388,12 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.beardedhen.androidbootstrap.BootstrapLabel
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="達成した予定をタップしろ" />
+                        android:text="達成した予定をタップしろ"
+                        app:bootstrapBrand="success"
+                        />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodRecycleView"
@@ -446,7 +448,7 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/taskBtn"
                     android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:onClick="openTaskView"
                     app:bootstrapText="{fa_calendar_check_o}"
@@ -458,7 +460,7 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CharaBtn"
                     android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:onClick="openChara"
                     app:bootstrapText="{fa_android}"
@@ -470,7 +472,7 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/homeBtn"
                     android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:onClick="openHome"
                     app:bootstrapText="{fa_home}"
@@ -482,7 +484,7 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CotBtn"
                     android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:onClick="openAchievement"
                     app:bootstrapText="{fa_trophy}"
@@ -493,7 +495,7 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/settingBtn"
                     android:layout_width="200dp"
-                    android:layout_height="40dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:onClick="openSetting"
                     app:bootstrapText="{fa_gear}"
