@@ -1,6 +1,7 @@
 let motion1 = null;
 let motion2 = null;
 let motion3 = null;
+let visiChara1 = 'hidden';
 let visiChara2 = 'hidden';
 let visiChara3 = 'hidden';
 let visifuki1 = 'hidden';
@@ -152,6 +153,9 @@ function anim(chara, motion, motionName) {
 //挿入準備
 function setVisible(chara) {
   const ob = document.getElementById(chara);
+  if (chara == 'chara1') {
+    visiChara1 = 'visible';
+  }
   if (chara == 'chara2') {
     visiChara2 = 'visible';
   }
@@ -189,8 +193,10 @@ function u_pa_2() {
 function hugeBack() {
   var ele = document.getElementById("back");
   ele.style.cssText = 'width: 100%;   height: 100%;   background: url("images/bg_house_living.jpg") no-repeat center/80%;   background-size: 400px 200px;';
-  var chara1 = document.getElementById("chara1");
-  chara1.style.cssText = 'z-index: 30;  top: 120px;  bottom: 0;';
+  if (visiChara1 == "visible") {
+    var chara1 = document.getElementById("chara1");
+    chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 120px;  bottom: 0;';
+  }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 100px;';
@@ -205,8 +211,11 @@ function hugeBack() {
 function smallBack() {
   var ele = document.getElementById("back");
   ele.style.cssText = 'width: 100%; height: 100px; background: url("images/bg_natural_sougen.jpg") no-repeat center/80%; background-size: 500px 100px;';
-  var chara1 = document.getElementById("chara1");
-  chara1.style.cssText = 'z-index: 30;  top: 30px;';
+  
+  if (visiChara1 == "visible") {
+    var chara1 = document.getElementById("chara1");
+  chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+  }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';
@@ -222,8 +231,11 @@ function smallBack() {
 function huhouShinnyuu() {
   var ele = document.getElementById("back");
   ele.style.cssText = 'width: 100%; height: 100%; background: url("images/_214558.jpg") no-repeat center/80%; background-size: 370px 100px;';
-  var chara1 = document.getElementById("chara1");
-  chara1.style.cssText = 'z-index: 30;  top: 30px;';
+  
+  if (visiChara1 == "visible") {
+    var chara1 = document.getElementById("chara1");
+  chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+  }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';

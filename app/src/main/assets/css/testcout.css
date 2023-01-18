@@ -13,6 +13,7 @@ body {
 
 
 #chara1{
+  visibility: hidden;
   z-index: 30;
   top: 30px;
 }
