@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="10">
 
             <Space
@@ -41,6 +41,7 @@
                 android:layout_height="90dp" />
 
             <CalendarView
+                android:background="@drawable/p0397_m"
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -54,6 +55,7 @@
                 android:layout_weight="4">
 
                 <LinearLayout
+                    android:background="@drawable/p0397_m"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -76,10 +78,9 @@
         <!--        予定追加レイアウト-->
         <LinearLayout
             android:id="@+id/layerTask"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="380dp"
             android:layout_gravity="center"
-            android:background="@drawable/border"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:visibility="gone">
@@ -87,6 +88,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
@@ -114,8 +116,9 @@
                     android:hint="@string/taskHint">
 
                     <EditText
+                        android:layout_gravity="center"
                         android:id="@+id/taskName"
-                        android:layout_width="match_parent"
+                        android:layout_width="380dp"
                         android:layout_height="match_parent"
                         android:hint="　　　　　　　　　　　　"
                         android:inputType="text"
@@ -140,6 +143,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -182,6 +186,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -213,6 +218,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -250,7 +256,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
                 android:layout_width="match_parent"
@@ -260,12 +266,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
+
                 <Spinner
                     android:id="@+id/spinner2"
                     android:layout_width="150dp"
                     android:layout_height="30dp"
                     android:gravity="center|top" />
+
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="150dp"
@@ -279,6 +288,7 @@
                 android:layout_height="40dp"
                 android:onClick="ListTask"
                 android:text="選択"
+                android:layout_gravity="center"
                 app:bootstrapBrand="primary"
                 app:roundedCorners="true"
                 app:showOutline="true" /> <!--android:backgroundTint="@android:color/black"-->
@@ -289,6 +299,7 @@
                 android:layout_weight="1">
 
                 <LinearLayout
+                    android:background="@drawable/p0468_m"
                     android:id="@+id/taskInsert"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -319,10 +330,12 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="実績一覧"/>
+
+            <com.beardedhen.androidbootstrap.BootstrapLabel
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:bootstrapBrand="success"
+                android:text="実績一覧" />
 
             <!--            <com.beardedhen.androidbootstrap.BootstrapButton-->
             <!--                android:id="@+id/debugSetDataBase"-->
@@ -340,6 +353,7 @@
 
                 <LinearLayout
                     android:id="@+id/achieveList"
+                    android:background="@drawable/p0468_m"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -383,6 +397,7 @@
                 android:layout_weight="1">
 
                 <LinearLayout
+                    android:background="@drawable/p0492_m"
                     android:id="@+id/charaFoodLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -431,7 +446,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="right|bottom"
                     android:onClick="openTaskAdd"
-                    app:bootstrapText="{fa_plus}"
+                    app:bootstrapText="{fa_plus-circle}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
                     app:layout_constraintBottom_toBottomOf="parent"

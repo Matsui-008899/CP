@@ -39,7 +39,7 @@
     <string name="fgt_title">パスワードの設定・再設定</string>
     <string name="fgt_current">現在のパスワード</string>
     <string name="fgt_new">新しいパスワード</string>
-    <string name="fgt_re">新しいパスワードを再入力</string>
+    <string name="fgt_re">新しいパスワードを再入力 (確認)</string>
     <string name="fgt_change">変更する</string>
     <string name="fgt_back">戻る</string>
 
@@ -49,7 +49,7 @@
 
     // FirstActivity
     <string name="fst_title">パスワードを作成</string>
-    <string name="fst_warning">（注）数字、5文字</string>
+    <string name="fst_warning">※ 数字のみ、5文字(半角)</string>
     <string name="fst_enter">パスワードを入力してください</string>
     <string name="fst_send">設定</string>
 
