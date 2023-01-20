@@ -1381,7 +1381,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void checkTask(View view) {
         int id = (int) view.getTag();
 
+        //gameActivityでレベルアップの処理を行う
+//        trueを返すのであればキャラクターに変化（追加キャラor進化）があり
         boolean visibleChara = gameActivity.levelUp();
+        //
         if (visibleChara) {
             AllCharaView();
             gameView.loadUrl("javascript:hugeBack()");

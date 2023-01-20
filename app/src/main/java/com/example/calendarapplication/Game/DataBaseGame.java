@@ -94,13 +94,13 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     }
 
     public void reCreate2(SQLiteDatabase db) {
-        saveData(db,"みたらし",0,"chara1");
-        saveData(db,"たこ",1,"chara1");
-        saveData(db,"マジン",2,"chara1");
-        saveData(db,"ネコ",0,"chara2");
+        saveData(db,"mitarashi",0,"chara1");
+        saveData(db,"tako",1,"chara1");
+        saveData(db,"tako",2,"chara1");
+        saveData(db,"neko",0,"chara2");
         saveData(db,"neko2",1,"chara2");
         saveData(db,"neko3",2,"chara2");
-        saveData(db,"ウーパー",0,"chara3");
+        saveData(db,"u_pa_",0,"chara3");
         saveData(db,"u_pa_2",1,"chara3");
         saveData(db,"u_pa_",2,"chara3");
     }
