@@ -143,8 +143,16 @@ img, div {
   margin: auto;
 }
 
+:root {
+  --animationCount1: 1;
+  --animationCount2: 1;
+  --animationCount3: 1;
+}
+
 .purun {
   animation: purun 2s infinite;
+  --second: 2s;
+  --name: purun;
 }
 @keyframes purun {
   0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -157,6 +165,8 @@ img, div {
 
 .korokoro {
       animation: korokoro 2.5s infinite;
+      --second: 2.5s;
+      --name: korokoro;
     }
     @keyframes korokoro {
       0%   { transform: translate(0%, 0%); }
@@ -173,9 +183,13 @@ img, div {
     }
 
 
-.pyon{
-  animation: pyon 2.5s infinite;
-}
+
+    .pyon{
+      animation: pyon 2.5s infinite;
+      --second: 2.5s;
+      --name: pyon;
+    }
+
 @keyframes pyon {
   0%   { transform: scale(0.8, 1.4) translate(0%, -100%); }
   10%  { transform: scale(0.8, 1.4) translate(0%, -15%); }
@@ -190,6 +204,8 @@ img, div {
 
 .poyoon{
   animation: poyoon 2s infinite;
+  --second: 2s;
+  --name: poyoon;
 }
 @keyframes poyoon {
   0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -204,6 +220,8 @@ img, div {
 
 .purupurun{
   animation: purupurun 2s infinite;
+  --second: 2s;
+  --name: purupurun;
 }
 @-webkit-keyframes purupurun {
   0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -224,6 +242,8 @@ img, div {
 
 .pururun{
   animation: pururun 1.6s infinite;
+  --second: 1.6s;
+  --name: pururun;
 }
 @-webkit-keyframes pururun {
   0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -248,6 +268,8 @@ img, div {
 
 .puyon{
   animation: puyon 1.3s infinite;
+  --second: 1.3s;
+  --name: puyon;
 }
 @-webkit-keyframes puyon {
   0%   { -webkit-transform: scale(1.0, 1.0) translate(0%, 0%); }
@@ -271,6 +293,8 @@ img, div {
 
 .papa{
   animation: papa 4s infinite;
+  --second: 4s;
+  --name: papa;
 }
 @keyframes papa {
       33%  { transform: translatex(100%)  rotate(1turn);}
@@ -279,10 +303,32 @@ img, div {
 
 .kurukuru{
   animation: kurukuru 3s linear;
+  --second: 3s;
+  --name: kurukuru;
 }
 @keyframes kurukuru {
       0%  { transform: translateY(-100%) rotate(0);}
       100%  { transform: translateY(0%) rotate(720deg)}
-}   
+}
 
-    
+
+.is-stop1{
+  animation-name: var(--name);
+  animation-duration: var(--second);
+  animation-iteration-count: var(--animationCount1);
+  animation-fill-mode: forwards;
+}
+
+.is-stop2{
+  animation-name: var(--name);
+  animation-duration: var(--second);
+  animation-iteration-count: var(--animationCount2);
+  animation-fill-mode: forwards;
+}
+
+.is-stop3{
+  animation-name: var(--name);
+  animation-duration: var(--second);
+  animation-iteration-count: var(--animationCount3);
+  animation-fill-mode: forwards;
+}

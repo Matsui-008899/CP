@@ -50,7 +50,6 @@ function purun(chara) {
   } else if (chara == 'chara3') {
     anim(chara, motion1, "purun");
   }
-
 }
 
 /**
@@ -145,9 +144,11 @@ function kurukuru(chara) {
 }
 
 function anim(chara, motion, motionName) {
+  stop(chara);
   document.getElementById(chara).classList.remove(motion);
   looopAnimation(chara, motionName);
   motion = motionName;
+  console.log(motion);
 }
 
 //挿入準備
@@ -288,4 +289,60 @@ function invisibleBalloon(){
     const ob = document.getElementById('chara3com');
     ob.style.visibility='hidden';
   }
+}
+
+function father(chara){
+  stop(chara);
+  document.getElementById(chara).addEventListener('animationend',()=>{
+    korokoro(chara);
+  });
+}
+
+const elementfather1 = document.getElementById('chara1');
+const elementfather2 = document.getElementById('chara2');
+const elementfather3 = document.getElementById('chara3');
+
+const HTML = document.querySelector('html');
+
+elementfather1.addEventListener('animationiteration', () => {
+  const animationCount1 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount1'));
+  HTML.style.setProperty('--animationCount1',animationCount1 + 1);
+});
+
+elementfather2.addEventListener('animationiteration', () => {
+  const animationCount2 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount2'));
+  HTML.style.setProperty('--animationCount1',animationCount2 + 1);
+});
+
+elementfather3.addEventListener('animationiteration', () => {
+  const animationCount3 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount3'));
+  HTML.style.setProperty('--animationCount1',animationCount3 + 1);
+});
+
+
+function stop(chara){
+  console.log('停止処理開始');
+  const ele = document.getElementById(chara);
+  if(chara == 'chara1'){
+    ele.classList.remove(motion1);
+    ele.classList.add("is-stop1");
+  }
+  if(chara == 'chara2'){
+    ele.classList.remove(motion2);
+    ele.classList.add("is-stop2");
+  }
+  if(chara == 'chara3'){
+    ele.classList.remove(motion3);
+    ele.classList.add("is-stop3");
+  }
+  ele.addEventListener("animationend", (event) => {
+    /* イベント対象のアニメーション名で処理の出し分可能 */
+    console.log(event.animationName);
+    console.log(ele.classList);
+      ele.classList.remove(...ele.classList);
+      ele.classList.remove("is-stop");
+      HTML.style.setProperty("--animationCount", 1);
+      console.log(ele.classList+'呼び出し');
+  });
+  console.log('完了');
 }
