@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             android:weightSum="10">
 
             <Space
@@ -44,13 +44,13 @@
                 android:background="@drawable/p0399_m"
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_gravity="center"
                 android:layout_weight="3" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:layout_weight="4">
 
@@ -73,17 +73,18 @@
                 </LinearLayout>
             </ScrollView>
 
+
         </LinearLayout>
 
         <!--        予定追加レイアウト-->
         <LinearLayout
             android:id="@+id/layerTask"
             android:layout_width="match_parent"
-            android:layout_height="380dp"
-            android:layout_gravity="center"
+            android:layout_height="684dp"
+            android:layout_gravity="bottom"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -300,8 +301,7 @@
                         android:text="選択"
                         android:layout_gravity="center"
                         app:bootstrapBrand="primary"
-                        app:roundedCorners="true"
-                        app:showOutline="true" /> <!--android:backgroundTint="@android:color/black"-->
+                        app:roundedCorners="true" /> <!--android:backgroundTint="@android:color/black"-->
 
 
                 </LinearLayout>
@@ -384,7 +384,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="80dp" />
+                android:layout_height="55dp" />
 
 
         </LinearLayout>
@@ -463,7 +463,7 @@
                     android:onClick="openTaskAdd"
                     app:bootstrapText="{fa_plus-circle}"
                     app:bootstrapSize="xl"
-                    app:bootstrapBrand="primary"
+                    app:bootstrapBrand="success"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -484,8 +484,8 @@
                     app:bootstrapText="{fa_calendar_check_o}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" /> <!--android:backgroundTint="@android:color/black"-->
+                    android:background="@drawable/border"
+                    /> <!--android:backgroundTint="@android:color/black"-->
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CharaBtn"
@@ -496,8 +496,8 @@
                     app:bootstrapText="{fa_android}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_red_light"-->
+                    android:background="@drawable/border"
+                    /> <!--android:backgroundTint="@android:color/holo_red_light"-->
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/homeBtn"
@@ -508,8 +508,8 @@
                     app:bootstrapText="{fa_home}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" /> <!--android:backgroundTint="@android:color/darker_gray"-->
+                    android:background="@drawable/border"
+                    /> <!--android:backgroundTint="@android:color/darker_gray"-->
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/CotBtn"
@@ -520,8 +520,8 @@
                     app:bootstrapText="{fa_trophy}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_blue_light"-->
+                    android:background="@drawable/border"
+                    /> <!--android:backgroundTint="@android:color/holo_blue_light"-->
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/settingBtn"
                     android:layout_width="200dp"
@@ -531,8 +531,8 @@
                     app:bootstrapText="{fa_gear}"
                     app:bootstrapSize="xl"
                     app:bootstrapBrand="primary"
-                    app:roundedCorners="true"
-                    app:showOutline="true" /> <!--android:backgroundTint="@android:color/holo_green_light"-->
+                    android:background="@drawable/border"
+                    /> <!--android:backgroundTint="@android:color/holo_green_light"-->
             </TableRow>
         </TableLayout>
     </LinearLayout>
