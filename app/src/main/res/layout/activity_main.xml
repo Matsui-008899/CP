@@ -32,46 +32,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:weightSum="10">
+            android:visibility="gone">
 
             <Space
                 android:id="@+id/tintin2"
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
-
-            <CalendarView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/p0399_m"
-                android:id="@+id/calendar"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_gravity="center"
-                android:layout_weight="3" />
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <CalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center"
+                    />
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_gravity="center"
-                android:layout_weight="4">
-
-                <LinearLayout
-                    android:background="@drawable/p0399_m"
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center">
 
-                    <!--                    <TextView-->
-                    <!--                        android:id="@+id/TaskView"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="match_parent"-->
-                    <!--                        android:text="" />-->
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/CalendarRecycleView"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </ScrollView>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/CalendarRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </ScrollView>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="55dp" />
 
 
         </LinearLayout>
@@ -84,7 +84,7 @@
             android:layout_gravity="bottom"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -257,7 +257,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
                 android:layout_width="match_parent"
@@ -309,12 +309,12 @@
             </LinearLayout>
 
             <ScrollView
+                android:background="@drawable/p0468_m"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <LinearLayout
-                    android:background="@drawable/p0468_m"
                     android:id="@+id/taskInsert"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -406,24 +406,25 @@
             <!--                android:layout_height="140dp"-->
             <!--                android:visibility="visible"/>-->
 
+            <com.beardedhen.androidbootstrap.BootstrapLabel
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="達成した予定をタップしろ"
+                app:bootstrapBrand="success"
+                />
             <ScrollView
+                android:background="@drawable/p0492_m"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <LinearLayout
-                    android:background="@drawable/p0492_m"
                     android:id="@+id/charaFoodLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <com.beardedhen.androidbootstrap.BootstrapLabel
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="達成した予定をタップしろ"
-                        app:bootstrapBrand="success"
-                        />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/foodRecycleView"

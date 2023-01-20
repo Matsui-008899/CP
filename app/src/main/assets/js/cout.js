@@ -1,12 +1,15 @@
-let motion1 = null;
-let motion2 = null;
-let motion3 = null;
+let motion1 = 'null';
+let motion2 = 'null';
+let motion3 = 'null';
 let visiChara1 = 'hidden';
 let visiChara2 = 'hidden';
 let visiChara3 = 'hidden';
 let visifuki1 = 'hidden';
 let visifuki2 = 'hidden';
 let visifuki3 = 'hidden';
+let time1 = 0;
+let time2 = 0;
+let time3 = 0;
 
 //背景の挙動設定
 // document.querySelector(`.container`).animate(
@@ -44,11 +47,11 @@ function looopAnimation(id, className) {
  */
 function purun(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "purun");
+    anim(chara, 'motion1', "purun",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion1, "purun");
+    anim(chara, 'motion2', "purun",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion1, "purun");
+    anim(chara, 'motion3', "purun",motion3);
   }
 }
 
@@ -57,66 +60,66 @@ function purun(chara) {
  */
 function korokoro(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "korokoro");
+    anim(chara, 'motion1', "korokoro",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, "korokoro");
+    anim(chara, 'motion2', "korokoro",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, "korokoro");
+    anim(chara, 'motion3', "korokoro",motion3);
   }
 
 }
 
 function pyon(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "pyon");
+    anim(chara, 'motion1', "pyon",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, "pyon");
+    anim(chara, 'motion2', "pyon",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, "pyon");
+    anim(chara, 'motion3', "pyon",motion3);
   }
 
 }
 
 function poyoon(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "poyoon");
+    anim(chara, 'motion1', "poyoon",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, "poyoon");
+    anim(chara, 'motion2', "poyoon",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, "poyoon");
+    anim(chara, 'motion3', "poyoon",motion3);
   }
 
 }
 
 function purupurun(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "purupurun");
+    anim(chara, 'motion1', "purupurun",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, "purupurun");
+    anim(chara, 'motion2', "purupurun",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, "purupurun");
+    anim(chara, 'motion3', "purupurun",motion3);
   }
 
 }
 
 function pururun(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, "pururun");
+    anim(chara, 'motion1', "pururun",motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, "pururun");
+    anim(chara, 'motion2', "pururun",motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, "pururun");
+    anim(chara, 'motion3', "pururun",motion3);
   }
 
 }
 
 function puyon(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, 'puyon');
+    anim(chara, 'motion1', 'puyon',motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, 'puyon');
+    anim(chara, 'motion2', 'puyon',motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, 'puyon');
+    anim(chara, 'motion3', 'puyon',motion3);
   }
 
 }
@@ -124,31 +127,103 @@ function puyon(chara) {
 
 function papa(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, 'papa');
+    anim(chara, 'motion1', 'papa',motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, 'papa');
+    anim(chara, 'motion2', 'papa',motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, 'papa');
+    anim(chara, 'motion3', 'papa',motion3);
   }
 }
 
 function kurukuru(chara) {
   if (chara == 'chara1') {
-    anim(chara, motion1, 'kurukuru');
+    anim(chara, 'motion1', 'kurukuru',motion1);
   } else if (chara == 'chara2') {
-    anim(chara, motion2, 'kurukuru');
+    anim(chara, 'motion2', 'kurukuru',motion2);
   } else if (chara == 'chara3') {
-    anim(chara, motion3, 'kurukuru');
+    anim(chara, 'motion3', 'kurukuru',motion3);
   }
   window.setTimeout(purun, 5000, chara);
 }
 
-function anim(chara, motion, motionName) {
-  stop(chara);
-  document.getElementById(chara).classList.remove(motion);
-  looopAnimation(chara, motionName);
-  motion = motionName;
-  console.log(motion);
+function anim(chara, motion, motionName, motionNull) {
+  console.log(motionNull + "motoincheck");
+  if (motionNull != 'null') {
+    stop(chara);
+
+    document.getElementById(chara).addEventListener('animationend', () => {
+      console.log(document.getElementById(chara).classList + 'スタート呼び出し');
+      document.getElementById(chara).classList.remove(motion);
+      looopAnimation(chara, motionName);
+      if (motion == 'motion1') {
+        motion1 = motionName;
+        console.log(motion1+'inしたお');
+      }
+      if (motion == 'motion2') {
+        motion2 = motionName;
+      }
+      if (motion == 'motion3') {
+        motion3 = motionName;
+      }
+      console.log(document.getElementById(chara).classList + 'エンド呼び出し');
+
+    });
+  } else {
+    console.log(document.getElementById(chara).classList + 'スタート呼び出し');
+    document.getElementById(chara).classList.remove(motion);
+    looopAnimation(chara, motionName);
+    if (motion == 'motion1') {
+      motion1 = motionName;
+      console.log(motion1)
+    }
+    if (motion == 'motion2') {
+      motion2 = motionName;
+    }
+    if (motion == 'motion3') {
+      motion3 = motionName;
+    }
+    console.log(document.getElementById(chara).classList + 'エンド呼び出し');
+
+
+  }
+
+  // if (motion == null) {
+  //   console.log(document.getElementById(chara).classList + 'スタート呼び出し');
+  //     document.getElementById(chara).classList.remove(motion);
+  //     looopAnimation(chara, motionName);
+  //     if (motion == 'motion1') {
+  //       motion1 = motionName;
+  //       console.log(motion1)
+  //     }
+  //     if (motion == 'motion2') {
+  //       motion2 = motionName;
+  //     }
+  //     if (motion == 'motion3') {
+  //       motion3 = motionName;
+  //     }
+  //     console.log(document.getElementById(chara).classList + 'エンド呼び出し');
+
+  // } else {
+  //   stop(chara);
+  //   document.getElementById(chara).addEventListener('animationend', () => {
+  //     console.log(document.getElementById(chara).classList + 'スタート呼び出し');
+  //     document.getElementById(chara).classList.remove(motion);
+  //     looopAnimation(chara, motionName);
+  //     if (motion == 'motion1') {
+  //       motion1 = motionName;
+  //       console.log(motion1)
+  //     }
+  //     if (motion == 'motion2') {
+  //       motion2 = motionName;
+  //     }
+  //     if (motion == 'motion3') {
+  //       motion3 = motionName;
+  //     }
+  //     console.log(document.getElementById(chara).classList + 'エンド呼び出し');
+
+  // });
+  // }
+
 }
 
 //挿入準備
@@ -212,10 +287,10 @@ function hugeBack() {
 function smallBack() {
   var ele = document.getElementById("back");
   ele.style.cssText = 'width: 100%; height: 100px; background: url("images/bg_natural_sougen.jpg") no-repeat center/80%; background-size: 500px 100px;';
-  
+
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
-  chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+    chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
@@ -232,10 +307,10 @@ function smallBack() {
 function huhouShinnyuu() {
   var ele = document.getElementById("back");
   ele.style.cssText = 'width: 100%; height: 100%; background: url("images/_214558.jpg") no-repeat center/80%; background-size: 370px 100px;';
-  
+
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
-  chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+    chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
@@ -248,12 +323,12 @@ function huhouShinnyuu() {
   }
 }
 
-function visibleBalloon(name, level,chara) {
+function visibleBalloon(name, level, chara) {
   const putName = document.getElementById(name + 'name');
   const putLevel = document.getElementById(name + 'level');
-  console.log(name+"com");
-  const ob = document.getElementById(name+'com');
-  ob.style.visibility='visible';
+  console.log(name + "com");
+  const ob = document.getElementById(name + 'com');
+  ob.style.visibility = 'visible';
   if (name == 'chara1') {
     visifuki1 = 'visible';
   }
@@ -272,30 +347,23 @@ function visibleBalloon(name, level,chara) {
 
 }
 
-function invisibleBalloon(){
+function invisibleBalloon() {
   if (visifuki1 == 'visible') {
     visifuki1 = 'hidden';
     const ob = document.getElementById('chara1com');
-    ob.style.visibility='hidden';
-  
+    ob.style.visibility = 'hidden';
+
   }
   if (visifuki2 == 'visible') {
     visifuki2 = 'hidden';
     const ob = document.getElementById('chara2com');
-    ob.style.visibility='hidden';
+    ob.style.visibility = 'hidden';
   }
   if (visifuki3 == 'visible') {
     visifuki3 = 'hidden';
     const ob = document.getElementById('chara3com');
-    ob.style.visibility='hidden';
+    ob.style.visibility = 'hidden';
   }
-}
-
-function father(chara){
-  stop(chara);
-  document.getElementById(chara).addEventListener('animationend',()=>{
-    korokoro(chara);
-  });
 }
 
 const elementfather1 = document.getElementById('chara1');
@@ -306,32 +374,38 @@ const HTML = document.querySelector('html');
 
 elementfather1.addEventListener('animationiteration', () => {
   const animationCount1 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount1'));
-  HTML.style.setProperty('--animationCount1',animationCount1 + 1);
+  HTML.style.setProperty('--animationCount1', animationCount1 + 1);
 });
 
 elementfather2.addEventListener('animationiteration', () => {
   const animationCount2 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount2'));
-  HTML.style.setProperty('--animationCount1',animationCount2 + 1);
+  HTML.style.setProperty('--animationCount2',animationCount2 + 1);
 });
 
 elementfather3.addEventListener('animationiteration', () => {
   const animationCount3 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount3'));
-  HTML.style.setProperty('--animationCount1',animationCount3 + 1);
+  HTML.style.setProperty('--animationCount2',animationCount3 + 1);
 });
 
 
-function stop(chara){
+function stop(chara) {
   console.log('停止処理開始');
   const ele = document.getElementById(chara);
-  if(chara == 'chara1'){
+  if (chara == 'chara1') {
+    console.log(motion1 + 'モーション呼び出し' + ele.classList);
+    settingTime(chara,motion1);
     ele.classList.remove(motion1);
     ele.classList.add("is-stop1");
   }
-  if(chara == 'chara2'){
+  if (chara == 'chara2') {
+    console.log(motion2 + 'モーション呼び出し' + ele.classList);
+    settingTime(chara,motion2);
     ele.classList.remove(motion2);
     ele.classList.add("is-stop2");
   }
-  if(chara == 'chara3'){
+  if (chara == 'chara3') {
+    console.log(motion3 + 'モーション呼び出し' + ele.classList);
+    settingTime(chara,motion3);
     ele.classList.remove(motion3);
     ele.classList.add("is-stop3");
   }
@@ -339,10 +413,59 @@ function stop(chara){
     /* イベント対象のアニメーション名で処理の出し分可能 */
     console.log(event.animationName);
     console.log(ele.classList);
-      ele.classList.remove(...ele.classList);
-      ele.classList.remove("is-stop");
-      HTML.style.setProperty("--animationCount", 1);
-      console.log(ele.classList+'呼び出し');
+    ele.classList.remove(...ele.classList);
+    console.log(ele.classList);
+
+    if (chara == 'chara1') {
+      HTML.style.setProperty("--animationCount1", 1);
+      motion1 = 'null';
+      ele.classList.remove("is-stop1");
+    }
+    if (chara == 'chara2') {
+      HTML.style.setProperty("--animationCount2", 1);
+      motion2 = 'null';
+      ele.classList.remove("is-stop2");
+    }
+    if (chara == 'chara3') {
+      HTML.style.setProperty("--animationCount3", 1);
+      motion3 = 'null';
+      ele.classList.remove("is-stop3");
+    }
+    console.log(motion2)
+    console.log('停止処理完了');
+
   });
-  console.log('完了');
+
+}
+
+function settingTime(chara,motion){
+  document.getElementById(chara).style.setProperty('--name', motion);
+  if (motion == 'purun') {
+    document.getElementById(chara).style.setProperty('--second', '2s');
+  }
+  if (motion == 'korokoro') {
+    document.getElementById(chara).style.setProperty('--second', '2.5s');
+  }
+  if (motion == 'pyon') {
+    document.getElementById(chara).style.setProperty('--second', '2.5s');
+  }
+  if (motion == 'poyoon') {
+    document.getElementById(chara).style.setProperty('--second', '2s');
+  }
+  if (motion == 'purupurun') {
+    document.getElementById(chara).style.setProperty('--second', '2s');
+  }
+  if (motion == 'pururun') {
+    document.getElementById(chara).style.setProperty('--second', '1.6s');
+  }
+  if (motion == 'puyon') {
+    document.getElementById(chara).style.setProperty('--second', '1.3s');
+  }
+  if (motion == 'papa') {
+    document.getElementById(chara).style.setProperty('--second', '4s');
+  }
+  if (motion == 'kurukuru') {
+    document.getElementById(chara).style.setProperty('--second', '3s');
+  }
+
 }
