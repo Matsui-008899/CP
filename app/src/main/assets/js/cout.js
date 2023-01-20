@@ -306,7 +306,7 @@ function smallBack() {
 
 function huhouShinnyuu() {
   var ele = document.getElementById("back");
-  ele.style.cssText = 'width: 100%; height: 100%; background: url("images/_214558.jpg") no-repeat center/80%; background-size: 370px 100px;';
+  ele.style.cssText = 'width: 100%; height: 100%; background: url("images/_214558.jpg") no-repeat center/80%; background-size: 450px 100px;';
 
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
