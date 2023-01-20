@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:weightSum="10">
 
             <Space
@@ -41,7 +41,7 @@
                 android:layout_height="90dp" />
 
             <CalendarView
-                android:background="@drawable/p0397_m"
+                android:background="@drawable/p0399_m"
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -55,7 +55,7 @@
                 android:layout_weight="4">
 
                 <LinearLayout
-                    android:background="@drawable/p0397_m"
+                    android:background="@drawable/p0399_m"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -256,7 +256,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:layout_width="match_parent"
