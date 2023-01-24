@@ -11,6 +11,22 @@ let time1 = 0;
 let time2 = 0;
 let time3 = 0;
 
+var motionList = {
+  1:function(chara){purun(chara);},
+  2:function(chara){korokoro(chara);},
+  3:function(chara){pyon(chara);},
+  4:function(chara){poyoon(chara);},
+  5:function(chara){purupurun(chara);},
+  6:function(chara){pururun(chara);},
+  7:function(chara){puyon(chara);},
+  8:function(chara){papa(chara);},
+};
+var motionList2 = ["purun", "korokoro", "pyon", "poyoon", "purupurun", "pururun", "puyon", "papa"];
+
+let charaMode1 = "wait";
+let charaMode2 = "wait";
+let charaMode3 = "wait";
+
 //背景の挙動設定
 // document.querySelector(`.container`).animate(
 //   [
@@ -143,11 +159,10 @@ function kurukuru(chara) {
   } else if (chara == 'chara3') {
     anim(chara, 'motion3', 'kurukuru',motion3);
   }
-  window.setTimeout(purun, 5000, chara);
+  window.setTimeout(purun, 1000, chara);
 }
 
 function anim(chara, motion, motionName, motionNull) {
-  console.log(motionNull + "motoincheck");
   if (motionNull != 'null') {
     stop(chara);
 
@@ -157,7 +172,6 @@ function anim(chara, motion, motionName, motionNull) {
       looopAnimation(chara, motionName);
       if (motion == 'motion1') {
         motion1 = motionName;
-        console.log(motion1+'inしたお');
       }
       if (motion == 'motion2') {
         motion2 = motionName;
@@ -165,16 +179,13 @@ function anim(chara, motion, motionName, motionNull) {
       if (motion == 'motion3') {
         motion3 = motionName;
       }
-      console.log(document.getElementById(chara).classList + 'エンド呼び出し');
 
     });
   } else {
-    console.log(document.getElementById(chara).classList + 'スタート呼び出し');
     document.getElementById(chara).classList.remove(motion);
     looopAnimation(chara, motionName);
     if (motion == 'motion1') {
       motion1 = motionName;
-      console.log(motion1)
     }
     if (motion == 'motion2') {
       motion2 = motionName;
@@ -182,7 +193,6 @@ function anim(chara, motion, motionName, motionNull) {
     if (motion == 'motion3') {
       motion3 = motionName;
     }
-    console.log(document.getElementById(chara).classList + 'エンド呼び出し');
 
 
   }
@@ -326,7 +336,6 @@ function huhouShinnyuu() {
 function visibleBalloon(name, level, chara) {
   const putName = document.getElementById(name + 'name');
   const putLevel = document.getElementById(name + 'level');
-  console.log(name + "com");
   const ob = document.getElementById(name + 'com');
   ob.style.visibility = 'visible';
   if (name == 'chara1') {
@@ -339,10 +348,7 @@ function visibleBalloon(name, level, chara) {
     visifuki3 = 'visible';
   }
 
-
-  console.log('名前：' + chara);
-  console.log('現在レベル：' + level);
-  putName.textContent = '名前：' + chara;
+  putName.textContent = '名前：' + chara+"くん";
   putLevel.textContent = '現在レベル：' + level;
 
 }
@@ -411,10 +417,7 @@ function stop(chara) {
   }
   ele.addEventListener("animationend", (event) => {
     /* イベント対象のアニメーション名で処理の出し分可能 */
-    console.log(event.animationName);
-    console.log(ele.classList);
     ele.classList.remove(...ele.classList);
-    console.log(ele.classList);
 
     if (chara == 'chara1') {
       HTML.style.setProperty("--animationCount1", 1);
@@ -431,7 +434,6 @@ function stop(chara) {
       motion3 = 'null';
       ele.classList.remove("is-stop3");
     }
-    console.log(motion2)
     console.log('停止処理完了');
 
   });
@@ -467,5 +469,45 @@ function settingTime(chara,motion){
   if (motion == 'kurukuru') {
     document.getElementById(chara).style.setProperty('--second', '3s');
   }
+}
 
+
+let mode1 = 0;
+let mode2 = 0;
+let mode3 = 0;
+
+
+
+function waitMove(chara) {
+  let num = Math.floor(Math.random() * Object.keys(motionList).length)+1;
+  motionList[num](chara);
+  console.log(chara+"待機処理開始");
+}
+
+
+function clickMove(chara) {
+  if(mode1 > 0){
+    clearInterval(mode1);
+  }
+  if(mode2 > 0){
+    clearInterval(mode2);
+  }
+  if(mode3 > 0){
+    clearInterval(mode3);
+  }
+
+  let num = Math.floor(Math.random() * Object.keys(motionList).length)+1;
+  motionList[num](chara);
+  console.log(chara+"クリック処理開始");
+
+  //待機処理
+  if(chara == 'chara1'){
+    mode1 = setInterval(waitMove, 10000,chara);
+  }
+  if(chara == 'chara2'){
+    mode2 = setInterval(waitMove, 10000,chara);
+  }
+  if(chara == 'chara3'){
+    mode3 = setInterval(waitMove, 10000,chara);
+  }
 }

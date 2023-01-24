@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private DataBase selectDB;
     private WebView gameView;
     private int taskSetting;
-    private boolean moveScene;
 
     InputMethodManager inputMethodManager;
     private LinearLayout layerTask;
@@ -185,7 +184,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //月日ごとに呼び出し済みかどうかのチェック
         checkLoad = new boolean[13];
 
-        moveScene = false;
 
 
         //予定一覧画面
@@ -215,12 +213,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         StartGameCharaView();
 
         gameView.setOnTouchListener((view, motionEvent) -> (motionEvent.getAction() == MotionEvent.ACTION_MOVE));
-
-
-        //ゲーム：待機画面モーション無限ループ
-        timeCount1();
-        timeCount2();
-        timeCount3();
 
         maxIdSetting();
 
@@ -268,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
         String charaName = gameActivity.callCharaName(chara);
 
+        Log.d("debug", "通行確認" + charaName);
         //NULLでなければキャラクターを表示する
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
@@ -308,103 +301,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     }
 
     /**
-     * 一定周期でキャラクターのアニメーションを変える
-     * ver.キャラ１
-     */
-    private void timeCount1() {
-        Random random = new Random();
-        //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 20000;
-        new CountDownTimer(tara, 1000) {
-            @Override
-            public void onTick(long l) {
-//                Log.d("debug", "キャラ１：カウントまで" + l / 1000);
-                if (moveScene) {
-                    timeCount1();
-                    moveScene = false;
-                    cancel();
-                }
-            }
-
-            @Override
-            public void onFinish() {
-//                Log.d("debug", "カウント終了");
-                Random random = new Random();
-                int randomValue1 = random.nextInt(8);
-                gameView.loadUrl("javascript:" + charaMotion[randomValue1] + "('" + "chara1" + "')");
-                timeCount1();
-            }
-        }.start();
-
-    }
-
-    /**
-     * 一定周期でキャラクターのアニメーションを変える
-     * ver.キャラ２
-     */
-    private void timeCount2() {
-        Random random = new Random();
-        //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 20000;
-        new CountDownTimer(tara, 1000) {
-            @Override
-            public void onTick(long l) {
-//                Log.d("debug", "キャラ２：カウントまで" + l / 1000);
-                if (moveScene) {
-                    timeCount2();
-                    moveScene = false;
-                    cancel();
-                }
-            }
-
-            @Override
-            public void onFinish() {
-//                Log.d("debug", "カウント終了");
-                Random random = new Random();
-                if (charaCheck2) {
-                    int randomValue2 = random.nextInt(8);
-                    gameView.loadUrl("javascript:" + charaMotion[randomValue2] + "('" + "chara2" + "')");
-                }
-                timeCount2();
-            }
-        }.start();
-
-    }
-
-    /**
-     * 一定周期でキャラクターのアニメーションを変える
-     * ver.キャラ３
-     */
-    private void timeCount3() {
-        Random random = new Random();
-        //レンジ：１５秒
-        int tara = random.nextInt(5) * 1000 + 20000;
-        new CountDownTimer(tara, 1000) {
-            @Override
-            public void onTick(long l) {
-//                Log.d("debug", "キャラ３：カウントまで" + l / 1000);
-                if (moveScene) {
-                    timeCount3();
-                    moveScene = false;
-                    cancel();
-                }
-            }
-
-            @Override
-            public void onFinish() {
-//                Log.d("debug", "カウント終了");
-                Random random = new Random();
-                if (charaCheck3) {
-                    int randomValue3 = random.nextInt(8);
-                    gameView.loadUrl("javascript:" + charaMotion[randomValue3] + "('" + "chara3" + "')");
-                }
-                timeCount3();
-            }
-        }.start();
-
-    }
-
-    /**
      * キーボード非表示（フォーカス外タッチ時）
      */
     @Override
@@ -422,7 +318,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         changeGameViewStandard();
 
-        moveScene = true;
 
         layerVisible(View.VISIBLE, View.GONE, View.GONE, View.GONE, View.GONE);
 
@@ -440,7 +335,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openTaskAdd(View view) {
 
         changeGameViewStandard();
-        moveScene = true;
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
         timeS.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -464,7 +358,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openTaskView(View view) {
 
         changeGameViewStandard();
-        moveScene = true;
 
         layerVisible(View.GONE, View.GONE, View.VISIBLE, View.GONE, View.GONE);
 
@@ -483,7 +376,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public void openAchievement(View view) {
 
         changeGameViewStandard();
-        moveScene = true;
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 

@@ -239,10 +239,11 @@ public class GameActivity {
     public void resetDB() {
         Log.d("debug", "データベース初期化開始");
         SQLiteDatabase db = dbGame.getWritableDatabase();
-        db.delete("charadb", null, null);
-        db.delete("evolvedb", null, null);
-        dbGame.reCreate(db);
-        dbGame.reCreate2(db);
+//        db.delete("charadb", null, null);
+//        db.delete("evolvedb", null, null);
+//        dbGame.reCreate(db);
+//        dbGame.reCreate2(db);
+        dbGame.onUpgrade(db,1,2);
         Log.d("debug", "データベース初期化完了");
 
     }
@@ -415,7 +416,7 @@ public class GameActivity {
         SQLiteDatabase db = dbGame.getReadableDatabase();
         Cursor cursor = db.query(
                 "charadb",
-                new String[]{"charaName, evolution"},
+                new String[]{"charaName, evolution,name"},
                 null,
                 null,
                 null,
@@ -425,19 +426,20 @@ public class GameActivity {
         cursor.moveToFirst();
 
         for (int i = 0; i < cursor.getCount(); i++) {
-            Cursor cursor2 = db.query(
-                    "evolvedb",
-                    new String[]{"evolveName"},
-                    "evolution = ? and originName = ?",
-                    new String[]{cursor.getString(1), cursor.getString(0)},
-                    null,
-                    null,
-                    null
-            );
-            cursor2.moveToFirst();
-            chara[i] = cursor2.getString(0);
+//            Cursor cursor2 = db.query(
+//                    "evolvedb",
+//                    new String[]{"evolveName"},
+//                    "evolution = ? and originName = ?",
+//                    new String[]{cursor.getString(1), cursor.getString(0)},
+//                    null,
+//                    null,
+//                    null
+//            );
+//            cursor2.moveToFirst();
+//            chara[i] = cursor2.getString(0);
+            chara[i] = cursor.getString(2);
             cursor.moveToNext();
-            cursor2.close();
+//            cursor2.close();
         }
 
         cursor.close();

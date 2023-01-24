@@ -14,6 +14,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
     private  static final String CHARANAME = "charaName";
     private  static final String LEVEL = "level";
     private  static final String EVOLUTION = "evolution";
+    private  static final String CNAME = "name";
 
     private  static final String TABLE_NAME2 = "evolvedb";
     private  static final String _ID2 = "_id";
@@ -34,7 +35,8 @@ public class DataBaseGame extends  SQLiteOpenHelper{
                     _ID + " INTEGER PRIMARY KEY," +
                     CHARANAME + " TEXT," +
                     EVOLUTION + " INTEGER," +
-                    LEVEL + " INTEGER)";
+                    LEVEL + " INTEGER,"+
+                    CNAME + " TEXT)";
 
     private static final String SQL_CREATE_ENTRIES_EVOLVE =
             "CREATE TABLE " + TABLE_NAME2 + " (" +
@@ -88,9 +90,9 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
 
     public void reCreate(SQLiteDatabase db) {
-        saveData(db,"chara1",0,0);
-        saveData(db,"chara2",0,0);
-        saveData(db,"chara3",0,0);
+        saveData(db,"chara1",0,0,"みたらし");
+        saveData(db,"chara2",0,0,"ねこ");
+        saveData(db,"chara3",0,0,"うーぱー");
     }
 
     public void reCreate2(SQLiteDatabase db) {
@@ -148,11 +150,12 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
 
 
-    public void saveData(SQLiteDatabase db, String charaName,int evolution, int level) {
+    public void saveData(SQLiteDatabase db, String charaName,int evolution, int level,String name) {
         ContentValues values = new ContentValues();
         values.put("charaName",charaName);
         values.put("evolution",evolution);
         values.put("level",level);
+        values.put("name",name);
 
         db.insert("charadb",null,values);
     }

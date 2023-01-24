@@ -13,7 +13,7 @@ body {
 
 
 #chara1{
-  visibility: visible;
+  visibility: hidden;
   z-index: 30;
   top: 30px;
 }
@@ -304,7 +304,7 @@ img, div {
 }
 
 .kurukuru{
-  animation: kurukuru 3s linear;
+  animation: kurukuru 3s infinite;
   --second: 3s;
   --name: kurukuru;
 }
