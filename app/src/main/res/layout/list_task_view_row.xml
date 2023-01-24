@@ -357,9 +357,8 @@
                 android:layout_height="35dp"
                 android:onClick="onDelete"
                 android:text="削除"
-                app:bootstrapBrand="primary"
+                app:bootstrapBrand="regular"
                 app:roundedCorners="true"
-                app:showOutline="true"
                 android:visibility="visible"/>
             <Space
                 android:layout_width="20dp"

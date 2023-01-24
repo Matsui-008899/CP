@@ -32,12 +32,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
                 android:id="@+id/tintin2"
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
+
+            <com.beardedhen.androidbootstrap.BootstrapLabel
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:bootstrapBrand="success"
+                android:text="ホーム" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +54,7 @@
                 <CalendarView
                     android:id="@+id/calendar"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="298dp"
                     android:layout_gravity="center"
                     />
 
@@ -78,13 +85,18 @@
 
         <!--        予定追加レイアウト-->
         <LinearLayout
+            android:background="@drawable/p0468_m"
             android:id="@+id/layerTask"
             android:layout_width="match_parent"
-            android:layout_height="684dp"
+            android:layout_height="602dp"
             android:layout_gravity="bottom"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:visibility="gone">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="70dp"></Space>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,9 +112,12 @@
                     android:text="@string/cancel"
                     app:bootstrapBrand="primary"
                     app:roundedCorners="true"
-                    app:showOutline="true" />
+                    />
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></Space>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,6 +132,7 @@
                     android:hint="@string/taskHint">
 
                     <EditText
+                        android:background="@color/white"
                         android:layout_gravity="center"
                         android:id="@+id/taskName"
                         android:layout_width="380dp"
@@ -128,6 +144,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"></Space>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,6 +236,10 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></Space>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -234,6 +258,10 @@
                     android:layout_height="22dp" />
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></Space>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -257,12 +285,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="90dp" />
 
+            <com.beardedhen.androidbootstrap.BootstrapLabel
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                app:bootstrapBrand="success"
+                android:text="予定一覧" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -368,7 +401,7 @@
 
                 <LinearLayout
                     android:id="@+id/achieveList"
-                    android:background="@drawable/p0468_m"
+                    android:background="@drawable/p0220_m"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -408,7 +441,7 @@
 
             <com.beardedhen.androidbootstrap.BootstrapLabel
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:text="達成した予定をタップしろ"
                 app:bootstrapBrand="success"
                 />
@@ -459,18 +492,23 @@
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/buttonTaskMenu"
                     android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:layout_gravity="right|bottom"
                     android:onClick="openTaskAdd"
                     app:bootstrapText="{fa_plus-circle}"
                     app:bootstrapSize="xl"
-                    app:bootstrapBrand="success"
+                    app:bootstrapBrand="primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:roundedCorners="true" />
+                    app:roundedCorners="true"
+                    />
             </TableRow>
+
+            <Space
+                android:layout_height="10dp"
+                android:layout_width="match_parent"></Space>
 
             <TableRow
                 android:layout_width="match_parent"
