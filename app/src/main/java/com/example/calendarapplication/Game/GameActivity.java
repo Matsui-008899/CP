@@ -161,15 +161,13 @@ public class GameActivity {
             return true;
         }
         //進化チェック
-//        if ((level >= 10) && (evolveLevel == 0)) {
-//            evolve(db, id, evolveLevel);
-//            return true;
-//        } else if ((level >= 20) && (evolveLevel == 1)) {
-//            evolve(db, id, evolveLevel);
-//            return true;
-//        } else if ((level >= 30) && (evolveLevel == 2)) {
-//            return evolve(db, id, evolveLevel);
-//        }
+        if ((level >= 10) && (evolveLevel == 0)) {
+            evolve(db, id, evolveLevel);
+            return true;
+        } else if ((level >= 20) && (evolveLevel == 1)) {
+            evolve(db, id, evolveLevel);
+            return true;
+        }
         return false;
     }
 

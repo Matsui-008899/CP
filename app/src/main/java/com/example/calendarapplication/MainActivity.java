@@ -246,6 +246,22 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     private boolean GameCharaView(String chara) {
         Log.d("dasda","肉"+chara);
+
+
+        //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
+        String charaName = gameActivity.callCharaName(chara);
+
+        Log.d("debug", "通行確認" + charaName+"ssssssssssssssssssssss");
+        //NULLでなければキャラクターを表示する
+        if (charaName != null) {
+            gameView.loadUrl("javascript:" + charaName + "()");
+            gameView.loadUrl("javascript:setVisible('" + chara + "')");
+            gameView.loadUrl("javascript:kurukuru('" + chara + "')");
+            Log.d("debug", "表示キャラ名" + charaName);
+            Log.d("debug", "表示キャラID" + chara);
+            return true;
+        }
+
         //起動済みチェック
         if (Objects.equals(chara, "chara1") && charaCheck1) {
             return true;
@@ -254,20 +270,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             return true;
         }
         if (Objects.equals(chara, "chara3") && charaCheck3) {
-            return true;
-        }
-
-        //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
-        String charaName = gameActivity.callCharaName(chara);
-
-        Log.d("debug", "通行確認" + charaName);
-        //NULLでなければキャラクターを表示する
-        if (charaName != null) {
-            gameView.loadUrl("javascript:" + charaName + "()");
-            gameView.loadUrl("javascript:setVisible('" + chara + "')");
-            gameView.loadUrl("javascript:kurukuru('" + chara + "')");
-            Log.d("debug", "表示キャラ名" + charaName);
-            Log.d("debug", "表示キャラID" + chara);
             return true;
         }
         return false;
@@ -379,7 +381,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         layerVisible(View.GONE, View.GONE, View.GONE, View.VISIBLE, View.GONE);
 
-        gameView.loadUrl("javascript:huhouShinnyuu()");
+        gameView.loadUrl("javascript:ryokan()");
         //キャラクター待機モーション
         stayMotion();
 

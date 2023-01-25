@@ -333,6 +333,25 @@ function huhouShinnyuu() {
   }
 }
 
+function ryokan() {
+  var ele = document.getElementById("back");
+  ele.style.cssText = 'width: 100%; height: 100%; background: url("images/bg_ryokan_hiroen.jpg") no-repeat center/80%; background-size: 450px 100px;';
+
+  if (visiChara1 == "visible") {
+    var chara1 = document.getElementById("chara1");
+    chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+  }
+  if (visiChara2 == "visible") {
+    var chara2 = document.getElementById("chara2");
+    chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 15px;';
+
+  }
+  if (visiChara3 == "visible") {
+    var chara3 = document.getElementById("chara3");
+    chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 15px;';
+  }
+}
+
 function visibleBalloon(name, level, chara) {
   const putName = document.getElementById(name + 'name');
   const putLevel = document.getElementById(name + 'level');
