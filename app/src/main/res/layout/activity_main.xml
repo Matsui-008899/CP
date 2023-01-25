@@ -373,7 +373,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
                 android:layout_width="match_parent"
@@ -381,7 +381,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/p0399_m"
+            android:background="@drawable/p0220_m"
             android:orientation="vertical"
             android:layout_weight="1">
 
