@@ -85,4 +85,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/mitarashi_first"
+        android:layout_width="149dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/upa_first"
+        app:layout_constraintEnd_toStartOf="@+id/firstButton"
+        app:layout_constraintTop_toBottomOf="@+id/firstWarning"
+        app:srcCompat="@drawable/mitarashi22" />
+
+    <ImageView
+        android:id="@+id/neko_first"
+        android:layout_width="201dp"
+        android:layout_height="268dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginBottom="16dp"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/upa_first"
+        app:layout_constraintTop_toBottomOf="@+id/firstPassword"
+        app:srcCompat="@drawable/neko22" />
+
+    <ImageView
+        android:id="@+id/upa_first"
+        android:layout_width="234dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="33dp"
+        app:layout_constraintEnd_toStartOf="@+id/neko_first"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mitarashi_first"
+        app:srcCompat="@drawable/u_pa_22" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
