@@ -59,6 +59,7 @@
     <string name="scd_count_msg">個目がセットされました</string>
     <string name="scd_send">設定</string>
     <string name="scd_reset">リセット</string>
+    <string name="scd_warning">＊動物の画像を1つ以上入れろ</string>
 
     // Common First・SecondActivity
     <string name="syoki">初期設定</string>

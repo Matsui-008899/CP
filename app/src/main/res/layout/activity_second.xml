@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/p0468_m"
     tools:context=".SecondActivity">
 
     <com.beardedhen.androidbootstrap.BootstrapLabel
@@ -16,7 +17,7 @@
         android:autoSizeTextType="uniform"
         android:text="@string/scd_title"
         android:textSize="30sp"
-        app:bootstrapBrand="primary"
+        app:bootstrapBrand="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/secondBtn3"
         app:layout_constraintTop_toBottomOf="@+id/nautilus"
-        app:roundedCorners="true"
-        app:showOutline="true" />
+        app:roundedCorners="true" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/secondBtn3"
@@ -51,8 +51,7 @@
         app:bootstrapBrand="primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/anomalocaris"
-        app:roundedCorners="true"
-        app:showOutline="true" />
+        app:roundedCorners="true" />
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/secondTv2"
@@ -259,6 +258,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstWarning"
+        android:layout_width="280dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="66dp"
+        android:text="@string/scd_warning"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anomalocaris" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
