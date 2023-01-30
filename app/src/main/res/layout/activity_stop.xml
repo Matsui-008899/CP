@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/p0468_m"
     tools:context=".StopActivity">
 
     <com.beardedhen.androidbootstrap.BootstrapLabel
@@ -15,7 +16,7 @@
         android:layout_marginEnd="36dp"
         android:autoSizeTextType="uniform"
         android:text="@string/stop"
-        app:bootstrapBrand="primary"
+        app:bootstrapBrand="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
