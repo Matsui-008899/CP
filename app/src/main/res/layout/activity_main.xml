@@ -53,8 +53,8 @@
                 android:layout_weight="1">
                 <CalendarView
                     android:id="@+id/calendar"
-                    android:layout_width="match_parent"
-                    android:layout_height="295dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
                     />
 

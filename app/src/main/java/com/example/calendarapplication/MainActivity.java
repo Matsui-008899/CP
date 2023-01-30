@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -30,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
@@ -56,7 +53,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     private EditText taskName;
@@ -82,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
     private Integer[] idList;
     private boolean[] checkLoad;
-
-    private final String[] charaMotion = {"purun", "korokoro", "pyon", "poyoon", "purupurun", "pururun", "puyon", "papa"};
 
     private SharedPreferences preference;
     private SharedPreferences.Editor editor;

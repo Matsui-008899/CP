@@ -20,6 +20,7 @@ public class GameActivity {
     //    private DataBaseEvolve dbEvolve;
     public int charaMany;
     boolean che = false;
+    private static Toast tor = null;
 
 
     public void createDataBase() {
@@ -117,9 +118,14 @@ public class GameActivity {
         }
 
 
+
+        if (tor != null){
+            tor.cancel();
+        }
         //Toast表示
         String message = cursor.getString(1) + "がレベルアップ：現在レベル" + levelSta;
-        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_LONG).show();
+        tor = Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_SHORT);
+        tor.show();
 
 
         //進化：塁化キャラチェック
