@@ -164,7 +164,7 @@ function kurukuru(chara) {
   } else if (chara == 'chara3') {
     anim(chara, 'motion3', 'kurukuru',motion3);
   }
-  setTimeout(waitMove,10000,chara);
+  setTimeout(waitMove,5000,chara);
 }
 
 function flow(chara) {

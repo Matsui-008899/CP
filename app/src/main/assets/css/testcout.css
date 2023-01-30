@@ -304,8 +304,8 @@ img, div {
 }
 
 .kurukuru{
-  animation: kurukuru 3s infinite;
-  --second: 3s;
+  animation: kurukuru 5s infinite;
+  --second: 5s;
   --name: kurukuru;
 }
 @keyframes kurukuru {
