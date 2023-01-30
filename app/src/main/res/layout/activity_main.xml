@@ -78,8 +78,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textSize="@dimen/bootstrap_h5_text_size"
-                    android:text="予定なし"></TextView>
+                    android:textSize="@dimen/bootstrap_h3_text_size"
+                    android:text="予定なし"
+                    ></TextView>
             </LinearLayout>
 
             <Space
@@ -291,7 +292,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:layout_width="match_parent"
@@ -345,14 +346,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/notTask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="予定なし"
-                    android:textSize="@dimen/bootstrap_h5_text_size"></TextView>
-
             </LinearLayout>
 
             <ScrollView
@@ -366,6 +359,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/notTask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="予定なし"
+                        android:textSize="@dimen/bootstrap_h3_text_size"
+                        android:paddingTop="150dp"></TextView>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/RecycleView"
