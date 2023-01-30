@@ -854,6 +854,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         );
         cursor.moveToFirst();
 
+        TextView mes = findViewById(R.id.notTask);
+
+        if(cursor.getCount() == 0){
+            mes.setVisibility(View.VISIBLE);
+        }else {
+            mes.setVisibility(View.GONE);
+        }
 
         int month = Integer.parseInt(item.substring(0, item.indexOf("月")));
         Log.d("debug", "月true=" + checkLoad[month]);
@@ -931,7 +938,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         //DBから呼びだしたデータの件数文Forを回す
         cursor.close();
-
         return dataset;
     }
 
