@@ -788,6 +788,15 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         );
         cursor.moveToFirst();
 
+        TextView mes = findViewById(R.id.taskNone);
+
+        if(cursor.getCount() == 0){
+            mes.setVisibility(View.VISIBLE);
+        }else {
+            mes.setVisibility(View.GONE);
+        }
+
+
         for (int i = 0; i < cursor.getCount(); i++) {
             CTaskViewRowData data = new CTaskViewRowData();
 
@@ -1177,7 +1186,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             yearH.setText(String.format("%d", year));
             startMonth.setText(String.format("%02d", month + 1));
             startDay.setText(String.format("%02d", dayOfMonth));
-
             setYear = null;
             setMonth = null;
             setDay = null;

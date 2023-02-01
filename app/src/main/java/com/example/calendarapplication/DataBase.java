@@ -77,28 +77,33 @@ public class DataBase extends SQLiteOpenHelper {
 
     public void debugCreate(SQLiteDatabase db){
         Calendar c = Calendar.getInstance();
-        String startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)-1);
-        String startD = String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
         String endY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)-1);
-        String endD = String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY)+1, c.get(Calendar.MINUTE));
 
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "肉まん12","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "バイト","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
-        saveData(db, startY, startD, endY, endD, "学校","0");
+        saveData(db, DateCon(-1), "18時00分", DateCon(-1),"23時30分", "アルバイト","0");
+        saveData(db, DateCon(-2), "18時00分", DateCon(-2),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-3), "18時00分", DateCon(-3),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-4), "18時00分", DateCon(-4),"23時00分", "アルバイト","0");
+        saveData(db, DateCon(-14), "18時00分",DateCon(-14), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-2), "10時00分", DateCon(-2),"16時00分", "コミケ","0");
+        saveData(db, DateCon(-1), "14時00分", DateCon(-1),"22時00分", "デート","0");
+        saveData(db, DateCon(-3), "11時00分", DateCon(-3),"18時00分", "デート","0");
+        saveData(db, DateCon(-4), "11時00分", DateCon(-4),"17時00分", "デート","0");
+        saveData(db, DateCon(-5), "18時00分", DateCon(-5),"00時00分", "デート","0");
+        saveData(db, DateCon(-6), "18時00分", DateCon(-6),"23時30分", "アルバイト","0");
+        saveData(db, DateCon(-7), "18時00分", DateCon(-7),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-8), "18時00分", DateCon(-8),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-9), "18時00分", DateCon(-9),"23時00分", "アルバイト","0");
+        saveData(db, DateCon(-10), "18時00分",DateCon(-10), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-11), "18時00分",DateCon(-11), "23時30分", "アルバイト","0");
+        saveData(db, DateCon(-12), "18時00分",DateCon(-12), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-13), "18時00分",DateCon(-13), "22時00分", "アルバイト","0");
     }
+
+    private String DateCon(int i) {
+        Calendar c = Calendar.getInstance();
+        String startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)+i);
+        return startY;
+    }
+
+
 }
