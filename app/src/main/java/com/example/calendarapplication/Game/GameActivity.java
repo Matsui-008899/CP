@@ -117,11 +117,10 @@ public class GameActivity {
             checkingAchieve(2, levelSta);
         }
 
-
-
         if (tor != null){
             tor.cancel();
         }
+
         //Toast表示
         String message = cursor.getString(1) + "がレベルアップ：現在レベル" + levelSta;
         tor = Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_SHORT);
@@ -549,6 +548,7 @@ public class GameActivity {
         if (kind != 0) {
 
         }
+        //予定達成時
         if(kind == 3){
             int setId = 0;
             if (level == 1){

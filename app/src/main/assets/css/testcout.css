@@ -316,7 +316,7 @@ img, div {
 
 
 .flow{
-  animation: flow 10s;
+  animation: flow 10s infinite;
   --second: 10s;
   --name: flow;
 }
