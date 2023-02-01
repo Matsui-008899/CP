@@ -75,12 +75,12 @@
                 </ScrollView>
 
                 <TextView
+                    android:id="@+id/noTask2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textSize="@dimen/bootstrap_h3_text_size"
                     android:text="予定なし"
-                    ></TextView>
+                    android:textSize="@dimen/bootstrap_h3_text_size"></TextView>
             </LinearLayout>
 
             <Space
