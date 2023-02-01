@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/p0468_m"
     tools:context=".ForgotActivity">
 
     <com.beardedhen.androidbootstrap.BootstrapLabel
@@ -15,7 +16,7 @@
         android:layout_marginEnd="61dp"
         android:autoSizeTextType="uniform"
         android:text="@string/fgt_title"
-        app:bootstrapBrand="primary"
+        app:bootstrapBrand="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,8 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fgtRePassword"
-        app:roundedCorners="true"
-        app:showOutline="true" />
+        app:roundedCorners="true" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/fgtButton2"
@@ -105,6 +105,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fgtRePassword"
-        app:roundedCorners="true"
-        app:showOutline="true" />
+        app:roundedCorners="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>
