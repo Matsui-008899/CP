@@ -30,6 +30,9 @@ var motionWait = {
 
 var motionClick = {
   1: function (chara) { bunshin(chara); },
+  2: function (chara) { jetto(chara); },
+  3: function (chara) { look(chara); },
+  4: function (chara) { flow(chara); },
 };
 let charaMode1 = "wait";
 let charaMode2 = "wait";
