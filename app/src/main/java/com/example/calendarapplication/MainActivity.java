@@ -412,13 +412,13 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      */
     private void stayMotion() {
         if(charaCheck1){
-            gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
+//            gameView.loadUrl("javascript:puyon('" + "chara1" + "')");
         }
         if (charaCheck2) {
-            gameView.loadUrl("javascript:puyon('" + "chara2" + "')");
+//            gameView.loadUrl("javascript:puyon('" + "chara2" + "')");
         }
         if (charaCheck3) {
-            gameView.loadUrl("javascript:puyon('" + "chara3" + "')");
+//            gameView.loadUrl("javascript:puyon('" + "chara3" + "')");
         }
     }
 

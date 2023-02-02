@@ -11,22 +11,43 @@ body {
   background-size: 500px 100px;
 }
 
-
-#chara1{
+#chara1clone{
   visibility: hidden;
-  z-index: 30;
+  z-index: 25;
   top: 30px;
 }
 
-#chara2{
+#chara2clone{
   visibility: hidden;
   z-index: 20;
   right: 50%;
   top: 30px;
 }
 
-#chara3{
+#chara3clone{
   visibility: hidden;
+  z-index: 10;
+  right: -50%;
+  top: 30px;
+}
+
+
+#chara1{
+  visibility: visible;
+  z-index: 30;
+  top: 30px;
+}
+
+
+#chara2{
+  visibility: visible;
+  z-index: 20;
+  right: 50%;
+  top: 30px;
+}
+
+#chara3{
+  visibility: visible;
   z-index: 10;
   right: -50%;
   top: 30px;
@@ -193,8 +214,8 @@ img, div {
     }
 
 @keyframes pyon {
-  0%   { transform: scale(0.8, 1.4) translate(0%, -100%); }
-  10%  { transform: scale(0.8, 1.4) translate(0%, -15%); }
+  0%   { transform: scale(1.0, 1.0) translate(0%, 0%); }
+  5%  { transform: scale(1.4, 0.8) translate(0%, 10%); }
   20%  { transform: scale(1.4, 0.6) translate(0%, 30%); }
   30%  { transform: scale(0.9, 1.1) translate(0%, -10%); }
   40%  { transform: scale(0.95, 1.2) translate(0%, -30%); }
@@ -304,7 +325,7 @@ img, div {
 }
 
 .kurukuru{
-  animation: kurukuru 5s infinite;
+  animation: kurukuru 5s;
   --second: 5s;
   --name: kurukuru;
 }
@@ -316,7 +337,7 @@ img, div {
 
 
 .flow{
-  animation: flow 10s infinite;
+  animation: flow 10s;
   --second: 10s;
   --name: flow;
 }
@@ -352,12 +373,12 @@ img, div {
       100%  { transform: translateX(0%) translateY(0%)  rotate(50turn);}
 }
 
-.look{
-  animation: look 10s;
+.look1{
+  animation: look1 10s;
   --second: 10s;
-  --name: look
+  --name: look1
 }
-@keyframes look {
+@keyframes look1 {
       20%  { transform: translateX(600%) translateX(0%) rotate(4turn);}
       30%  { transform: translateY(500%) translateX(500%) scale(2,2) rotate(90deg);}
       40%  { transform: translateX(300%) translateY(0%) scale(2,2) rotate(-20deg);}
@@ -367,6 +388,100 @@ img, div {
       70%  { transform: translateX(-300%) translateY(500%) scale(2,2) rotate(-20deg);}
       80%  { transform: translateX(-600%) translateY(0%) rotate(0turn);}
       100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
+}
+
+.look2{
+  animation: look2 10s;
+  --second: 10s;
+  --name: look2
+}
+@keyframes look2 {
+      20%  { transform: translateX(900%) translateX(0%) rotate(4turn);}
+      30%  { transform: translateY(500%) translateX(800%) scale(2,2) rotate(90deg);}
+      40%  { transform: translateX(450%) translateY(0%) scale(2,2) rotate(-20deg);}
+      45%  { transform: translateY(500%) translateX(800%) scale(2,2) rotate(20deg);}
+      50%  { transform: translateY(500%) translateX(-200%) scale(2,2) rotate(-90deg);}
+      60%  { transform: translateX(-100%) translateY(0%) scale(2,2) rotate(20deg);}
+      70%  { transform: translateX(-100%) translateY(500%) scale(2,2) rotate(-20deg);}
+      80%  { transform: translateX(-400%) translateY(0%) rotate(0turn);}
+      100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
+}
+
+.look3{
+  animation: look3 10s;
+  --second: 10s;
+  --name: look3
+}
+@keyframes look3 {
+      20%  { transform: translateX(300%) translateX(0%) rotate(4turn);}
+      30%  { transform: translateY(500%) translateX(200%) scale(2,2) rotate(90deg);}
+      40%  { transform: translateX(100%) translateY(0%) scale(2,2) rotate(-20deg);}
+      45%  { transform: translateY(500%) translateX(500%) scale(2,2) rotate(20deg);}
+      50%  { transform: translateY(500%) translateX(-800%) scale(2,2) rotate(-90deg);}
+      60%  { transform: translateX(-500%) translateY(0%) scale(2,2) rotate(20deg);}
+      70%  { transform: translateX(-600%) translateY(500%) scale(2,2) rotate(-20deg);}
+      80%  { transform: translateX(-900%) translateY(0%) rotate(0turn);}
+      100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
+}
+
+.breakout{
+  animation: breakout 9s ;
+  --second: 9s;
+  --name: breakout;
+}
+
+@keyframes breakout {
+0%   { transform: rotateX(0deg); }
+24%   { transform: translateY(5%) rotateX(-20deg); }
+40%   { transform: translateY(50%) rotateX(-85deg); }
+80%   { transform: translateY(50%) rotateX(-85deg); }
+95%   { transform: translateY(50%) rotateX(-90deg); }
+100%   { transform: translateY(50%) rotateX(-90deg); }
+}
+
+.bunshin1{
+  animation: bunshin1 10s ;
+  --second: 10s;
+  --name: bunshin1;
+}
+
+@keyframes bunshin1 {
+0%   { transform: translateX(500%) rotate(0deg); }
+50%   { transform: translateX(500%) rotate(0deg); }
+60%   { transform: translateX(350%) rotate(-45deg); }
+70%   { transform: translateX(500%) rotate(0deg); }
+100%   { transform: translateX(0%) rotate(-1800deg); }
+
+}
+
+.bunshin2{
+  animation: bunshin2 10s ;
+  --second: 10s;
+  --name: bunshin2;
+}
+
+@keyframes bunshin2 {
+0%   { transform: translateX(600%) rotate(0deg); }
+50%   { transform: translateX(600%) rotate(0deg); }
+60%   { transform: translateX(500%) rotate(-45deg); }
+70%   { transform: translateX(600%) rotate(0deg); }
+100%   { transform: translateX(0%) rotate(-1800deg); }
+
+}
+
+.bunshin3{
+  animation: bunshin3 10s ;
+  --second: 10s;
+  --name: bunshin3;
+}
+
+@keyframes bunshin3 {
+0%   { transform: translateX(250%) rotate(0deg); }
+50%   { transform: translateX(250%) rotate(0deg); }
+60%   { transform: translateX(150%) rotate(-45deg); }
+70%   { transform: translateX(250%) rotate(0deg); }
+100%   { transform: translateX(0%) rotate(-1800deg); }
+
 }
 
 .is-stop1{

@@ -11,6 +11,12 @@ let time1 = 0;
 let time2 = 0;
 let time3 = 0;
 
+
+let mode1 = 0;
+let mode2 = 0;
+let mode3 = 0;
+
+let activeMode = 1;
 var motionWait = {
   1: function (chara) { purun(chara); },
   2: function (chara) { pyon(chara); },
@@ -19,13 +25,11 @@ var motionWait = {
   5: function (chara) { pururun(chara); },
   6: function (chara) { puyon(chara); },
   7: function (chara) { papa(chara); },
-  8: function (chara) { flow(chara); },
+  8: function (chara) { korokoro(chara); },
 };
 
 var motionClick = {
-  1: function (chara) { korokoro(chara); },
-  2: function (chara) { jetto(chara); },
-  3: function (chara) { look(chara); },
+  1: function (chara) { bunshin(chara); },
 };
 let charaMode1 = "wait";
 let charaMode2 = "wait";
@@ -164,7 +168,13 @@ function kurukuru(chara) {
   } else if (chara == 'chara3') {
     anim(chara, 'motion3', 'kurukuru', motion3);
   }
-  setTimeout(waitMove, 5000, chara);
+  oneOffClick(chara);
+  setTimeout(() => {
+    let ele = document.getElementById(chara);
+    ele.classList.remove(...ele.classList);
+    oneOnClick(chara);
+    korokoro(chara);
+  }, 5000);
 }
 
 function flow(chara) {
@@ -189,22 +199,123 @@ function jetto(chara) {
 
 function look(chara) {
   if (chara == 'chara1') {
-    anim(chara, 'motion1', "look", motion1);
+    anim(chara, 'motion1', "look1", motion1);
   } else if (chara == 'chara2') {
-    anim(chara, 'motion2', "look", motion2);
+    anim(chara, 'motion2', "look2", motion2);
   } else if (chara == 'chara3') {
-    anim(chara, 'motion3', "look", motion3);
+    anim(chara, 'motion3', "look3", motion3);
   }
 }
 
-function anim(chara, motion, motionName, motionNull) {
-  if (motionNull != 'null') {
-    stop(chara);
+function bunshin(chara) {
+  if (chara == 'chara1') {
+    anim(chara, 'motion1', "bunshin1", motion1);
+  } else if (chara == 'chara2') {
+    anim(chara, 'motion2', "bunshin2", motion2);
+  } else if (chara == 'chara3') {
+    anim(chara, 'motion3', "bunshin3", motion3);
+  }
 
-    console.log(chara + 'アニメーション処理待ち');
+}
+
+function allOffClick() {
+  let ele1 = document.getElementById('chara1');
+  ele1.removeAttribute('onclick');
+  let ele2 = document.getElementById('chara2');
+  ele2.removeAttribute('onclick');
+  let ele3 = document.getElementById('chara3');
+  ele3.removeAttribute('onclick');
+}
+
+function allOnClick() {
+  let ele1 = document.getElementById('chara1');
+  let ele2 = document.getElementById('chara2');
+  let ele3 = document.getElementById('chara3');
+  ele1.setAttribute('onclick', "clickMove('chara1')");
+  ele2.setAttribute('onclick', "clickMove('chara2')");
+  ele3.setAttribute('onclick', "clickMove('chara3')");
+}
+
+function oneOnClick(chara) {
+  let ele = document.getElementById(chara);
+  ele.setAttribute('onclick', "clickMove('" + chara + "')");
+}
+
+function oneOffClick(chara) {
+  let ele = document.getElementById(chara);
+  ele.removeAttribute('onclick');
+}
+
+function cMotionDelete(chara) {
+  let ele = document.getElementById(chara);
+  ele.classList.remove(...ele.classList);
+  allOnClick();
+}
+
+function onHidden(params) {
+  console.log("クローン廃棄");
+  let on = document.getElementById(params);
+  on.classList.remove(...on.classList);
+  on.style.visibility = 'hidden';
+}
+
+function anim(chara, motion, motionName) {
+  let anima = 0
+  if (chara == 'chara1') {
+    if (mode1 > 0) {
+      clearInterval(mode1);
+    }
+  }
+  if (chara == 'chara2') {
+    if (mode2 > 0) {
+      clearInterval(mode2);
+    }
+  }
+  if (chara == 'chara3') {
+    if (mode3 > 0) {
+      clearInterval(mode3);
+    }
+  }
+  let ori = document.getElementById(chara);
+  let ele = ori.classList.length;
+  if (ele != 0) {
+    stop(chara);
     document.getElementById(chara).addEventListener('animationend', () => {
+      if (anima == 0) {
+        anima = 1;
+        document.getElementById(chara).classList.remove(motion);
+        looopAnimation(chara, motionName);
+        if (motionName == "bunshin1" || motionName == "bunshin2" || motionName == "bunshin3") {
+          motinclone(chara);
+        }
+        if (!activeMode) {
+          setTimeout(cMotionDelete, 11000, chara);
+          activeMode = 1;
+        }
+        if (motion == 'motion1') {
+          motion1 = motionName;
+        }
+        if (motion == 'motion2') {
+          motion2 = motionName;
+        }
+        if (motion == 'motion3') {
+          motion3 = motionName;
+        }
+
+      }
+    });
+  } else if (ele == 0) {
+    if (anima == 0) {
+      anima = 1;
       document.getElementById(chara).classList.remove(motion);
       looopAnimation(chara, motionName);
+      if (motionName == "bunshin1" || motionName == "bunshin2" || motionName == "bunshin3") {
+        motinclone(chara);
+      }
+      if (!activeMode) {
+        setTimeout(cMotionDelete, 11000, chara);
+        activeMode = 1;
+      }
       if (motion == 'motion1') {
         motion1 = motionName;
       }
@@ -214,24 +325,28 @@ function anim(chara, motion, motionName, motionNull) {
       if (motion == 'motion3') {
         motion3 = motionName;
       }
-
-    });
-  } else {
-    console.log('事前アニメーションなし');
-    document.getElementById(chara).classList.remove(motion);
-    looopAnimation(chara, motionName);
-    if (motion == 'motion1') {
-      motion1 = motionName;
     }
-    if (motion == 'motion2') {
-      motion2 = motionName;
-    }
-    if (motion == 'motion3') {
-      motion3 = motionName;
-    }
-
-
   }
+  let run = Math.floor(Math.random() * 10000 + 12000);
+  console.log(chara + '待機時間' + run);
+  //待機処理
+  if (chara == 'chara1') {
+    mode1 = setInterval(waitMove, run, chara);
+  }
+  if (chara == 'chara2') {
+    mode2 = setInterval(waitMove, run, chara);
+  }
+  if (chara == 'chara3') {
+    mode3 = setInterval(waitMove, run, chara);
+  }
+}
+
+function motinclone(chara) {
+  console.log("クローン処理開始");
+  let clone = document.getElementById(chara + 'clone');
+  clone.style.visibility = "visible";
+  looopAnimation(clone.id, 'breakout');
+  setTimeout(onHidden, 9000, clone.id);
 }
 
 //挿入準備
@@ -280,14 +395,20 @@ function hugeBack() {
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
     chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 120px;  bottom: 0;';
+    var chara1clo = document.getElementById("chara1clone");
+    chara1clo.style.cssText = ' z-index: 30;  top: 120px;  bottom: 0;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 100px;';
+    var chara2clo = document.getElementById("chara2clone");
+    chara2clo.style.cssText = ' z-index: 20;  right: 50%;  top: 100px;';
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
     chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 100px;';
+    var chara3clo = document.getElementById("chara3clone");
+    chara3clo.style.cssText = ' z-index: 10;  right: -50%;  top: 100px;';
   }
 
 }
@@ -299,15 +420,20 @@ function smallBack() {
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
     chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+    var chara1clo = document.getElementById("chara1clone");
+    chara1clo.style.cssText = ' z-index: 30;  top: 30px;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';
-
+    var chara2clo = document.getElementById("chara2clone");
+    chara2clo.style.cssText = ' z-index: 20;  right: 50%;  top: 30px;';
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
     chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';
+    var chara3clo = document.getElementById("chara3clone");
+    chara3clo.style.cssText = ' z-index: 10;  right: -50%;  top: 30px;';
   }
 }
 
@@ -319,15 +445,20 @@ function huhouShinnyuu() {
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
     chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+    var chara1clo = document.getElementById("chara1clone");
+    chara1clo.style.cssText = ' z-index: 30;  top: 30px;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 30px;';
-
+    var chara2clo = document.getElementById("chara2clone");
+    chara2clo.style.cssText = ' z-index: 20;  right: 50%;  top: 30px;';
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
     chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 30px;';
+    var chara3clo = document.getElementById("chara3clone");
+    chara3clo.style.cssText = ' z-index: 10;  right: -50%;  top: 30px;';
   }
 }
 
@@ -338,15 +469,20 @@ function ryokan() {
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
     chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 30px;';
+    var chara1clo = document.getElementById("chara1clone");
+    chara1clo.style.cssText = ' z-index: 30;  top: 30px;';
   }
   if (visiChara2 == "visible") {
     var chara2 = document.getElementById("chara2");
     chara2.style.cssText = 'visibility: visible; z-index: 20;  right: 50%;  top: 15px;';
-
+    var chara2clo = document.getElementById("chara2clone");
+    chara2clo.style.cssText = ' z-index: 20;  right: 50%;  top: 15px;';
   }
   if (visiChara3 == "visible") {
     var chara3 = document.getElementById("chara3");
     chara3.style.cssText = 'visibility: visible; z-index: 10;  right: -50%;  top: 15px;';
+    var chara3clo = document.getElementById("chara3clone");
+    chara3clo.style.cssText = 'z-index: 10;  right: -50%;  top: 15px;';
   }
 }
 
@@ -407,34 +543,34 @@ elementfather2.addEventListener('animationiteration', () => {
 
 elementfather3.addEventListener('animationiteration', () => {
   const animationCount3 = Number(getComputedStyle(HTML).getPropertyValue('--animationCount3'));
-  HTML.style.setProperty('--animationCount2', animationCount3 + 1);
+  HTML.style.setProperty('--animationCount3', animationCount3 + 1);
 });
 
 
 function stop(chara) {
-  console.log(chara + '停止処理開始');
   const ele = document.getElementById(chara);
+
+
   if (chara == 'chara1') {
-    console.log(chara + "の" + motion1 + 'モーション呼び出し' + ele.classList);
     settingTime(chara, motion1);
-    ele.classList.remove(motion1);
+    ele.classList.remove(...ele.classList);
     ele.classList.add("is-stop1");
   }
   if (chara == 'chara2') {
-    console.log(chara + "の" + motion2 + 'モーション呼び出し' + ele.classList);
     settingTime(chara, motion2);
-    ele.classList.remove(motion2);
+    ele.classList.remove(...ele.classList);
     ele.classList.add("is-stop2");
   }
   if (chara == 'chara3') {
-    console.log(chara + "の" + motion3 + 'モーション呼び出し' + ele.classList);
     settingTime(chara, motion3);
-    ele.classList.remove(motion3);
+    ele.classList.remove(...ele.classList);
     ele.classList.add("is-stop3");
   }
-  console.log(chara + '停止待ち');
   ele.addEventListener("animationend", (event) => {
     /* イベント対象のアニメーション名で処理の出し分可能 */
+    if (ele.classList == "bunshin1" || ele.classList == "bunshin2" || ele.classList == "bunshin3") {
+      onHidden(chara + "clone");
+    }
     ele.classList.remove(...ele.classList);
 
     if (chara == 'chara1') {
@@ -452,10 +588,7 @@ function stop(chara) {
       motion3 = 'null';
       ele.classList.remove("is-stop3");
     }
-    console.log(chara + '停止処理完了');
-
   });
-
 }
 
 function settingTime(chara, motion) {
@@ -490,20 +623,19 @@ function settingTime(chara, motion) {
   if (motion == 'jetto') {
     document.getElementById(chara).style.setProperty('--second', '10s');
   }
-  if (motion == 'look') {
+  if (motion == 'look1' || motion == 'look2' || motion == 'look3') {
     document.getElementById(chara).style.setProperty('--second', '10s');
   }
   if (motion == 'kurukuru') {
     document.getElementById(chara).style.setProperty('--second', '3s');
   }
+  if (motion == 'bunshin1' || motion == 'bunshin2' || motion == 'bunshin3') {
+    document.getElementById(chara).style.setProperty('--second', '10s');
+  }
 }
 
-let mode1 = 0;
-let mode2 = 0;
-let mode3 = 0;
 
 function waitMove(chara) {
-  console.log(chara + "待機処理開始");
   if (chara == 'chara1') {
     if (mode1 > 0) {
       clearInterval(mode1);
@@ -523,23 +655,13 @@ function waitMove(chara) {
   let num = Math.floor(Math.random() * Object.keys(motionWait).length) + 1;
   motionWait[num](chara);
   // purun(chara);
-
-  let run = Math.floor(Math.random() * 10000 + 5000);
-  //待機処理
-  if (chara == 'chara1') {
-    mode1 = setInterval(waitMove, run, chara);
-  }
-  if (chara == 'chara2') {
-    mode2 = setInterval(waitMove, run, chara);
-  }
-  if (chara == 'chara3') {
-    mode3 = setInterval(waitMove, run, chara);
-  }
-
 }
 
 
 function clickMove(chara) {
+  activeMode = 0;
+  allOffClick();
+  console.log(chara + "クリック処理開始");
   if (chara == 'chara1') {
     if (mode1 > 0) {
       clearInterval(mode1);
@@ -555,19 +677,6 @@ function clickMove(chara) {
       clearInterval(mode3);
     }
   }
-
   let num = Math.floor(Math.random() * Object.keys(motionClick).length) + 1;
   motionClick[num](chara);
-  console.log(chara + "クリック処理開始");
-
-  //待機処理
-  if (chara == 'chara1') {
-    mode1 = setInterval(waitMove, 10000, chara);
-  }
-  if (chara == 'chara2') {
-    mode2 = setInterval(waitMove, 10000, chara);
-  }
-  if (chara == 'chara3') {
-    mode3 = setInterval(waitMove, 10000, chara);
-  }
 }

@@ -92,7 +92,7 @@ public class GameActivity {
         SQLiteDatabase dbRead = dbGame.getReadableDatabase();
         Cursor cursor = dbRead.query(
                 "charadb",
-                new String[]{"_id, charaName, level, evolution"},
+                new String[]{"_id, charaName, level, evolution, name"},
                 "_id = ?",
                 new String[]{String.valueOf(aiai)},
                 null,
@@ -122,7 +122,7 @@ public class GameActivity {
         }
 
         //Toast表示
-        String message = cursor.getString(1) + "がレベルアップ：現在レベル" + levelSta;
+        String message = cursor.getString(4) + "がレベルアップ：現在レベル" + levelSta;
         tor = Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_SHORT);
         tor.show();
 
