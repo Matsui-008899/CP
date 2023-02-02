@@ -26,9 +26,13 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+
         // Viewの取得
         firstPassword = findViewById(R.id.firstPassword);
         firstButton = findViewById(R.id.firstButton);
+
+        //View調整
+        firstPassword.setTextSize(50);
 
         // ボタンにクリックリスナーをセット
         firstButton.setOnClickListener(this);

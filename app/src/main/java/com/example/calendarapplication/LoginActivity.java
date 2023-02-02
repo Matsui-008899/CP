@@ -30,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        EditText editPass = findViewById(R.id.password);
+        editPass.setTextSize(50);
 
         // Viewの取得
         password = findViewById(R.id.password);

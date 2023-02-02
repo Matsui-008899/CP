@@ -18,7 +18,7 @@
 
     // MainActivity
     <string name="pwd_title">パスワード</string>
-    <string name="pwd_enter">パスワードを入力してください</string>
+    <string name="pwd_enter"><font size="15">パスワードを入力してください</font></string>
     <string name="pwd_send">送信</string>
     <string name="pwd_forgot">パスワードを忘れた</string>
 
@@ -50,7 +50,7 @@
     // FirstActivity
     <string name="fst_title">パスワードを作成</string>
     <string name="fst_warning">※ 数字のみ、5文字(半角)</string>
-    <string name="fst_enter">パスワードを入力してください</string>
+    <string name="fst_enter"><font size="15">パスワードを入力してください</font></string>
     <string name="fst_send">設定</string>
 
     // SecondActivity
