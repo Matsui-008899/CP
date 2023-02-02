@@ -33,21 +33,21 @@ body {
 
 
 #chara1{
-  visibility: visible;
+  visibility: hidden;
   z-index: 30;
   top: 30px;
 }
 
 
 #chara2{
-  visibility: visible;
+  visibility: hidden;
   z-index: 20;
   right: 50%;
   top: 30px;
 }
 
 #chara3{
-  visibility: visible;
+  visibility: hidden;
   z-index: 10;
   right: -50%;
   top: 30px;
