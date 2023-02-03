@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:id="@+id/tintin2"
@@ -96,15 +96,16 @@
             android:background="@drawable/p0468_m"
             android:id="@+id/layerTask"
             android:layout_width="match_parent"
-            android:layout_height="602dp"
-            android:layout_gravity="bottom"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
+                android:id="@+id/tintin4"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"></Space>
+                android:layout_height="50dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +115,7 @@
 
                 <com.beardedhen.androidbootstrap.BootstrapButton
                     android:id="@+id/exit"
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:onClick="openHome"
                     android:text="@string/cancel"
@@ -125,7 +126,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"></Space>
+                android:layout_height="50dp"></Space>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -166,6 +167,7 @@
                     android:id="@+id/testVIew"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textSize="19sp"
                     android:text="@string/StartDayStartTime" />
             </LinearLayout>
 
@@ -173,6 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:padding="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -209,6 +212,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textSize="19sp"
                     android:text="@string/EndDayEndTime" />
             </LinearLayout>
 
@@ -216,7 +220,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/dateE"
@@ -251,7 +256,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -259,7 +264,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="通知："
-                    android:textSize="16sp" />
+                    android:textSize="23sp" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -494,11 +499,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="55dp" />
-
-
         </LinearLayout>
-
-
     </FrameLayout>
     <!--    下部ボタンレイアウト-->
     <LinearLayout

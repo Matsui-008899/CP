@@ -694,6 +694,7 @@ function clickMove(chara) {
   }
   // let num = Math.floor(Math.random() * Object.keys(motionClick).length) + 1;
   motionClick[count](chara);
+  console.log(motionClick[count](chara));
   count = count + 1;
   if (count == 5) {
     count = 1;

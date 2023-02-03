@@ -9,7 +9,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="cancel">キャンセル</string>
+    <string name="cancel">戻る</string>
     <string name="title">タイトル</string>
     <string name="StartDayStartTime">開始日時・時刻</string>
     <string name="SelectTime">時刻選択</string>
