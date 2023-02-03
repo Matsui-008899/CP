@@ -177,7 +177,7 @@ function kurukuru(chara) {
     ele.classList.remove(...ele.classList);
     oneOnClick(chara);
     korokoro(chara);
-  }, 5000);
+  }, 3000);
 }
 
 function flow(chara) {
@@ -370,31 +370,42 @@ function setVisible(chara) {
 //御手洗挿入
 function mitarashi() {
   document.getElementById("chara1").src = "images/mitarashi.png";
+  document.getElementById("chara1clone").src = "images/mitarashi.png";
 }
 
 function tako() {
   document.getElementById("chara1").src = "images/tako.png";
+  document.getElementById("chara1clone").src = "images/tako.png";
 }
 
 function neko() {
   document.getElementById("chara2").src = "images/neko.png";
+  document.getElementById("chara2clone").src = "images/neko.png";
 }
 function neko2() {
   document.getElementById("chara2").src = "images/neko2.png";
+  document.getElementById("chara2clone").src = "images/neko2.png";
 }
 function neko3() {
   document.getElementById("chara2").src = "images/neko3.png";
+  document.getElementById("chara2clone").src = "images/neko3.png";
 }
 function u_pa_() {
   document.getElementById("chara3").src = "images/u_pa_.png";
+  document.getElementById("chara3clone").src = "images/u_pa_.png";
 }
 function u_pa_2() {
   document.getElementById("chara3").src = "images/u_pa_2.png";
+  document.getElementById("chara3clone").src = "images/u_pa_2.png";
+}
+function donatsu() {
+  document.getElementById("chara1").src = "images/donatsu.png";
+  document.getElementById("chara1clone").src = "images/donatsu.png";
 }
 
 function hugeBack() {
   var ele = document.getElementById("back");
-  ele.style.cssText = 'width: 100%;   height: 100%;   background: url("images/bg_house_living.jpg") no-repeat center/80%;   background-size: 400px 200px;';
+  ele.style.cssText = 'width: 100%;   height: 100%;   background: url("images/bg_house_living.jpg") no-repeat center/80%;   background-size: 410px 200px;';
   if (visiChara1 == "visible") {
     var chara1 = document.getElementById("chara1");
     chara1.style.cssText = 'visibility: visible; z-index: 30;  top: 120px;  bottom: 0;';

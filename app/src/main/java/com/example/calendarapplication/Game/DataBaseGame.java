@@ -97,8 +97,8 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
     public void reCreate2(SQLiteDatabase db) {
         saveData(db,"mitarashi",0,"chara1");
-        saveData(db,"tako",1,"chara1");
-        saveData(db,"tako",2,"chara1");
+        saveData(db,"donatsu",1,"chara1");
+        saveData(db,"donatsu",2,"chara1");
         saveData(db,"neko",0,"chara2");
         saveData(db,"neko2",1,"chara2");
         saveData(db,"neko3",2,"chara2");
@@ -109,8 +109,8 @@ public class DataBaseGame extends  SQLiteOpenHelper{
 
     public void reCreate3(SQLiteDatabase db) {
         saveData(db,"丸い生き物","１体目のキャラを獲得","",0);
-        saveData(db,"ネコ？","２体目のキャラを獲得","",0);
-        saveData(db,"さかな","３体目のキャラを獲得","",0);
+        saveData(db,"ネコ","２体目のキャラを獲得","",0);
+        saveData(db,"ウーパー","３体目のキャラを獲得","",0);
         saveData(db,"始まりの一歩","予定を１件達成","",0);
         saveData(db,"一休み","予定を５件達成","",0);
         saveData(db,"慣れたかな？","予定を１５件達成","",0);
@@ -118,7 +118,7 @@ public class DataBaseGame extends  SQLiteOpenHelper{
         saveData(db,"時には休息も","予定を３０件達成","",0);
         saveData(db,"くる","１体のキャラクターがレベル５に到達","",0);
         saveData(db,"回り続ける","１体のキャラクターがレベル１０に到達","",0);
-        saveData(db,"ひたすらに回り続ける","１体のキャラクターがレベル３０に到達","",0);
+        saveData(db,"回る回る","１体のキャラクターがレベル３０に到達","",0);
         saveData(db,"くるくる","２体のキャラクターがレベル５に到達","",0);
         saveData(db,"くるるん","２体のキャラクターがレベル１０に到達","",0);
         saveData(db,"くるるるるる","２体のキャラクターがレベル３０に到達","",0);
