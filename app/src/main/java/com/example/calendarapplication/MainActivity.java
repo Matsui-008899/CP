@@ -413,6 +413,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         onFoodTask(view);
     }
 
+    /**
+     * レイヤ表示管理
+     */
     private void layerVisible(int home, int taskAdd, int taskList, int achievement, int game) {
         CalendarLayout.setVisibility(home);
         TaskLayout.setVisibility(taskAdd);

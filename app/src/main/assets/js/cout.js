@@ -34,6 +34,7 @@ var motionClick = {
   3: function (chara) { look(chara); },
   4: function (chara) { flow(chara); },
 };
+let count = 1;
 let charaMode1 = "wait";
 let charaMode2 = "wait";
 let charaMode3 = "wait";
@@ -691,6 +692,10 @@ function clickMove(chara) {
       clearInterval(mode3);
     }
   }
-  let num = Math.floor(Math.random() * Object.keys(motionClick).length) + 1;
-  motionClick[num](chara);
+  // let num = Math.floor(Math.random() * Object.keys(motionClick).length) + 1;
+  motionClick[count](chara);
+  count = count + 1;
+  if (count == 5) {
+    count = 1;
+  }
 }
