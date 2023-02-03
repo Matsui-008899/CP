@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -101,7 +102,14 @@ public class DataBase extends SQLiteOpenHelper {
 
     private String DateCon(int i) {
         Calendar c = Calendar.getInstance();
+        int a = c.get(Calendar.DAY_OF_MONTH)+i;
         String startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)+i);
+        if (a <= 0){
+            c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+            int b = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+            i = b + a;
+            startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)+i);
+        }
         return startY;
     }
 

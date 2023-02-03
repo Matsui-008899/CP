@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
@@ -109,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     public TextView setHour;
     public TextView setMin;
 
+    private boolean char1 = false;
+    private boolean char2 = false;
+    private boolean char3 = false;
 
 
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility", "CutPasteId"})
@@ -239,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
      * キャラクター一件分の表示チェック
      */
     private boolean GameCharaView(String chara) {
-        Log.d("dasda","肉"+chara);
+        Log.d("debug","チェック"+chara);
 
 
         //ＮＵＬＬであれば渡されたキャラクターのレベルは０であり表示することはできない
@@ -250,7 +254,18 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         if (charaName != null) {
             gameView.loadUrl("javascript:" + charaName + "()");
             gameView.loadUrl("javascript:setVisible('" + chara + "')");
-            gameView.loadUrl("javascript:kurukuru('" + chara + "')");
+            if (!char1&&chara=="chara1"){
+                gameView.loadUrl("javascript:kurukuru('" + chara + "')");
+                char1 = true;
+            }
+            if (!char2&&chara=="chara2"){
+                gameView.loadUrl("javascript:kurukuru('" + chara + "')");
+                char2 = true;
+            }
+            if (!char3&&chara=="chara3"){
+                gameView.loadUrl("javascript:kurukuru('" + chara + "')");
+                char3 = true;
+            }
             Log.d("debug", "表示キャラ名" + charaName);
             Log.d("debug", "表示キャラID" + chara);
             return true;
@@ -712,7 +727,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                     TextUtils.isEmpty(timeES)) {
                 emailField.setError("予定を入力してください");
 
-                dateE.setError("ころすろぞ");
+                dateE.setError("データエラー");
 
 
                 Log.d("debug", "null値判定,いずれかの値が空欄です");
@@ -725,9 +740,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
                 values.put("level", 0);
                 Log.d("debug", "**********" + values);
                 db.insert("taskdb", null, values);
+
                 CalendarLayout.setVisibility(View.VISIBLE);
                 TaskLayout.setVisibility(View.INVISIBLE);
-                Snackbar.make(view, taskNameS + "が追加されました", Snackbar.LENGTH_LONG).show();
+
+                Snackbar.make(view, "予定："+taskNameS + "が追加されました", Snackbar.LENGTH_LONG).show();
 
                 taskName.setText("");
                 Calendar c = Calendar.getInstance();
@@ -935,7 +952,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
             //プリセットの１件のデータを一意に識別できるように
             // DBの"_id"からID付与
-            Log.d("ddd",""+idList[id]);
             data.setId(idList[id]);
 
             dataset.add(data);
@@ -1092,6 +1108,9 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         int i = Arrays.asList(idList).indexOf(viewId);
         int aa = db.delete("taskdb", "_id = " + i, null);
 
+        String message = "予定を削除しました";
+        Toast.makeText(MyApplication.getAppContext(), message, Toast.LENGTH_SHORT).show();
+
         Log.d("dubug","削除成功判定ID ￥＝"+aa);
         View pan = findViewById(R.id.listMonthSelectBtn);
         ListTask(pan);
@@ -1126,7 +1145,6 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         /*
           newFragment.show(getSupportFragmentManager(), "timePicker");
          */
-        Log.d("ddd",hour+"**"+min);
         TimePickerFragment timePicker = new TimePickerFragment();
         timePicker.selected(hour,min);
         timePicker.show(getSupportFragmentManager(), "timePicker");
