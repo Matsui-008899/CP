@@ -104,16 +104,18 @@ public class DataBase extends SQLiteOpenHelper {
         Calendar c = Calendar.getInstance();
         int a = c.get(Calendar.DAY_OF_MONTH)+i;
         String startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)+i);
-        Log.d("deb","b"+startY);
-        Log.d("deb","a"+a);
+        Log.d("deb","加工前"+startY);
         if (a <= 0){
-            c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH));
+            c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH)-1,c.get(Calendar.DAY_OF_MONTH));
             int b = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+            Log.d("deb","加工後b"+b);
+            Log.d("deb","加工後a"+a);
             i = b + a;
-            i = i -3;
-            startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)+i);
+            Log.d("deb","加工後i"+i);
+            startY = String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, i);
         }
-        Log.d("deb",""+startY);
+
+        Log.d("deb","加工後"+startY);
         return startY;
     }
 
