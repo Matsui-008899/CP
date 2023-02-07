@@ -89,7 +89,7 @@ public class DataBase extends SQLiteOpenHelper {
         saveData(db, DateCon(-1), "14時00分", DateCon(-1),"22時00分", "デート","0");
         saveData(db, DateCon(-3), "11時00分", DateCon(-3),"18時00分", "デート","0");
         saveData(db, DateCon(-4), "11時00分", DateCon(-4),"17時00分", "デート","0");
-        saveData(db, DateCon(-5), "18時00分", DateCon(-5),"00時00分", "デート","0");
+        saveData(db, DateCon(-5), "18時00分", DateCon(-5),"22時00分", "デート","0");
         saveData(db, DateCon(-6), "18時00分", DateCon(-6),"23時30分", "アルバイト","0");
         saveData(db, DateCon(-7), "18時00分", DateCon(-7),"22時00分", "アルバイト","0");
         saveData(db, DateCon(-8), "18時00分", DateCon(-8),"22時00分", "アルバイト","0");

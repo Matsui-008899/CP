@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -114,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     private boolean char2 = false;
     private boolean char3 = false;
 
+    private String nowDay;
+
 
     @SuppressLint({"DefaultLocale", "SetJavaScriptEnabled", "ClickableViewAccessibility", "CutPasteId"})
     @Override
@@ -184,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
 
 
+
         //予定一覧画面
 
         /*
@@ -196,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 //                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                     //日別の予定一覧表示
                     taskDaySelect(message);
+                    nowDay = message;
+
                 }
         );
 
@@ -214,6 +220,28 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         maxIdSetting();
 
+        Calendar cal = Calendar.getInstance();
+        String sYear = cal.get(Calendar.YEAR) + "年";
+        setSelection(spinner2,sYear);
+        String sMonth = (String.format("%02d月", cal.get(Calendar.MONTH) + 1));
+        setSelection(spinner,sMonth);
+
+        String mes = (String.format("%d年%02d月%02d日", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH)));
+        nowDay = mes;
+    }
+
+    private void setSelection(Spinner spinner, String item) {
+        SpinnerAdapter adapter = spinner.getAdapter();
+        int index = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            Log.d("deb",""+adapter.getItem(i));
+            Log.d("deb",""+item);
+
+            if (adapter.getItem(i).equals(item)) {
+                index = i; break;
+            }
+        }
+        spinner.setSelection(index);
     }
 
 
@@ -348,12 +376,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         Calendar c = Calendar.getInstance();
         timeS.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
         timeS.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        dateS.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+        dateS.setText(nowDay);
         dateS.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         timeE.setText(String.format("%02d時%02d分", c.get(Calendar.HOUR_OF_DAY) + 1, c.get(Calendar.MINUTE)));
         timeE.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        dateE.setText(String.format("%d年%02d月%02d日", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH)));
+        dateE.setText(nowDay);
         dateE.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         layerVisible(View.GONE, View.VISIBLE, View.GONE, View.GONE, View.GONE);
@@ -861,10 +889,11 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         //DB呼びだし
         SQLiteDatabase db = selectDB.getReadableDatabase();
+        //月
         Spinner spinner = findViewById(R.id.spinner);
         String item = (String) spinner.getSelectedItem();
 
-
+        //年
         Spinner spinner2 = findViewById(R.id.spinner2);
         String item2 = (String) spinner2.getSelectedItem();
 

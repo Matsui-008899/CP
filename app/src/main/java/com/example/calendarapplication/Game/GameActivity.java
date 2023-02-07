@@ -319,8 +319,9 @@ public class GameActivity {
             data.setAchieveName(cursor.getString(0));
             data.setAchieveInfo(cursor.getString(1));
             if (Integer.parseInt(cursor.getString(3)) == 0) {
-                data.setAchieveInfoColor(Color.LTGRAY);
-                data.setAchieveNameColor(Color.LTGRAY);
+                data.setAchieveInfoColor(Color.GRAY);
+                data.setAchieveNameColor(Color.GRAY);
+                data.setAchieveDate("未達成");
             } else {
                 data.setAchieveInfoColor(Color.BLACK);
                 data.setAchieveNameColor(Color.BLACK);
