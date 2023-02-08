@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Space
                 android:id="@+id/tintin2"
@@ -100,7 +100,7 @@
             android:layout_gravity="center"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <Space
                 android:id="@+id/tintin4"
@@ -276,6 +276,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"></Space>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/setError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:padding="5dp"
+                    android:textColor="@color/bootstrap_brand_danger"
+                    android:text="$$$$$$"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

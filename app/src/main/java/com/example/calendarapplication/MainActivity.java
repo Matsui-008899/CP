@@ -741,25 +741,19 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         int test = dateSS.compareTo(dateES);
         int testSub = timeSS.compareTo(timeES);
+        TextView error = findViewById(R.id.setError);
+        error.setVisibility(View.GONE);
         /*
           日付判定
           時刻が開始＞終了かつ日付が開始＜終了または
          */
-        if ((testSub < 0 && test <= 0) || (testSub >= 0 && test < 0)) {
+        if ((testSub < 0 && test <= 0) || (testSub >= 0 && test < 0) || TextUtils.isEmpty(taskNameS)) {
             Log.d("debug", "正常に処理");
-            /*
-              if true　いずれかのエディットに入力されていない
-              false 正常
-             */
-            if (TextUtils.isEmpty(taskNameS) ||
-                    TextUtils.isEmpty(dateSS) ||
-                    TextUtils.isEmpty(timeSS) ||
-                    TextUtils.isEmpty(dateES) ||
-                    TextUtils.isEmpty(timeES)) {
+
+
+
+            if (TextUtils.isEmpty(taskNameS)) {
                 emailField.setError("予定を入力してください");
-
-                dateE.setError("データエラー");
-
 
                 Log.d("debug", "null値判定,いずれかの値が空欄です");
             } else {
@@ -795,6 +789,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             }
         } else {
             Log.d("debug", "日付に矛盾が発生");
+            error.setVisibility(View.VISIBLE);
+            error.setText("＊日付に矛盾が生じています");
         }
 
 

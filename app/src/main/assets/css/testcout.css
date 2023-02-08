@@ -380,12 +380,12 @@ img, div {
 }
 @keyframes look1 {
       20%  { transform: translateX(600%) translateX(0%) rotate(4turn);}
-      30%  { transform: translateY(500%) translateX(500%) scale(2,2) rotate(90deg);}
-      40%  { transform: translateX(300%) translateY(0%) scale(2,2) rotate(-20deg);}
-      45%  { transform: translateY(500%) translateX(500%) scale(2,2) rotate(20deg);}
-      50%  { transform: translateY(500%) translateX(-500%) scale(2,2) rotate(-90deg);}
-      60%  { transform: translateX(-300%) translateY(0%) scale(2,2) rotate(20deg);}
-      70%  { transform: translateX(-300%) translateY(500%) scale(2,2) rotate(-20deg);}
+      30%  { transform: translateY(500%) translateX(500%) scale(2.5,2.5) rotate(90deg);}
+      40%  { transform: translateX(300%) translateY(0%) scale(2.5,2.5) rotate(-20deg);}
+      45%  { transform: translateY(500%) translateX(500%) scale(2.5,2.5) rotate(20deg);}
+      50%  { transform: translateY(500%) translateX(-500%) scale(2.5,2.5) rotate(-90deg);}
+      60%  { transform: translateX(-300%) translateY(0%) scale(2.5,2.5) rotate(20deg);}
+      70%  { transform: translateX(-300%) translateY(500%) scale(2.5,2.5) rotate(-20deg);}
       80%  { transform: translateX(-600%) translateY(0%) rotate(0turn);}
       100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
 }
@@ -397,12 +397,12 @@ img, div {
 }
 @keyframes look2 {
       20%  { transform: translateX(900%) translateX(0%) rotate(4turn);}
-      30%  { transform: translateY(500%) translateX(800%) scale(2,2) rotate(90deg);}
-      40%  { transform: translateX(450%) translateY(0%) scale(2,2) rotate(-20deg);}
-      45%  { transform: translateY(500%) translateX(800%) scale(2,2) rotate(20deg);}
-      50%  { transform: translateY(500%) translateX(-200%) scale(2,2) rotate(-90deg);}
-      60%  { transform: translateX(-100%) translateY(0%) scale(2,2) rotate(20deg);}
-      70%  { transform: translateX(-100%) translateY(500%) scale(2,2) rotate(-20deg);}
+      30%  { transform: translateY(500%) translateX(800%) scale(2.5,2.5) rotate(90deg);}
+      40%  { transform: translateX(450%) translateY(0%) scale(2.5,2.5) rotate(-20deg);}
+      45%  { transform: translateY(500%) translateX(800%) scale(2.5,2.5) rotate(20deg);}
+      50%  { transform: translateY(500%) translateX(-200%) scale(2.5,2.5) rotate(-90deg);}
+      60%  { transform: translateX(-100%) translateY(0%) scale(2.5,2.5) rotate(20deg);}
+      70%  { transform: translateX(-100%) translateY(500%) scale(2.5,2.5) rotate(-20deg);}
       80%  { transform: translateX(-400%) translateY(0%) rotate(0turn);}
       100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
 }
@@ -414,12 +414,12 @@ img, div {
 }
 @keyframes look3 {
       20%  { transform: translateX(300%) translateX(0%) rotate(4turn);}
-      30%  { transform: translateY(500%) translateX(200%) scale(2,2) rotate(90deg);}
-      40%  { transform: translateX(100%) translateY(0%) scale(2,2) rotate(-20deg);}
-      45%  { transform: translateY(500%) translateX(500%) scale(2,2) rotate(20deg);}
-      50%  { transform: translateY(500%) translateX(-800%) scale(2,2) rotate(-90deg);}
-      60%  { transform: translateX(-500%) translateY(0%) scale(2,2) rotate(20deg);}
-      70%  { transform: translateX(-600%) translateY(500%) scale(2,2) rotate(-20deg);}
+      30%  { transform: translateY(500%) translateX(200%) scale(2.5,2.5) rotate(90deg);}
+      40%  { transform: translateX(100%) translateY(0%) scale(2.5,2.5) rotate(-20deg);}
+      45%  { transform: translateY(500%) translateX(500%) scale(2.5,2.5) rotate(20deg);}
+      50%  { transform: translateY(500%) translateX(-800%) scale(2.5,2.5) rotate(-90deg);}
+      60%  { transform: translateX(-500%) translateY(0%) scale(2.5,2.5) rotate(20deg);}
+      70%  { transform: translateX(-600%) translateY(500%) scale(2.5,2.5) rotate(-20deg);}
       80%  { transform: translateX(-900%) translateY(0%) rotate(0turn);}
       100%  { transform: translateX(0%) translateY(0%)  rotate(4turn);}
 }
@@ -461,10 +461,10 @@ img, div {
 }
 
 @keyframes bunshin2 {
-0%   { transform: translateX(600%) rotate(0deg); }
-50%   { transform: translateX(600%) rotate(0deg); }
-60%   { transform: translateX(500%) rotate(-45deg); }
-70%   { transform: translateX(600%) rotate(0deg); }
+0%   { transform: translateX(700%) rotate(0deg); }
+50%   { transform: translateX(700%) rotate(0deg); }
+60%   { transform: translateX(600%) rotate(-45deg); }
+70%   { transform: translateX(700%) rotate(0deg); }
 100%   { transform: translateX(0%) rotate(-1800deg); }
 
 }
