@@ -98,6 +98,24 @@ public class DataBase extends SQLiteOpenHelper {
         saveData(db, DateCon(-11), "18時00分",DateCon(-11), "23時30分", "アルバイト","0");
         saveData(db, DateCon(-12), "18時00分",DateCon(-12), "22時00分", "アルバイト","0");
         saveData(db, DateCon(-13), "18時00分",DateCon(-13), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-15), "18時00分", DateCon(-1),"23時30分", "アルバイト","0");
+        saveData(db, DateCon(-16), "18時00分", DateCon(-2),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-17), "18時00分", DateCon(-3),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-18), "18時00分", DateCon(-4),"23時00分", "アルバイト","0");
+        saveData(db, DateCon(-19), "18時00分",DateCon(-14), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-20), "10時00分", DateCon(-2),"16時00分", "コミケ","0");
+        saveData(db, DateCon(-1), "14時00分", DateCon(-1),"22時00分", "デート","0");
+        saveData(db, DateCon(-3), "11時00分", DateCon(-3),"18時00分", "デート","0");
+        saveData(db, DateCon(-4), "11時00分", DateCon(-4),"17時00分", "デート","0");
+        saveData(db, DateCon(-5), "18時00分", DateCon(-5),"22時00分", "デート","0");
+        saveData(db, DateCon(-6), "18時00分", DateCon(-6),"23時30分", "アルバイト","0");
+        saveData(db, DateCon(-7), "18時00分", DateCon(-7),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-8), "18時00分", DateCon(-8),"22時00分", "アルバイト","0");
+        saveData(db, DateCon(-9), "18時00分", DateCon(-9),"23時00分", "アルバイト","0");
+        saveData(db, DateCon(-10), "18時00分",DateCon(-10), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-11), "18時00分",DateCon(-11), "23時30分", "アルバイト","0");
+        saveData(db, DateCon(-12), "18時00分",DateCon(-12), "22時00分", "アルバイト","0");
+        saveData(db, DateCon(-13), "18時00分",DateCon(-13), "22時00分", "アルバイト","0");
     }
 
     private String DateCon(int i) {
